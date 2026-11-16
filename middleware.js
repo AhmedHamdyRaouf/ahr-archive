@@ -24,4 +24,4 @@ export async function middleware(req) {
   if (data.user && path.startsWith('/login')) return NextResponse.redirect(new URL('/dash', req.url));
   return res;
 }
-export const config = { matcher: ['/((?!_next/static|_next/image|favicon.ico|favicon-32.png|icon-192.png|icon-512.png|apple-touch-icon.png|manifest.webmanifest).*)'] };
+export const config = { matcher: ['/((?!_next/static|_next/image|favicon.ico|favicon-32.png|icon-192.png|icon-512.png|apple-touch-icon.png|logo.png|manifest.webmanifest).*)'] };
