@@ -926,8 +926,6 @@ skeleton();
   mcp=true;
   loadAll();
 })();
-})();
-
 
 // Full export: every archive table, read page by page through the read-only /api/sql, saved as one JSON file.
 async function exportAll(){
@@ -955,6 +953,7 @@ async function exportAll(){
   finally{delete b.dataset.busy;st.textContent='';}
 }
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#export-all')) exportAll();});
+})();
 </script>
 </body>
 </html>
