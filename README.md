@@ -19,6 +19,7 @@ npm install && cp .env.example .env.local && npm run dev
 ## Repository map
 - `app/`, `dash/`, `lib/`, `middleware.js` — the deployed dashboard
 - `database/` — full schema (apply in order) — see `database/README.md`
-- `public/photos/` — 177 archive photos; uploaded once to the private `archive-files` bucket via the dashboard's "استيراد الصور للمخزن", after which this folder is no longer needed
+- `content/life-story/` — life-story review package (chronology, links, conflicts, open questions, change log, restore script)
+- `docs/BASELINE.md` — reference state of the whole system (read this first before any update)
 - `legacy/ahr-platform/` — old platform repo (specs, docs, content dataset, migrations, old packages)
 - `legacy/ahr-data/` — old AHR Data repo (xlsx v10.5, CSVs, migrations, scripts, old dashboard)
