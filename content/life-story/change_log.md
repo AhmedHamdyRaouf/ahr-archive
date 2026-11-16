@@ -30,3 +30,9 @@ Decision recorded: direct replacement after a restorable backup (Ahmed, chat 202
 - Verified by md5: 63/63 live texts equal the approved drafts (one typo in LS-0031 found and fixed); ar translation == content for all 63.
 - Original texts: kept in `archive.bk_life_story_20261116`; restore.sql now restores them too (dry-run passed).
 - Dropped from the text by this replacement (present only in the originals/backup): embedded codes P-0086, P-0217, P-0091, W-0056/W-0057/W-0053 and some place/people details.
+
+## Step 3 — English translation of the new texts (2026-11-16)
+- English text of all 63 stories re-translated from the approved new Arabic text and written to `archive.translation` (field `content`, lang `en`), replacing the obsolete English. Status set to `Draft`, author "Claude (translation of approved Arabic text, 2026-11-16)".
+- Work titles are phonetic (not translated by meaning). Heading lines embedded in the Arabic text (e.g. "2015") are carried over as-is pending step 4.
+- Verified: 63 rows, 0 left with "Needs update" status, md5 of DB text equals the committed file `english_translation_2026-11-16.json`.
+- The previous English remains in `archive.bk_life_story_20261116`.
