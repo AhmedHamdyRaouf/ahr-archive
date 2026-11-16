@@ -22,3 +22,11 @@ Decision recorded: direct replacement after a restorable backup (Ahmed, chat 202
 
 ## Files
 `chronology.csv` (order by event date, thread, certainty) · `links.csv` · `conflicts.csv` · `open_questions.csv` (322 questions, verbatim) · `source_narratives.json` · `apply_live_updates.sql` · `restore.sql` · `test_report.md`
+
+## Step 2 — text replacement (Ahmed approved, 2026-11-16 17:10)
+- `life_story.content` of all 63 stories replaced with the Master v1.0 narrative drafts (paragraphs joined by blank lines; heading lines such as the year/period line kept as they appear in the Master).
+- Arabic `content` translation (ar) replaced with the same text; author «Ahmed (approved 2026-11-16)», status Entered.
+- English `content` translation (en) NOT rewritten: it still translates the OLD Arabic text; status set to «Needs update - Arabic text replaced 2026-11-16» for all 63 until re-translated.
+- Verified by md5: 63/63 live texts equal the approved drafts (one typo in LS-0031 found and fixed); ar translation == content for all 63.
+- Original texts: kept in `archive.bk_life_story_20261116`; restore.sql now restores them too (dry-run passed).
+- Dropped from the text by this replacement (present only in the originals/backup): embedded codes P-0086, P-0217, P-0091, W-0056/W-0057/W-0053 and some place/people details.

@@ -30,3 +30,14 @@
 
 ## Not tested
 - Visual check of the dashboard timeline after the change (the new rows use the same `date_value` shape as existing ones, year range 1988–2026).
+
+## Step 2 — text replacement (2026-11-16)
+| Check | Result |
+|---|---|
+| Stories whose content equals the approved draft (md5) | 63 / 63 |
+| ar `content` translation == `life_story.content` | 63 / 63 |
+| `topic` differences vs backup | 0 |
+| Entity rows differing from backup | 0; LS-0056/0057 still Restricted |
+| en `content` translations flagged «Needs update» | 63 |
+| Restore dry-run (content + translations back to backup), rolled back | content diff 0, translation diff 0 |
+| Dates / relations still in place | 44 / 35 |
