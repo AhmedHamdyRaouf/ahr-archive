@@ -62,3 +62,8 @@ This is the reference state of the whole system after the full review. Any later
 - زرار «English / العربية» أعلى الصفحة؛ الاختيار محفوظ في المتصفح (`ahr_ui`) والصفحة بتتعمل لها إعادة تحميل.
 - النسخة الإنجليزي بتترجم الواجهة بقاموس عبارات (`EN_DICT` في dash/index.html) فوق الواجهة المعروضة؛ الاتجاه LTR والأرقام إنجليزي. البيانات نفسها (العناوين والنصوص) ما بتتترجمش.
 - أي نص واجهة جديد بالعربي لازم يتضاف للقاموس عشان يظهر بالإنجليزي.
+
+## الهوية والأيقونة (Logo pack)
+- اللوجو الجديد (علامة AHR، لون indigo) في `public/logo.png` ويظهر في الشريط الجانبي والشريط العلوي للموبايل وصفحة الدخول.
+- الأيقونة (navy-gold): `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` وكلها في `manifest.webmanifest`.
+- المصدر: AHR_Logo_Pack (SVG/PDF/PNG الأصلية عند المالك).
