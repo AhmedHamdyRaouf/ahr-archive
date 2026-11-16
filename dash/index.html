@@ -232,6 +232,10 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
 .stack{display:flex;flex-direction:column;gap:10px}
 @media (max-width:720px){.frow,.frow.one,.fhead{grid-template-columns:1fr}.frow>label{padding-top:0}.fhead{display:none}.mbox .formgrid{grid-template-columns:1fr}}
 
+
+.th{float:inline-start;width:46px;height:46px;object-fit:cover;border-radius:10px;margin-inline-end:11px;border:1px solid var(--line);background:var(--card2)}
+.dph{display:block;margin-top:12px;max-width:100%;max-height:300px;border-radius:12px;border:1px solid var(--line);background:var(--card2)}
+td.ttl::after{content:"";display:block;clear:both}
 /* ===== mobile app experience ===== */
 .mtop,#more-sheet,#more-scrim,.nav #more-btn{display:none}
 @media (max-width:760px){
@@ -349,6 +353,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
   #pw-dlg{margin:auto auto 0!important;width:100vw!important;max-width:100vw!important;border-radius:22px 22px 0 0!important;padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}
   .toast{bottom:calc(98px + env(safe-area-inset-bottom));max-width:90vw;text-align:center}
 }
+@media (max-width:760px){.th{width:52px;height:52px}tbody td.ttl{display:block;-webkit-line-clamp:unset;overflow:visible}tbody td.ttl small{white-space:normal}}
 </style>
 </head>
 <body>
@@ -418,7 +423,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
 <datalist id="roles-dl"></datalist>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="تفاصيل السجل">
-  <div class="dh"><div style="min-width:0"><div class="code" id="d-code"></div><h2 id="d-title"></h2><div id="d-chips" class="flags" style="margin-top:8px"></div></div><button class="x" id="d-close" aria-label="إغلاق">✕</button></div>
+  <div class="dh"><div style="min-width:0"><div class="code" id="d-code"></div><h2 id="d-title"></h2><div id="d-chips" class="flags" style="margin-top:8px"></div><div id="d-photo"></div></div><button class="x" id="d-close" aria-label="إغلاق">✕</button></div>
   <nav class="dtabs" id="d-tabs" aria-label="أقسام السجل"></nav>
   <div class="db" id="d-body"></div>
 </aside>
@@ -576,6 +581,7 @@ const Q_ROWS=`select coalesce(json_agg(r order by r.t,r.c),'[]') j from (
  select e.id,e.public_code c,e.entity_type t,e.lifecycle lc,e.publication pb,e.verification v,e.privacy pr,
   left(coalesce(w.title_ar,p.name_ar,og.name_ar,case when cn.entity_id is not null then coalesce(cp.name_ar,cn.person_as_stated,'')||' — '||coalesce(cn.role,'') end,ev.name,a.name,pm.title_or_topic,ma.platform_or_asset,s.source_name,vd.title,pi.title,ls.topic,st.title,f.label,rl.relationship_type,e.public_code),140) l,
   left(coalesce(w.category_original,p.profession,og.organization_type,cw.title_ar,ev.event_type,a.organization,pm.outlet,ma.category,s.source_type,vd.channel,pi.project,ls.period,st.kind,f.fact_kind,''),90) s,
+  (select l.url from archive.link l where l.entity_id=e.id and l.url like 'photos/%' order by l.url limit 1) ph,
   exists(select 1 from archive.translation t where t.entity_id=e.id and t.lang='en') en,
   exists(select 1 from archive.date_value d where d.entity_id=e.id and d.precision='text') dt,
   (select count(*) from archive.review_item ri where ri.entity_id=e.id and not (ri.status ~ '^(Resolved|أُغلق|محسوم)' or ri.status='مغلقة')) rv,
@@ -695,7 +701,7 @@ function renderRows(){
   $('#rows').innerHTML=show.map(r=>{
     const f=[]; if(r.rv) f.push(chip(r.rv+' مراجعة','c-warn')); if(!r.en&&TEXTUAL.includes(r.t)) f.push(chip('بدون إنجليزي','c-mute')); if(r.dt) f.push(chip('تاريخ نصي','c-mute')); if(r.nc) f.push(chip('بدون كريدت','c-warn'));
     if(r.pb==='Published') f.push(chip('منشور','c-ok'));
-    return `<tr data-id="${r.id}"><td class="cb"><input type="checkbox" data-sel="${r.id}" ${state.sel.has(r.id)?'checked':''} aria-label="تحديد ${esc(r.c)}"></td><td><span class="code">${esc(r.c)}</span></td><td class="ttl">${esc(r.l)}<small>${state.type?'':esc(T1[r.t]||r.t)+(r.s?' · ':'')}${esc(r.t==='fact'?(FACTK[r.s]||r.s):r.s)}</small></td><td>${chip(VER[r.v]||r.v,VERCLS(r.v))}</td><td>${chip(LIFE[r.lc]||r.lc,LIFECLS(r.lc))}</td><td>${chip(PRIV[r.pr]||r.pr,PRIVCLS(r.pr))}</td><td><div class="flags">${f.join('')||'<span style="color:var(--dim)">—</span>'}</div></td></tr>`;
+    return `<tr data-id="${r.id}"><td class="cb"><input type="checkbox" data-sel="${r.id}" ${state.sel.has(r.id)?'checked':''} aria-label="تحديد ${esc(r.c)}"></td><td><span class="code">${esc(r.c)}</span></td><td class="ttl">${r.ph?`<img class="th" loading="lazy" decoding="async" alt="" src="${photoSrc(r.ph)}" onerror="this.remove()">`:''}${esc(r.l)}<small>${state.type?'':esc(T1[r.t]||r.t)+(r.s?' · ':'')}${esc(r.t==='fact'?(FACTK[r.s]||r.s):r.s)}</small></td><td>${chip(VER[r.v]||r.v,VERCLS(r.v))}</td><td>${chip(LIFE[r.lc]||r.lc,LIFECLS(r.lc))}</td><td>${chip(PRIV[r.pr]||r.pr,PRIVCLS(r.pr))}</td><td><div class="flags">${f.join('')||'<span style="color:var(--dim)">—</span>'}</div></td></tr>`;
   }).join('');
   $('#rows-more').innerHTML=!list.length?'<div class="empty">مفيش سجلات بالفلتر ده.</div>':list.length>show.length?`<div class="more"><button class="btn" id="more">اعرض ${fmt(Math.min(120,list.length-show.length))} كمان (من ${fmt(list.length)})</button></div>`:`<div class="more">${fmt(list.length)} سجل</div>`;
   if($('#more')) $('#more').onclick=()=>{state.shown+=120;renderRows();};
@@ -795,12 +801,13 @@ async function openDetail(id,tab){
   if(!UUID.test(id)) return;
   if(current&&current.id!==id&&dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو فتحت سجل تاني التعديلات اللي ما اتحفظتش هتضيع.','كمّل من غير حفظ')) return;
   const r=DATA.byId.get(id);
-  $('#d-code').textContent=r?r.c:''; $('#d-title').textContent=r?r.l:'…'; $('#d-chips').innerHTML='';
+  $('#d-code').textContent=r?r.c:''; $('#d-title').textContent=r?r.l:'…'; $('#d-chips').innerHTML=''; $('#d-photo').innerHTML='';
   $('#d-tabs').innerHTML=''; $('#d-body').innerHTML='<div class="skel" style="height:80px"></div><div class="skel" style="height:120px;margin-top:14px"></div>';
   $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
   try{ const d=one(await sql(qDetail(id))); current={id,d,tab:tab||(current&&current.id===id?current.tab:'summary'),dirty:{}}; renderDrawer(); }
   catch(err){ $('#d-body').innerHTML=`<div class="banner bad">${esc(err.code==='tool_error'?('خطأ من قاعدة البيانات: '+cleanErr(err)):'تعذّر تحميل التفاصيل ('+(err.code||'')+').')}</div>`; }
 }
+const photoSrc=u=>'/api/file?p='+encodeURI(u);
 function trMap(d){const m={};(d.tr||[]).forEach(x=>{(m[x.f]=m[x.f]||{})[x.l]=x});return m;}
 function renderDrawer(){
   const d=current.d,e=d.e; if(!e){$('#d-body').innerHTML='<div class="empty">السجل مش موجود.</div>';return;}
@@ -808,6 +815,8 @@ function renderDrawer(){
   $('#d-code').textContent=e.public_code+' · '+(T1[t]||t)+(t==='fact'?' · '+(FACTK[ext.fact_kind]||ext.fact_kind):'');
   $('#d-title').textContent=ext.title_ar||ext.name_ar||(tm.title&&tm.title.ar&&tm.title.ar.b)||ext.title||ext.name||ext.title_or_topic||ext.topic||ext.label||ext.source_name||ext.platform_or_asset||(DATA.byId.get(e.id)||{}).l||e.public_code;
   $('#d-chips').innerHTML=chip(VER[e.verification]||e.verification,VERCLS(e.verification))+chip(LIFE[e.lifecycle],LIFECLS(e.lifecycle))+chip(PRIV[e.privacy],PRIVCLS(e.privacy))+chip(PUB[e.publication],e.publication==='Published'?'c-ok':'c-mute');
+  const ph=((d.links||[]).find(x=>/^photos\//.test(x.u))||{}).u;
+  $('#d-photo').innerHTML=ph?`<a href="${photoSrc(ph)}" target="_blank" rel="noopener"><img class="dph" alt="" src="${photoSrc(ph)}" onerror="this.parentNode.outerHTML='<div class=&quot;note&quot;>الصورة لسه ما اترفعتش للمخزن</div>'"></a>`:'';
   const openRev=(d.rev||[]).filter(x=>!CLOSED(x.s)).length;
   const counts={credits:t==='work'?(d.credits||[]).length:t==='person'?(d.works||[]).length:null,links:(d.links||[]).length,dates:(d.dates||[]).length,review:openRev,history:d.hist};
   const tabs=TABS.filter(([k])=>k!=='credits'||t==='work'||t==='person');
@@ -1067,7 +1076,7 @@ skeleton();
     busy=true;
     try{
       const rows=await sql("select distinct url from archive.link where url like 'photos/%' order by 1");
-      const paths=rows.map(r=>r.url); let done=0,fail=[],i=0;
+      const paths=rows.map(r=>r.url); let done=0,fail=[],i=0,why='';
       st.textContent='0/'+paths.length;
       const worker=async()=>{while(i<paths.length){const p=paths[i++];
         try{
@@ -1075,12 +1084,12 @@ skeleton();
           const blob=await g.blob();
           const r=await fetch(SESS.url+'/storage/v1/object/archive-files/'+encodeURI(p),{method:'POST',headers:{apikey:SESS.anon,Authorization:'Bearer '+SESS.token,'content-type':blob.type||'image/jpeg'},body:blob});
           if(!r.ok){const t=await r.text().catch(()=>'');if(!(r.status===409||/Duplicate|already exists/i.test(t))) throw new Error('up '+r.status);}
-        }catch(e){fail.push(p)}
+        }catch(e){fail.push(p);if(!why)why=String(e&&e.message||e)}
         done++; st.textContent=done+'/'+paths.length;
       }};
       await Promise.all([worker(),worker(),worker()]);
       st.textContent=fail.length?('فشل '+fail.length):'✓';
-      toast(fail.length?('تم، لكن '+fail.length+' صورة فشلت — اضغط تاني'):'كل الصور اترفعت ('+paths.length+')');
+      toast(fail.length?('فشل '+fail.length+' ('+why+') — اضغط تاني'):'كل الصور اترفعت ('+paths.length+')');
     }catch(e){toast('خطأ: '+(e&&e.message||e))}
     busy=false;
   };
