@@ -10,7 +10,7 @@ begin
  if tbl is null then raise exception 'نوع غير معروف'; end if;
  pre := case t when 'work' then 'W-' when 'person' then 'P-' when 'contribution' then 'C-' when 'relationship' then 'WR-' when 'event' then 'E-' when 'award' then 'A-'
    when 'press_mention' then 'PR-' when 'media_asset' then 'MA-' when 'source' then 'SRC-' when 'video' then 'YV-' when 'project_item' then 'PI-'
-   when 'life_story' then 'LS-' when 'site_text' then 'TX-' when 'organization' then 'ORG-'
+   when 'life_story' then 'LS-' when 'site_text' then 'TX-' when 'organization' then 'ORG-' when 'digital_profile' then 'DP-' when 'contact_info' then 'CI-'
    when 'fact' then case p->>'fact_kind' when 'audience_voice' then 'AV-' when 'contact' then 'CT-' when 'press_link' then 'PL-' when 'role_education' then 'RE-' when 'training_choir' then 'TC-' else 'F-' end end;
  code := archive.next_code(pre);
  insert into archive.entity(public_code,entity_type,verification,privacy,confirmation_scope)
@@ -24,6 +24,8 @@ begin
  elsif t='contribution' then insert into archive.contribution(entity_id,work_id,person_id,role) values(v_id,(p->'ext'->>'work_id')::uuid,nullif(p->'ext'->>'person_id','')::uuid,p->'ext'->>'role');
  elsif t='relationship' then insert into archive.relationship(entity_id,source_work,target_work,relationship_type) values(v_id,(p->'ext'->>'source_work')::uuid,(p->'ext'->>'target_work')::uuid,coalesce(p->'ext'->>'relationship_type','related'));
  elsif t='fact' then insert into archive.fact(entity_id,fact_kind) values(v_id,coalesce(p->>'fact_kind','note'));
+ elsif t='digital_profile' then insert into archive.digital_profile(entity_id,section) values(v_id,coalesce(nullif(p->'ext'->>'section',''),'social'));
+ elsif t='contact_info' then insert into archive.contact_info(entity_id,kind) values(v_id,coalesce(nullif(p->'ext'->>'kind',''),'phone'));
  else execute format('insert into archive.%I(entity_id) values($1)',tbl) using v_id; end if;
  for k,v in select key,value from jsonb_each_text(coalesce(p->'fields','{}')) loop perform archive.apply_field(v_id,t,k,'ar',v,null); end loop;
  for k,v in select key,value from jsonb_each_text(coalesce(p->'fields_en','{}')) loop perform archive.apply_field(v_id,t,k,'en',v,null); end loop;
@@ -201,6 +203,8 @@ begin
     if v is not null and not exists(select 1 from archive.entity where id=v::uuid) then raise exception 'السجل المرتبط غير موجود'; end if;
     if v is not null and v::uuid=p_id then raise exception 'لا يمكن ربط السجل بنفسه'; end if;
     execute format('update archive.%I set %I=$1::uuid where entity_id=$2',tbl,k) using v,p_id;
+  elsif dt='date' then
+    execute format('update archive.%I set %I=$1::date where entity_id=$2',tbl,k) using v,p_id;
   else
     if k='category' and v is not null and not exists(select 1 from archive.ref_work_category where code=v) then raise exception 'تصنيف غير معروف'; end if;
     if k in ('title_ar','name_ar','fact_kind','relationship_type') and v is null then raise exception 'الحقل % مطلوب', k; end if;
@@ -256,7 +260,8 @@ AS $function$
  select case t when 'work' then 'work' when 'person' then 'person' when 'contribution' then 'contribution' when 'relationship' then 'relationship'
   when 'event' then 'event' when 'award' then 'award' when 'press_mention' then 'press_mention' when 'media_asset' then 'media_asset'
   when 'source' then 'source' when 'video' then 'video' when 'project_item' then 'project_item' when 'life_story' then 'life_story'
-  when 'site_text' then 'site_text' when 'fact' then 'fact' when 'organization' then 'organization' end $function$;
+  when 'site_text' then 'site_text' when 'fact' then 'fact' when 'organization' then 'organization'
+  when 'digital_profile' then 'digital_profile' when 'contact_info' then 'contact_info' end $function$;
 
 CREATE OR REPLACE FUNCTION archive.is_staff(write_access boolean)
  RETURNS boolean

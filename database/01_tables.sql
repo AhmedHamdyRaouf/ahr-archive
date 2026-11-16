@@ -14,6 +14,8 @@ create table archive.event (entity_id uuid not null, name text, event_type text,
 create table archive.fact (entity_id uuid not null, fact_kind text not null, label text, detail text, period text);
 create table archive.life_story (entity_id uuid not null, period text, topic text, content text);
 create table archive.link (id uuid not null default gen_random_uuid(), entity_id uuid not null, kind text not null, url text not null);
+create table archive.digital_profile (entity_id uuid not null, section text not null default 'social', platform text, page_type text, profile_url text, external_id text, owner_entity_id uuid default archive.eid('P-0001'), last_reviewed date);
+create table archive.contact_info (entity_id uuid not null, kind text not null default 'phone', label text, value text, region text, owner_entity_id uuid default archive.eid('P-0001'));
 create table archive.media_asset (entity_id uuid not null, platform_or_asset text, category text, rights_holder text, usage_rights text, credit_line text);
 create table archive.organization (entity_id uuid not null, name_ar text, name_en text, organization_type text);
 create table archive.person (entity_id uuid not null, name_ar text not null, name_en text, person_type text, profession text);
@@ -36,6 +38,17 @@ create table archive.work (entity_id uuid not null, category text, category_orig
 -- primary keys / unique / checks
 alter table archive.audit_log_archived add constraint audit_log_archived_pkey primary key (id);
 alter table archive.award add constraint award_pkey primary key (entity_id);
+alter table archive.digital_profile add constraint digital_profile_pkey primary key (entity_id);
+alter table archive.digital_profile add constraint digital_profile_entity_id_fkey foreign key (entity_id) references archive.entity(id);
+alter table archive.digital_profile add constraint digital_profile_owner_entity_id_fkey foreign key (owner_entity_id) references archive.entity(id);
+alter table archive.digital_profile add constraint chk_digital_profile_section check (section in ('social','streaming','professional','film_tv','official_site','press_profile','external_id'));
+alter table archive.contact_info add constraint contact_info_pkey primary key (entity_id);
+alter table archive.contact_info add constraint contact_info_entity_id_fkey foreign key (entity_id) references archive.entity(id);
+alter table archive.contact_info add constraint contact_info_owner_entity_id_fkey foreign key (owner_entity_id) references archive.entity(id);
+alter table archive.contact_info add constraint chk_contact_info_kind check (kind in ('phone','email','other'));
+create index idx_digital_profile_owner on archive.digital_profile(owner_entity_id);
+create index idx_digital_profile_section on archive.digital_profile(section);
+create index idx_contact_info_owner on archive.contact_info(owner_entity_id);
 alter table archive.blocked_title add constraint blocked_title_pkey primary key (title_ar);
 alter table archive.change_log add constraint change_log_pkey primary key (id);
 alter table archive.contribution add constraint contribution_pkey primary key (entity_id);
