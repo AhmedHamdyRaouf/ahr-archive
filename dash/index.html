@@ -355,9 +355,16 @@ td.ttl::after{content:"";display:block;clear:both}
 }
 @media (max-width:760px){.th{width:52px;height:52px}tbody td.ttl{display:block;-webkit-line-clamp:unset;overflow:visible}tbody td.ttl small{white-space:normal}}
 
+
+.cmeta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:14px;color:var(--muted)}.cmeta b{color:var(--ink);font-weight:600;font-size:15px}
+.cview{margin-bottom:16px}.chead{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--dim);font-weight:500;margin-bottom:6px}.chead small{font-weight:400}
+.ta.big{font-size:15.5px;line-height:2;padding:14px 16px;background:var(--card);resize:vertical;overflow:hidden}.ta.big.md{min-height:180px}.ta.big.xl{min-height:420px;font-size:16.5px;line-height:2.05}.ta.big.en{line-height:1.75}
+.dl{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}.dr{display:grid;grid-template-columns:150px 1fr 1fr;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.7}.dr:last-child{border-bottom:0}.dk{color:var(--muted)}.dv.en{direction:ltr;text-align:left;color:var(--dim)}.dv i{color:var(--dim)}
+@media (max-width:720px){.dr{grid-template-columns:1fr;gap:2px}.ta.big.xl{min-height:340px}}
+#d-photo .dph{max-height:420px}
 #d-photo:empty{display:none}
 #d-photo{flex:none;background:var(--card2)}
-#d-photo .dph{display:block;width:100%;height:auto;max-height:280px;margin:0;border:0;border-radius:0;object-fit:cover;object-position:center 30%}
+#d-photo .dph{display:block;width:100%;height:auto;max-height:420px;margin:0;border:0;border-radius:0;object-fit:cover;object-position:center 30%}
 #d-photo .note{padding:10px 20px;margin:0}
 .fcell .lg{display:none}
 @media (max-width:760px){
@@ -949,14 +956,14 @@ function picker(el,{types,value,onPick,placeholder,allowNew}){
 }
 
 /* ---------- detail drawer ---------- */
-const TABS=[['summary','ملخص'],['data','البيانات'],['credits','الكريدت'],['links','روابط وملفات'],['dates','التواريخ'],['review','المراجعة'],['history','السجل'],['origin','الأصل']];
+const TABS=[['content','المحتوى'],['data','تعديل البيانات'],['summary','الحالة والمراجعة'],['credits','الكريدت'],['links','روابط وملفات'],['dates','التواريخ'],['review','المراجعة'],['history','السجل'],['origin','الأصل']];
 function dirtyCount(){return current&&current.dirty?Object.keys(current.dirty).length:0;}
 async function closeDrawer(){
   if(dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو قفلت دلوقتي التعديلات اللي ما اتحفظتش هتضيع.','اقفل من غير حفظ')) return;
   $('#drawer').classList.remove('on');$('#scrim').classList.remove('on');current=null;
 }
 $('#d-close').onclick=closeDrawer; $('#scrim').onclick=closeDrawer;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal').classList.contains('on')&&!$('#cmodal').classList.contains('on'))closeDrawer();if((e.ctrlKey||e.metaKey)&&e.key==='s'&&current&&current.tab==='data'){e.preventDefault();saveData();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal').classList.contains('on')&&!$('#cmodal').classList.contains('on'))closeDrawer();if((e.ctrlKey||e.metaKey)&&e.key==='s'&&current&&(current.tab==='data'||current.tab==='content')){e.preventDefault();saveData();}});
 async function openDetail(id,tab){
   if(!UUID.test(id)) return;
   if(current&&current.id!==id&&dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو فتحت سجل تاني التعديلات اللي ما اتحفظتش هتضيع.','كمّل من غير حفظ')) return;
@@ -964,7 +971,7 @@ async function openDetail(id,tab){
   $('#d-code').textContent=r?r.c:''; $('#d-title').textContent=r?r.l:'…'; $('#d-chips').innerHTML=''; $('#d-photo').innerHTML='';
   $('#d-tabs').innerHTML=''; $('#d-body').innerHTML='<div class="skel" style="height:80px"></div><div class="skel" style="height:120px;margin-top:14px"></div>';
   $('#drawer').classList.add('on'); $('#scrim').classList.add('on');
-  try{ const d=one(await sql(qDetail(id))); current={id,d,tab:tab||(current&&current.id===id?current.tab:'summary'),dirty:{}}; renderDrawer(); }
+  try{ const d=one(await sql(qDetail(id))); current={id,d,tab:tab||(current&&current.id===id?current.tab:'content'),dirty:{}}; renderDrawer(); }
   catch(err){ $('#d-body').innerHTML=`<div class="banner bad">${esc(err.code==='tool_error'?('خطأ من قاعدة البيانات: '+cleanErr(err)):'تعذّر تحميل التفاصيل ('+(err.code||'')+').')}</div>`; }
 }
 const photoSrc=u=>'/api/file?p='+encodeURI(u);
@@ -980,11 +987,11 @@ function renderDrawer(){
   const openRev=(d.rev||[]).filter(x=>!CLOSED(x.s)).length;
   const counts={credits:t==='work'?(d.credits||[]).length:t==='person'?(d.works||[]).length:null,links:(d.links||[]).length,dates:(d.dates||[]).length,review:openRev,history:d.hist};
   const tabs=TABS.filter(([k])=>k!=='credits'||t==='work'||t==='person');
-  if(!tabs.find(x=>x[0]===current.tab)) current.tab='summary';
+  if(!tabs.find(x=>x[0]===current.tab)) current.tab='content';
   $('#d-tabs').innerHTML=tabs.map(([k,l])=>`<button class="dtab ${current.tab===k?'on':''}" data-tab="${k}">${l==='الكريدت'&&t==='person'?'أعماله':l}${counts[k]?`<span class="n">${fmt(counts[k])}</span>`:''}</button>`).join('');
-  $$('#d-tabs .dtab').forEach(b=>b.onclick=async()=>{if(current.tab==='data'&&dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو انتقلت التعديلات اللي ما اتحفظتش هتضيع.','انتقل من غير حفظ'))return;current.dirty={};current.tab=b.dataset.tab;renderDrawer();});
+  $$('#d-tabs .dtab').forEach(b=>b.onclick=async()=>{if((current.tab==='data'||current.tab==='content')&&dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو انتقلت التعديلات اللي ما اتحفظتش هتضيع.','انتقل من غير حفظ'))return;current.dirty={};current.tab=b.dataset.tab;renderDrawer();});
   const body=$('#d-body'); body.scrollTop=0;
-  ({summary:tabSummary,data:tabData,credits:tabCredits,links:tabLinks,dates:tabDates,review:tabReview,history:tabHistory,origin:tabOrigin})[current.tab](body,d);
+  ({content:tabContent,summary:tabSummary,data:tabData,credits:tabCredits,links:tabLinks,dates:tabDates,review:tabReview,history:tabHistory,origin:tabOrigin})[current.tab](body,d);
   $$('#d-body [data-open]').forEach(b=>{if(b.dataset.open) b.onclick=()=>openDetail(b.dataset.open)});
 }
 function missingList(d){
@@ -1045,6 +1052,34 @@ async function changeStatus(sel){
   catch(err){toast(cleanErr(err),1);sel.value=e[f];sel.disabled=false;}
 }
 
+
+/* content tab: the record's content first (big, readable, editable); details below */
+const MAINF={life_story:'content',site_text:'content',work:'story_notes',person:'bio_short',award:'description',project_item:'description',media_asset:'description',digital_profile:'description',source:'what_it_holds',fact:'detail',contact_info:'notes',organization:'notes',contribution:'notes',relationship:'notes'};
+const XL=new Set(['life_story','site_text','work']);
+function tabContent(body,d){
+  const e=d.e,t=e.entity_type,ext=d.ext||{},tm=trMap(d),sch=SCHEMA[t]||[],mf=MAINF[t],mrow=sch.find(x=>x[0]===mf);
+  const val=(k,l)=>{const x=tm[k]&&tm[k][l];return x?x.b:(l==='ar'&&ext[k]!=null?String(ext[k]):'');};
+  let h='';
+  if(t==='life_story'){const per=val('period','ar'),top=val('topic','ar');h+=`<div class="cmeta">${top?`<b>${esc(top)}</b>`:''}${per?`<span class="chip c-mute">${esc(per)}</span>`:''}</div>`;}
+  if(mrow){
+    const cls=XL.has(t)?'xl':'md';
+    const box=(l)=>{const v=val(mf,l),en=l==='en';return `<div class="cview"><div class="chead"><span>${en?'English':'عربي'} — ${esc(mrow[1])}</span><small data-wc="${l}">${fmt(v.trim()?v.trim().split(/\s+/).length:0)} كلمة</small></div><textarea class="ta big ${cls} ${en?'en':''}" data-k="${mf}" data-l="${l}" placeholder="${en?'English':'اكتب هنا…'}" aria-label="${esc(mrow[1])} ${en?'English':'عربي'}">${esc(v)}</textarea></div>`;};
+    h+=box('ar')+box('en');
+  }
+  const others=sch.filter(x=>x[0]!==mf).map(x=>({k:x[0],l:x[1],ar:val(x[0],'ar'),en:val(x[0],'en')})).filter(x=>x.ar||x.en);
+  if(others.length) h+=`<div class="sec"><h4>التفاصيل <small><a href="#" id="go-data" style="text-decoration:none">تعديل كل الحقول ←</a></small></h4><div class="dl">${others.map(x=>`<div class="dr"><span class="dk">${esc(x.l)}</span><span class="dv">${esc(x.ar)||'<i>—</i>'}</span>${x.en?`<span class="dv en">${esc(x.en)}</span>`:''}</div>`).join('')}</div></div>`;
+  else if(!mrow) h+=`<div class="empty">مفيش محتوى مكتوب للسجل ده لسه. <a href="#" id="go-data">ابدأ من «تعديل البيانات»</a></div>`;
+  h+=`<div class="savebar" id="savebar"><button class="btn gold" id="save">حفظ التعديلات</button><button class="btn" id="discard">تراجع</button><span class="msg" id="savemsg">مفيش تعديلات</span></div>`;
+  body.innerHTML=h;
+  const orig={};$$('#d-body [data-k]').forEach(x=>orig[x.dataset.k+'|'+x.dataset.l]=x.value);
+  const upd=()=>{const n=dirtyCount();$('#savebar').classList.toggle('has',n>0);$('#savemsg').innerHTML=n?`${fmt(n)} تعديل مش محفوظ · <span class="kbd">Ctrl+S</span>`:'مفيش تعديلات';};
+  const grow=x=>{x.style.height='auto';x.style.height=Math.max(x.scrollHeight+4,x.classList.contains('xl')?420:x.classList.contains('md')?180:76)+'px';};
+  $$('#d-body textarea[data-k]').forEach(x=>{grow(x);x.oninput=()=>{grow(x);const key=x.dataset.k+'|'+x.dataset.l;if(x.value!==orig[key]){current.dirty[key]={f:x.dataset.k,l:x.dataset.l,v:x.value};x.classList.add('dirty');}else{delete current.dirty[key];x.classList.remove('dirty');}const wc=$('#d-body [data-wc="'+x.dataset.l+'"]');if(wc){const v=x.value.trim();wc.textContent=fmt(v?v.split(/\s+/).length:0)+' كلمة';}upd();};});
+  const gd=$('#go-data');if(gd)gd.onclick=async ev=>{ev.preventDefault();if(dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو انتقلت التعديلات اللي ما اتحفظتش هتضيع.','انتقل من غير حفظ'))return;current.dirty={};current.tab='data';renderDrawer();};
+  $('#save').onclick=saveData;$('#discard').onclick=()=>{current.dirty={};renderDrawer();};
+  upd();
+}
+
 /* data tab: every field, Arabic and English side by side */
 function tabData(body,d){
   const e=d.e,t=e.entity_type,ext=d.ext||{},tm=trMap(d);
@@ -1084,7 +1119,7 @@ async function saveData(){
   const ext={}; items.filter(x=>x.ext).forEach(x=>ext[x.ext]=x.v);
   const req=(SCHEMA[e.entity_type]||[]).find(s=>s[3]); if(req&&fields.some(f=>f.f===req[0]&&f.l==='ar'&&!f.v.trim())) return toast(req[1]+' مطلوب',1);
   const btn=$('#save'); if(btn){btn.disabled=true;btn.textContent='بيتحفظ…';}
-  try{await api('api_save',{id:e.id,fields,ext:Object.keys(ext).length?ext:undefined});current.dirty={};toast('اتحفظ ✓ ('+fmt(items.length)+' تعديل)');await refreshAfterWrite();openDetail(e.id,'data');}
+  try{await api('api_save',{id:e.id,fields,ext:Object.keys(ext).length?ext:undefined});current.dirty={};toast('اتحفظ ✓ ('+fmt(items.length)+' تعديل)');await refreshAfterWrite();openDetail(e.id,current.tab);}
   catch(err){toast(cleanErr(err),1);if(btn){btn.disabled=false;btn.textContent='حفظ التعديلات';}}
 }
 
