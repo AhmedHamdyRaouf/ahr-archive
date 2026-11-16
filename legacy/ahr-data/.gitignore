@@ -1,0 +1,5 @@
+.env
+*.env
+Lyrics_Private*
+private-ids/
+.DS_Store

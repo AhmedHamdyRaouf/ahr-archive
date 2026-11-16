@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Hamdy Raouf — Works & Discography</title>
+<link rel="stylesheet" href="../assets/css/site-additional.css">
+<link rel="alternate" hreflang="en" href="https://ahmedhamdyraouf.com/works-en/">
+<link rel="alternate" hreflang="ar" href="https://ahmedhamdyraouf.com/works-ar/">
+<link rel="alternate" hreflang="x-default" href="https://ahmedhamdyraouf.com/works-en/">
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="loader"><div class="loader-content"><h1>Ahmed Hamdy Raouf</h1><p>Composer • Music Producer • Vocal Coach</p></div></div>
+<div dir="ltr" style="direction:ltr;text-align:left;">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+
+.works-hero{min-height:55vh;display:flex;align-items:flex-end;padding-bottom:80px;padding-top:140px;padding-right:8%;padding-left:8%;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.75)),url('https://ahmedhamdyraouf.com/wp-content/uploads/2026/05/48C750FA-CC2D-45E2-8CD3-3A148F84DA3E.png') center/cover no-repeat;}
+.works-hero h1{font-size:90px;font-weight:800;line-height:.95;letter-spacing:-2px;margin-bottom:25px;font-family:'Playfair Display',serif;text-shadow:0 5px 25px rgba(0,0,0,.35);}
+.works-hero p{font-size:20px;line-height:2;max-width:700px;color:rgba(255,255,255,.8);}
+.stats-bar{display:flex;gap:60px;justify-content:center;padding:60px 8% 40px;flex-wrap:wrap;background:#050505;}
+.stat{text-align:center;}
+.stat-num{font-size:72px;font-weight:800;font-family:'Playfair Display',serif;color:#c7a86b;line-height:1;}
+.stat-label{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#888;margin-top:10px;}
+.filters-section{padding:35px 8% 18px;background:#050505;position:sticky;top:80px;z-index:100;border-bottom:1px solid rgba(255,255,255,.05);}
+.filters{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.filter-btn{padding:12px 26px;border-radius:50px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#fff;font-family:'Readex Pro',sans-serif;font-size:14px;cursor:pointer;transition:.4s;}
+.filter-btn:hover{border-color:#c7a86b;color:#c7a86b;}
+.filter-btn.active{background:#c7a86b;color:#000;border-color:#c7a86b;}
+.works-section{padding:80px 8%;background:#050505;}
+.section-header{margin-bottom:40px;}
+.section-header h2{font-size:48px;font-family:'Playfair Display',serif;line-height:1.1;}
+.section-count{color:#c7a86b;font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:8px;}
+.section-line{width:60px;height:2px;background:#c7a86b;margin-top:15px;}
+.section-divider{height:1px;background:linear-gradient(to left,transparent,rgba(199,168,107,.3),transparent);margin:0 8%;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;}
+.work-item{background:#0d0d0d;padding:26px 30px;border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:.4s;position:relative;overflow:hidden;}
+.work-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:#c7a86b;transition:.4s;}
+.work-item:hover::before{height:100%;}
+.work-item:hover{background:#111;transform:translateX(5px);}
+.item-name{font-size:18px;font-weight:600;margin-bottom:8px;color:#fff;line-height:1.4;}
+.item-sub{color:#c7a86b;font-size:14px;margin-bottom:8px;}
+.item-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.item-year{color:#555;font-size:13px;}
+.item-type{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.08);color:#888;}
+.item-arrow{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#c7a86b;font-size:16px;opacity:0;transition:.3s;}
+.work-item:hover .item-arrow{opacity:1;left:13px;}
+.drama-list{display:flex;flex-direction:column;}
+.drama-row{display:grid;grid-template-columns:100px 1fr 1fr 1fr;gap:25px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:.3s;align-items:center;}
+.drama-row:first-child{border-top:1px solid rgba(255,255,255,.05);}
+.drama-row:hover{padding-right:15px;background:rgba(199,168,107,.03);}
+.drama-year{font-size:26px;font-weight:700;color:#c7a86b;font-family:'Playfair Display',serif;}
+.drama-name{font-size:17px;font-weight:600;}
+.drama-type{color:#888;font-size:13px;}
+.drama-cast{color:#bbb;font-size:13px;}
+.award-card{background:linear-gradient(135deg,rgba(199,168,107,.07),rgba(255,255,255,.01));border:1px solid rgba(199,168,107,.2);border-radius:18px;padding:30px;transition:.4s;cursor:pointer;}
+.award-card:hover{border-color:rgba(199,168,107,.4);transform:translateY(-5px);}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
+.award-type{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#c7a86b;margin-bottom:10px;}
+.award-org{font-size:18px;font-weight:700;margin-bottom:8px;}
+.award-year{color:#666;font-size:13px;margin-bottom:10px;}
+.award-detail{color:#bbb;font-size:14px;line-height:1.8;}
+.loading-state{text-align:center;padding:60px;color:#444;font-size:16px;letter-spacing:2px;}
+.lang-btn-new{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;border:1px solid rgba(199,168,107,.4);background:rgba(199,168,107,.08);color:#c7a86b;font-family:'Readex Pro',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:.4s;letter-spacing:.5px;backdrop-filter:blur(10px);white-space:nowrap;}
+.lang-btn-new:hover{background:#c7a86b;color:#000;border-color:#c7a86b;transform:translateY(-2px);box-shadow:0 8px 25px rgba(199,168,107,.25);}
+.lang-dropdown{display:none!important;}
+.lang-btn{display:none!important;}
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.35s;backdrop-filter:blur(10px);}
+.popup-overlay.active{opacity:1;visibility:visible;}
+.popup-box{background:#0d0d0d;border:1px solid rgba(199,168,107,.2);border-radius:28px;padding:50px;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;position:relative;transform:translateY(25px);transition:.35s;}
+.popup-overlay.active .popup-box{transform:translateY(0);}
+.popup-close{position:absolute;top:22px;left:22px;background:rgba(255,255,255,.06);border:none;color:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;}
+.popup-close:hover{background:#c7a86b;color:#000;}
+.popup-category{color:#c7a86b;font-size:11px;letter-spacing:5px;text-transform:uppercase;margin-bottom:14px;}
+.popup-title{font-size:34px;font-weight:800;font-family:'Playfair Display',serif;margin-bottom:6px;line-height:1.1;}
+.popup-title-en{font-size:16px;color:#666;margin-bottom:32px;font-style:italic;}
+.popup-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.popup-field{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.05);}
+.popup-field-label{color:#c7a86b;font-size:11px;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;min-width:85px;padding-top:3px;}
+.popup-field-value{color:#ccc;font-size:14px;line-height:1.8;word-break:break-word;}
+.popup-links{display:flex;gap:10px;flex-wrap:wrap;}
+.popup-link{padding:11px 22px;border-radius:50px;border:1px solid rgba(199,168,107,.3);color:#c7a86b;font-size:13px;transition:.3s;text-decoration:none;}
+.popup-link:hover{background:#c7a86b;color:#000;}
+.hidden{display:none!important;}
+.reveal{opacity:0;transform:translateY(22px);transition:.6s ease;}
+.reveal.active{opacity:1;transform:none;}
+@media(max-width:768px){
+  .works-hero{padding-top:110px;padding-bottom:50px;min-height:50vh;padding-right:22px;padding-left:22px;}
+  .works-hero h1{font-size:50px;}
+  .stats-bar{gap:30px;padding:40px 22px 30px;}
+  .stat-num{font-size:50px;}
+  .filters-section{padding:22px 22px 14px;top:70px;}
+  .filter-btn{padding:9px 15px;font-size:12px;}
+  .works-section{padding:50px 22px;}
+  .section-header h2{font-size:32px;}
+  .cards-grid{grid-template-columns:1fr;}
+  .drama-row{grid-template-columns:70px 1fr;gap:12px;}
+  .drama-type,.drama-cast{display:none;}
+  .awards-grid{grid-template-columns:1fr;}
+  .popup-box{padding:28px 18px;}
+  .popup-title{font-size:24px;}
+  .section-divider{margin:0 22px;}
+}
+</style>
+
+<!-- NAV -->
+<nav>
+<div class="logo">Ahmed <span>Hamdy</span> Raouf</div>
+<div class="menu-toggle"><span></span><span></span><span></span></div>
+<div class="nav-links">
+<a href="https://ahmedhamdyraouf.com/home-en/">Home</a>
+<a href="https://ahmedhamdyraouf.com/about-en/">About</a>
+<a href="https://ahmedhamdyraouf.com/works-en/">Works</a>
+<a href="https://ahmedhamdyraouf.com/dandana-en/">Dandana</a>
+<a href="https://ahmedhamdyraouf.com/training-en/">Training</a>
+<a href="https://ahmedhamdyraouf.com/home-en/#gallery">Gallery</a>
+<a href="https://ahmedhamdyraouf.com/contact-en/">Contact</a>
+<a href="https://ahmedhamdyraouf.com/voice-test-en/">Voice Test</a>
+<a href="https://ahmedhamdyraouf.com/home-ar/" class="lang-btn-new"><span>🌐</span> العربية</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="works-hero">
+  <div class="container">
+    <div class="hero-sub">Complete Archive</div>
+    <h1>Works</h1>
+    <p>Over 25 years of composition, arrangement, and music production — songs, theatre, drama, and choirs.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num" id="stat-singles">—</div><div class="stat-label">Songs & Collaborations</div></div>
+  <div class="stat"><div class="stat-num" id="stat-theatre">—</div><div class="stat-label">Theatre Productions</div></div>
+  <div class="stat"><div class="stat-num" id="stat-drama">—</div><div class="stat-label">Drama & Film</div></div>
+  <div class="stat"><div class="stat-num">25+</div><div class="stat-label">Years of Experience</div></div>
+</div>
+
+
+
+<!-- SINGLES -->
+<section class="works-section" id="singles-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="singles-count">Loading......</div>
+      <h2>Songs & Collaborations</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cards-grid" id="singles-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+<div class="section-divider" id="div1"></div>
+
+<!-- THEATRE -->
+<section class="works-section" id="theatre-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="theatre-count">Loading......</div>
+      <h2>Theatre Productions</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cards-grid" id="theatre-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+<div class="section-divider" id="div2"></div>
+
+<!-- DRAMA -->
+<section class="works-section" id="drama-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="drama-count">Loading......</div>
+      <h2>Drama & Film</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="drama-list" id="drama-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+<div class="section-divider" id="div3"></div>
+
+<!-- CHOIRS -->
+<section class="works-section" id="choirs-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="choirs-count">Loading......</div>
+      <h2>Choirs & Training</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cards-grid" id="choirs-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+<div class="section-divider" id="div4"></div>
+
+<!-- CONCERTS -->
+<section class="works-section" id="concerts-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="concerts-count">Loading......</div>
+      <h2>Concerts & Live Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="cards-grid" id="concerts-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+<div class="section-divider" id="div5"></div>
+
+<!-- AWARDS -->
+<section class="works-section" id="awards-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-count" id="awards-count">Loading......</div>
+      <h2>Awards & Recognition</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="awards-grid" id="awards-grid"><div class="loading-state">Loading...</div></div>
+  </div>
+</section>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-category" id="popup-cat"></div>
+    <div class="popup-title" id="popup-title"></div>
+    <div class="popup-title-en" id="popup-title-en"></div>
+    <div class="popup-fields" id="popup-fields"></div>
+    <div class="popup-links" id="popup-links"></div>
+  </div>
+</div>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/201114004738" class="whatsapp-float" target="_blank">WhatsApp</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© Ahmed Hamdy Raouf — Official Website</p>
+    <p>Composer • Music Producer • Vocal Coach</p>
+  </div>
+</footer>
+
+<script>
+// ── SHEETS ──
+const SHEETS = {
+  singles:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=248213971&single=true&output=csv',
+  theatre:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=582470275&single=true&output=csv',
+  drama:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=1828539478&single=true&output=csv',
+  choirs:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=202863829&single=true&output=csv',
+  concerts: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=1903280134&single=true&output=csv',
+  awards:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRHU8jryiHeAik8rqlJKEKggZeKBVOEGbDLwqP1B4MbCtev5KPnRoNKXmbW4NMoCLKws9Vc6SrLr0uL/pub?gid=1129442503&single=true&output=csv',
+};
+
+// ── CSV PARSER ──
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g,'').trim());
+  return lines.slice(1).map(line => {
+    const vals = [];
+    let cur = '', inQ = false;
+    for (let ch of line) {
+      if (ch === '"') inQ = !inQ;
+      else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else cur += ch;
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h,i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,''));
+    return obj;
+  }).filter(r => Object.values(r).some(v => v));
+}
+
+// ── FETCH ──
+async function fetchSheet(url) {
+  const res = await fetch(url);
+  return parseCSV(await res.text());
+}
+
+// ── POPUP ──
+function showPopup(cat, titleAR, titleEN, details, links) {
+  document.getElementById('popup-cat').textContent = cat;
+  document.getElementById('popup-title').textContent = titleAR || '';
+  document.getElementById('popup-title-en').textContent = titleEN || '';
+
+  const fEl = document.getElementById('popup-fields');
+  fEl.innerHTML = '';
+  details.forEach(([label, val]) => {
+    if (!val || val === '—' || val.trim() === '') return;
+    const d = document.createElement('div');
+    d.className = 'popup-field';
+    d.innerHTML = '<span class="popup-field-label">' + label + '</span><span class="popup-field-value">' + val + '</span>';
+    fEl.appendChild(d);
+  });
+
+  const lEl = document.getElementById('popup-links');
+  lEl.innerHTML = '';
+  links.forEach(([label, url]) => {
+    if (!url || url === '—' || url.trim() === '') return;
+    const a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.className = 'popup-link';
+    a.textContent = label;
+    lEl.appendChild(a);
+  });
+
+  document.getElementById('popup').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('popup').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('popupClose').onclick = closePopup;
+document.getElementById('popup').onclick = e => { if(e.target.id==='popup') closePopup(); };
+document.addEventListener('keydown', e => { if(e.key==='Escape') closePopup(); });
+
+// ── CARD BUILDER ──
+function buildCard(innerHTML, cat, titleAR, titleEN, details, links, cls) {
+  const el = document.createElement('div');
+  el.className = (cls || 'work-item') + ' reveal';
+  el.innerHTML = innerHTML;
+  el.addEventListener('click', () => showPopup(cat, titleAR, titleEN, details, links));
+  return el;
+}
+
+// ── REVEAL ──
+function revealAll() {
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.active)').forEach((el,i) => {
+      setTimeout(() => el.classList.add('active'), i * 40);
+    });
+  }, 100);
+}
+
+// ── RENDER SINGLES ──
+function renderSingles(data) {
+  document.getElementById('stat-singles').textContent = data.length;
+  document.getElementById('singles-count').textContent = data.length + ' Songs & Collaborations';
+  const grid = document.getElementById('singles-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const card = buildCard(
+      '<div class="item-name">' + (r['Song Name (EN)']||'') + '</div>' +
+      '<div class="item-sub">' + ((r['Artist (EN)']||r['Artist (المطرب)']||'')) + '</div>' +
+      '<div class="item-meta"><span class="item-year">' + (r['Year']||'') + '</span><span class="item-type">' + ((r['Type (EN)']||r['Type']||'')) + '</span></div>' +
+      '<span class="item-arrow">→</span>',
+      'Songs & Collaborations',
+      r['Song Name (EN)'] || '',
+      r['Song Name (EN)'] || '',
+      [
+        ['Artist', r['Artist (EN)']||r['Artist (المطرب)']],
+        ['Lyricist', r['Lyricist (EN)']||r['Lyricist (الشاعر)']],
+        ['Composer', r['Composer (EN)']||r['Composer (الملحن)']],
+        ['Arranger', r['Arranger (EN)']||r['Arranger (الموزع)']],
+        ['Year', r['Year']],
+        ['Type', r['Type (EN)']||r['Type']],
+        ['Notes', r['Notes (EN)']||r['Notes']],
+      ],
+      [
+        ['YouTube', r['YouTube']],
+        ['Spotify', r['Spotify']],
+        ['Anghami', r['Anghami']],
+        ['Apple Music', r['Apple Music']],
+      ]
+    );
+    grid.appendChild(card);
+  });
+  revealAll();
+}
+
+// ── RENDER THEATRE ──
+function renderTheatre(data) {
+  document.getElementById('stat-theatre').textContent = data.length;
+  document.getElementById('theatre-count').textContent = data.length + ' Theatre Productions';
+  const grid = document.getElementById('theatre-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const card = buildCard(
+      '<div class="item-name">' + (r['Production Name (EN)']||'') + '</div>' +
+      '<div class="item-sub">' + ((r['Role (EN)']||r['Role (مساهمة أحمد حمدي رؤوف)']||'')) + '</div>' +
+      '<div class="item-meta"><span class="item-year">' + (r['Year']||'') + '</span><span class="item-type">' + ((r['Type (EN)']||r['Type']||'')) + '</span></div>' +
+      '<span class="item-arrow">→</span>',
+      'Theatre Productions',
+      r['Production Name (EN)'] || '',
+      r['Production Name (EN)'] || '',
+      [
+        ['Year', r['Year']],
+        ['Type', r['Type (EN)']||r['Type']],
+        ['Producer', r['Producer (EN)']||r['Producer (جهة الإنتاج)']],
+        ['Venue', r['Venue (EN)']||r['Venue (مكان العرض)']],
+        ['Director', r['Director (EN)']||r['Director (الإخراج)']],
+        ['Writer', r['Writer (EN)']||r['Writer (الكاتب)']],
+        ['Cast', r['Cast (EN)']||r['Cast (البطولة)']],
+        ['Role', r['Role (EN)']||r['Role (مساهمة أحمد حمدي رؤوف)']],
+        ['Details', r['Details (EN)']||r['Details']],
+      ],
+      [['Sources', r['Sources']]]
+    );
+    grid.appendChild(card);
+  });
+  revealAll();
+}
+
+// ── RENDER DRAMA ──
+function renderDrama(data) {
+  document.getElementById('stat-drama').textContent = data.length;
+  document.getElementById('drama-count').textContent = data.length + ' Drama & Film Works';
+  const grid = document.getElementById('drama-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const row = buildCard(
+      '<div class="drama-year">' + (r['Year']||'') + '</div>' +
+      '<div class="drama-name">' + (r['Title (EN)']||'') + '</div>' +
+      '<div class="drama-type">' + ((r['Type (EN)']||r['Type']||'')) + '</div>' +
+      '<div class="drama-cast">' + ((r['Cast (EN)']||r['Cast / Vocals (الغناء)']||'')) + '</div>',
+      'Drama & Film',
+      r['Title (EN)'] || '',
+      r['Title (EN)'] || '',
+      [
+        ['Year', r['Year']],
+        ['Type', r['Type (EN)']||r['Type']],
+        ['Category', r['Category (EN)']||r['Category (التصنيف)']],
+        ['Lyricist', r['Lyricist (EN)']||r['Lyricist (الكلمات)']],
+        ['Composer', r['Composer (EN)']||r['Composer (الألحان)']],
+        ['Arranger', r['Arranger (EN)']||r['Arranger (التوزيع)']],
+        ['Soundtrack', r['Soundtrack (EN)']||r['Soundtrack (الموسيقى التصويرية)']],
+        ['Cast / Vocals', r['Cast (EN)']||r['Cast / Vocals (الغناء)']],
+        ['Director', r['Director (EN)']||r['Director (الإخراج)']],
+        ['Notes', r['Notes (EN)']||r['Notes']],
+      ],
+      [['Sources / YouTube', r['Sources / Links']]]
+    , 'drama-row');
+    grid.appendChild(row);
+  });
+  revealAll();
+}
+
+// ── RENDER CHOIRS ──
+function renderChoirs(data) {
+  document.getElementById('choirs-count').textContent = data.length + ' Training Experiences';
+  const grid = document.getElementById('choirs-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const card = buildCard(
+      '<div class="item-name">' + (r['Organization (EN)']||'') + '</div>' +
+      '<div class="item-sub">' + (r['Role (EN)']||'') + '</div>' +
+      '<div class="item-meta"><span class="item-year">' + (r['Years']||'') + '</span><span class="item-type">' + ((r['Location (EN)']||r['Location']||'')) + '</span></div>' +
+      '<span class="item-arrow">→</span>',
+      'Choirs & Training',
+      r['Organization (EN)'] || '',
+      r['Organization (EN)'] || '',
+      [
+        ['Period', r['Years']],
+        ['Location', r['Location (EN)']||r['Location']],
+        ['Role', r['Role (EN)']],
+        ['Description', r['Description (EN)']||r['Description']],
+      ],
+      [['Sources', r['Sources']]]
+    );
+    grid.appendChild(card);
+  });
+  revealAll();
+}
+
+// ── RENDER CONCERTS ──
+function renderConcerts(data) {
+  document.getElementById('concerts-count').textContent = data.length + ' Live Projects';
+  const grid = document.getElementById('concerts-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const card = buildCard(
+      '<div class="item-name">' + (r['Project / Concert (EN)']||'') + '</div>' +
+      '<div class="item-sub">' + ((r['Role (EN)']||r['Role']||'')) + '</div>' +
+      '<div class="item-meta"><span class="item-year">' + (r['Year']||'') + '</span><span class="item-type">' + ((r['Venue (EN)']||r['Venue']||'')) + '</span></div>' +
+      '<span class="item-arrow">→</span>',
+      'Concerts & Live Projects',
+      r['Project / Concert (EN)'] || '',
+      r['Project / Concert (EN)'] || '',
+      [
+        ['Year', r['Year']],
+        ['Location', r['Venue (EN)']||r['Venue']],
+        ['Role', r['Role (EN)']||r['Role']],
+        ['Description', r['Description (EN)']||r['Description']],
+      ],
+      [['Sources / YouTube', r['Sources / Links']]]
+    );
+    grid.appendChild(card);
+  });
+  revealAll();
+}
+
+// ── RENDER AWARDS ──
+function renderAwards(data) {
+  document.getElementById('awards-count').textContent = data.length + ' Awards & Honours';
+  const grid = document.getElementById('awards-grid');
+  grid.innerHTML = '';
+  data.forEach(r => {
+    const card = buildCard(
+      '<div class="award-type">' + ((r['Type (EN)']||r['Type (النوع)']||'')) + '</div>' +
+      '<div class="award-org">' + (r['Organization / Festival']||'') + '</div>' +
+      '<div class="award-year">' + (r['Year']||'') + '</div>' +
+      '<div class="award-detail">' + (r['Details']||'') + '</div>',
+      'Awards & Recognition',
+      r['Organization / Festival'] || '',
+      (r['Type (EN)']||r['Type (النوع)']||''),
+      [
+        ['Type', r['Type (EN)']||r['Type (النوع)']],
+        ['Year', r['Year']],
+        ['Details', r['Details (EN)']||r['Details']],
+      ],
+      [['Sources', r['Sources']]]
+    , 'award-card');
+    grid.appendChild(card);
+  });
+  revealAll();
+}
+
+// ── FILTERS ──
+const sectionIds = ['singles','theatre','drama','choirs','concerts','awards'];
+const divIds = ['div1','div2','div3','div4','div5'];
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id+'-section');
+      filter === 'all' || filter === id ? el.classList.remove('hidden') : el.classList.add('hidden');
+    });
+    divIds.forEach(id => {
+      filter === 'all' ? document.getElementById(id).classList.remove('hidden') : document.getElementById(id).classList.add('hidden');
+    });
+    const target = filter === 'all' ? document.getElementById('singles-section') : document.getElementById(filter+'-section');
+    if(target) setTimeout(() => target.scrollIntoView({behavior:'smooth',block:'start'}), 100);
+  });
+});
+
+// ── MOBILE NAV ──
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('navLinks');
+  if(btn) btn.onclick = () => nav.classList.toggle('active');
+});
+
+// ── SCROLL REVEAL ──
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.reveal:not(.active)').forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('active');
+  });
+});
+
+// ── LOAD ALL ──
+(async () => {
+  try {
+    const [singles, theatre, drama, choirs, concerts, awards] = await Promise.all([
+      fetchSheet(SHEETS.singles),
+      fetchSheet(SHEETS.theatre),
+      fetchSheet(SHEETS.drama),
+      fetchSheet(SHEETS.choirs),
+      fetchSheet(SHEETS.concerts),
+      fetchSheet(SHEETS.awards),
+    ]);
+    renderSingles(singles);
+    renderTheatre(theatre);
+    renderDrama(drama);
+    renderChoirs(choirs);
+    renderConcerts(concerts);
+    renderAwards(awards);
+  } catch(e) {
+    console.error('Error:', e);
+  }
+})();
+</script>
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var toggle = document.querySelector("nav > .menu-toggle");
+  var links = document.querySelector("nav > .nav-links");
+  if(toggle && links){
+    toggle.onclick = function(){ links.classList.toggle("active"); };
+  }
+});
+</script>
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  // ---- SCROLL REVEAL (progressive enhancement) ----
+  var revealTargets = document.querySelectorAll(
+    '.reveal,.section-title,.work-card,.training-card,.gallery-grid img,.dandana-box,.about-content,.about-image,.ct-sec,.tp-section,.dn-sec,.about-section,.works-section,.timeline-item,.award-row,.press-card'
+  );
+  if(revealTargets.length && 'IntersectionObserver' in window){
+    revealTargets.forEach(function(el){ el.classList.add('reveal-init'); });
+    var revealIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry, idx){
+        if(entry.isIntersecting){
+          setTimeout(function(){ entry.target.classList.add('reveal-active'); }, (idx % 6) * 80);
+          revealIO.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0, rootMargin:'0px 0px -5% 0px'});
+    revealTargets.forEach(function(el){ revealIO.observe(el); });
+  }
+
+  // ---- ANIMATED NUMBER COUNTERS ----
+  var counterTargets = document.querySelectorAll('.stat-num,.coaching-stat-num,.tp-stat-num');
+  var isArabicPage = document.documentElement.lang === 'ar';
+  var arabicDigits = '٠١٢٣٤٥٦٧٨٩';
+  function toArabicDigits(s){ return s.replace(/\d/g, function(d){ return arabicDigits[d]; }); }
+  function animateCounter(el){
+    var raw = el.textContent.trim();
+    if(!raw) return;
+    var western = raw.replace(/[٠-٩]/g, function(d){ return String(arabicDigits.indexOf(d)); });
+    var m = western.match(/[\d,]+/);
+    if(!m) return;
+    var target = parseInt(m[0].replace(/,/g,''), 10);
+    if(isNaN(target) || target === 0) return;
+    var prefix = western.slice(0, m.index), suffix = western.slice(m.index + m[0].length);
+    var dur = 1400, start = null;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts-start)/dur, 1);
+      var val = Math.floor(p * target);
+      var out = prefix + val.toLocaleString('en-US') + suffix;
+      el.textContent = isArabicPage ? toArabicDigits(out) : out;
+      if(p < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    }
+    requestAnimationFrame(step);
+  }
+  if(counterTargets.length && 'IntersectionObserver' in window){
+    var counterIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          animateCounter(entry.target);
+          counterIO.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.2, rootMargin:'0px 0px -10% 0px'});
+    counterTargets.forEach(function(el){ counterIO.observe(el); });
+  }
+
+  // ---- BACK TO TOP ----
+  var backToTop = document.getElementById('backToTop');
+  if(backToTop){
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 400) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.onclick = function(){ window.scrollTo({top:0, behavior:'smooth'}); };
+  }
+
+  // ---- READING PROGRESS BAR ----
+  var progressBar = document.getElementById('scrollProgress');
+  if(progressBar){
+    window.addEventListener('scroll', function(){
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    });
+  }
+
+});
+</script>
+</body>
+</html>

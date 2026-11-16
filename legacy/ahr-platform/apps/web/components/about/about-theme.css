@@ -1,0 +1,188 @@
+/*
+  Scoped to `.about-theme` only — does not touch globals.css's site-wide
+  --color-primary/--font-display tokens. Reuses --color-primary (the
+  ratified gold, #c7a86b) so the accent stays identical to the rest of
+  the site; black/white are literal per spec ("no fourth color").
+*/
+.about-theme {
+  --about-black: #000000;
+  --about-white: #ffffff;
+  --about-gold: var(--color-primary, #c7a86b);
+  --about-gold-soft: rgba(199, 168, 107, 0.35);
+  --about-muted: rgba(255, 255, 255, 0.62);
+  --about-hairline: rgba(255, 255, 255, 0.12);
+  --about-surface: #0a0a0a;
+
+  background: var(--about-black);
+  color: var(--about-white);
+  min-height: 100vh;
+}
+
+.about-theme[dir="ltr"] {
+  --font-about-display: var(--font-about-display-en);
+  --font-about-body: var(--font-about-body-en);
+}
+
+.about-theme[dir="rtl"] {
+  --font-about-display: var(--font-about-arabic);
+  --font-about-body: var(--font-about-arabic);
+}
+
+.about-theme h1,
+.about-theme h2,
+.about-theme h3,
+.about-theme .about-heading {
+  font-family: var(--font-about-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.about-theme,
+.about-theme p,
+.about-theme span,
+.about-theme a,
+.about-theme button {
+  font-family: var(--font-about-body);
+}
+
+.about-theme .about-eyebrow {
+  font-family: var(--font-about-body);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--about-gold);
+}
+
+.about-theme .about-quote {
+  font-family: var(--font-about-display);
+  font-style: italic;
+  color: var(--about-gold);
+  line-height: 1.5;
+}
+
+.about-theme .about-ghost-number {
+  font-family: var(--font-about-display);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  line-height: 1;
+  user-select: none;
+}
+
+/* Section 04 — "very subtle music staff texture", ~2% opacity, typography only */
+.about-theme .about-staff-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--about-white) 0px,
+    var(--about-white) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+}
+
+.about-theme .about-hairline {
+  border-color: var(--about-hairline);
+}
+
+.about-theme ::selection {
+  background: var(--about-gold-soft);
+  color: var(--about-white);
+}
+
+/*
+  site-legacy.css (imported by the shared (site) layout) carries two
+  blanket rules that outrank plain Tailwind utilities on the elements
+  below, because CSS specificity is compared per matched selector, not
+  per stylesheet or import order:
+    `.site-theme, .site-theme *{ margin:0; padding:0; }`   → (0,1,0)
+    `.site-theme section{ padding:100px 8%; }`             → (0,1,1)
+  A one-class Tailwind utility (`.mx-auto`, `.py-24`, …) is only (0,1,0),
+  so it loses both fights — that's what was collapsing every centered
+  block to the left edge and forcing every section to a flat 100px.
+  `.cine-shell`/`.cine-section` add one extra class under `.about-theme`
+  (→ 0,2,0 / 0,2,1), which unambiguously outranks both legacy rules.
+*/
+.about-theme .cine-shell {
+  /* Width stays Tailwind's job (`max-w-6xl`, `max-w-3xl`, …) — legacy
+     never touches `max-width`, only `margin`/`padding`, so only those
+     two need fixing here. */
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  position: relative;
+}
+
+.about-theme .cine-center {
+  /* For a narrower block already nested inside a `.cine-shell` (no
+     padding-inline needed again) — pair with Tailwind's `max-w-*`. */
+  margin-inline: auto;
+}
+
+.about-theme section.cine-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  padding-inline: 0;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .about-theme section.cine-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.about-theme section.cine-section.is-roomy {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (min-width: 768px) {
+  .about-theme section.cine-section.is-roomy {
+    padding-top: 11rem;
+    padding-bottom: 11rem;
+  }
+}
+
+.about-theme section.cine-section.is-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+/*
+  Next.js dev mode splits Tailwind's generated utilities across a separate
+  CSS chunk per route segment (app/layout.css, (site)/layout.css, this
+  page's own page.css). `.hidden{display:none}` gets duplicated into an
+  *earlier-loading* chunk than this page's own `.md\:flex{display:flex}`,
+  so on the resulting specificity tie the duplicate — not the override —
+  ends up last in the merged cascade and wins, permanently hiding the
+  desktop rail. Plain, page-scoped classes side-step that chunk-ordering
+  hazard entirely.
+*/
+.about-theme .cine-timeline-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .about-theme .cine-timeline-desktop {
+    display: flex;
+  }
+}
+
+.about-theme .cine-timeline-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .about-theme .cine-timeline-mobile {
+    display: none;
+  }
+}

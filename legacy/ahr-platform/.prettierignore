@@ -1,0 +1,20 @@
+# Added Phase 3 CTO Audit (Testing & QA Final Review — Coverage Report).
+# Prettier previously had no ignore file at all; it was formatting build
+# output and generated coverage artifacts whenever they happened to exist
+# on disk, which is both wasted work and never something that should be
+# formatted, since it's not source code.
+
+node_modules/
+.next/
+coverage/
+*.tsbuildinfo
+package-lock.json
+
+# Added Phase 1 Platform Implementation audit. docs/architecture/ is an
+# exact, traceable copy of the approved architecture/specification
+# documents from Technical-Documentation/ (a separate track deliverable,
+# not this repo's own source). It is intentionally not reformatted here,
+# so the copy stays byte-identical to the approved original.
+docs/architecture/
+DEVELOPMENT-STATUS.md
+BACKLOG.md

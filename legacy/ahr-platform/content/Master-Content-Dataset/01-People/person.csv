@@ -1,0 +1,73 @@
+﻿person_id,name_arabic,name_english,primary_role,notes,source_ref
+PER-0001,أحمد حمدي رؤوف عوض,Ahmed Hamdy Raouf,Composer / Vocal Coach / Musical Author,"Subject of this dataset. Born 15 August 1984, Alexandria, Egypt (Mahram Bek). Diploma Conservatoire (double bass/cello); BA Academy of Arts - Higher Institute of Music. Member: SACEM (France), SASERO (Egypt), Musicians Syndicate Egypt (card #10372, joined 2025). UAE Golden Residency (Creatives & Artists category).",Complete_Archive_v2:ملخص عام
+PER-0002,مدحت صالح,Medhat Saleh,Singer/Performer,Performed multiple AHR compositions.,Complete_Archive_v2:الألحان الغنائية
+PER-0003,محمد منير,Mohamed Mounir,Singer/Performer,Performed 'Ana Menak Etaalemt' (2015) and 'Te3b' (2026).,Complete_Archive_v2:الألحان الغنائية
+PER-0004,علي الحجار,Ali El Haggar,Singer/Performer,Longtime collaborator; ~40+ songs per SEO sheet notes ('40+ أغنية').,Complete_Archive_v2:الألحان الغنائية
+PER-0005,عايدة الأيوبي,Aida El Ayouby,Singer/Performer,Performed 'Awel Dahka'.,Complete_Archive_v2:الألحان الغنائية
+PER-0006,ريهام عبد الحكيم,Reham Abdel Hakim,Singer/Performer,"Performed 'Ana Mesh Magnona' (Fresca, 2004).",Complete_Archive_v2:الألحان الغنائية
+PER-0007,خالد محروس,Khaled Mahrous,Singer/Performer,Performed 'Lama El Beban Tet2efel'.,Complete_Archive_v2:الألحان الغنائية
+PER-0008,سهيلة بهجت,Suheila Bahgat,Singer/Performer,Performed 'Alf Shou3our'.,Complete_Archive_v2:الألحان الغنائية
+PER-0009,زينب أحمد,Zeinab Ahmed,Singer/Performer,Performed 'Agaban Le Kalamak'.,Complete_Archive_v2:الألحان الغنائية
+PER-0010,محمد نبيل,Mohamed Nabil,Lyricist,Wrote 'Qalb Wahed' and 'Donya El Saada'.,Complete_Archive_v2:الألحان الغنائية
+PER-0011,طارق علي,Tarek Ali,Lyricist,"Wrote multiple lyrics incl. 'Benhebbak Ya Drama', 'Ente El Madad'.",Complete_Archive_v2:الألحان الغنائية
+PER-0012,أحمد فايز,Ahmed Fayez,Lyricist,Wrote 'Ana Menak Etaalemt'.,Complete_Archive_v2:الألحان الغنائية
+PER-0013,أحمد شبكة,Ahmed Shabaka,Lyricist,Wrote 'Te3b'.,Complete_Archive_v2:الألحان الغنائية
+PER-0014,ناصر رشوان,Nasser Rashwan,Lyricist,"Wrote several national songs ('Fagr Beladi', 'El Medan', 'Khaled Said', 'Abou El Ahlam').",Complete_Archive_v2:الألحان الغنائية
+PER-0015,صفوت زينهم,Safwat Zeinhom,Lyricist,"Wrote 'Sha3bena Gaish', 'El Rehan Alek', 'Awel Dahka'.",Complete_Archive_v2:الألحان الغنائية
+PER-0016,محمد عبد القادر,Mohamed Abdel Kader,Lyricist,Wrote 'Eyounak Eyouny'.,Complete_Archive_v2:الألحان الغنائية
+PER-0017,سالم الشهباني,Salem El Shahbani,Lyricist,"Wrote multiple songs incl. 'El Saa 12 We Deqiqa', 'Dari Gamalek', 'Set El Kol'.",Complete_Archive_v2:الألحان الغنائية
+PER-0018,جمال بخيت,Gamal Bekheit,Lyricist,Wrote '3 El Rabab'.,Complete_Archive_v2:الألحان الغنائية
+PER-0019,ضحى جبر,Doha Gabr,Lyricist,Wrote 'Orbak Naga'.,Complete_Archive_v2:الألحان الغنائية
+PER-0020,صلاح عبد الله,Salah Abdallah,Lyricist,Wrote 'Sotak Gameel'.,Complete_Archive_v2:الألحان الغنائية
+PER-0021,أحمد قدري,Ahmed Qadry,Lyricist,Wrote 'Lama El Beban Tet2efel'.,Complete_Archive_v2:الألحان الغنائية
+PER-0022,أمير نسيم,Amir Naseem,Lyricist,Wrote 'Ebhar Masr'.,Complete_Archive_v2:الألحان الغنائية
+PER-0023,حازم رأفت,Hazem Raafat,Arranger,Arranged 'Qalb Wahed'.,Complete_Archive_v2:الألحان الغنائية
+PER-0024,محمد حمدي رؤوف,Mohamed Hamdy Raouf,Arranger,"Recurring arranger credit across ~15+ songs (see person_id PER-0001's works). **Confirmed by the data owner (2026-07-21): PER-0024 is Ahmed Hamdy Raouf's brother**, also a music arranger. Has his own ElCinema profile (person/1990118/ belongs to PER-0001; person/2024870/ belongs to PER-0024) with an independent biography — not a duplicate or misspelling of PER-0001.",Complete_Archive_v2:الألحان الغنائية / owner-confirmed 2026-07-21
+PER-0025,جمال فتحي,Gamal Fathy,Arranger,"Arranged multiple songs incl. 'Donya El Saada', 'Farhet El Donya'.",Complete_Archive_v2:الألحان الغنائية
+PER-0026,Sebastian Muller Schrobsdorff,Sebastian Muller Schrobsdorff,Arranger,International arranger for 'Ana Menak Etaalemt' (Germany/Spain/Egypt production).,Complete_Archive_v2:الألحان الغنائية
+PER-0027,يوسف صادق,Youssef Sadek,Arranger,Arranged 'Eyounak Eyouny'.,Complete_Archive_v2:الألحان الغنائية
+PER-0028,مادو,Mado,Arranger,"Arranged 'Khasamtny', 'Set El Kol'.",Complete_Archive_v2:الألحان الغنائية
+PER-0029,أحمد شعتوت,Ahmed Shaatout,Arranger,Arranged 'El Saa 12 We Deqiqa'; co-arranged 'Dari Gamalek'.,Complete_Archive_v2:الألحان الغنائية
+PER-0030,شريف منصور,Sherif Mansour,Arranger,Arranged 'Awel Dahka'.,Complete_Archive_v2:الألحان الغنائية
+PER-0031,وليد مصطفى,Walid Mostafa,Arranger,"Arranged 'Farhet El Donya' (charity song, Mostashfa Ahl Masr).",Complete_Archive_v2:الألحان الغنائية
+PER-0032,محمد العشي,Mohamed El Ashy,Arranger,Co-arranged 'Orbak Naga'.,Complete_Archive_v2:الألحان الغنائية
+PER-0033,جلال عزام,Galal Azzam,Arranger,Co-arranged 'Orbak Naga'.,Complete_Archive_v2:الألحان الغنائية
+PER-0034,أحمد خضر,Ahmed Khedr,Director,Directed 'El Shehab' (1999 TV series).,Complete_Archive_v2:الدراما والسينما
+PER-0035,سمير علام,Samir Allam,Director,Directed 'Emsek El Khashab' (1999).,Complete_Archive_v2:الدراما والسينما
+PER-0036,مجدي أحمد علي,Magdy Ahmed Aly,Director,Directed 'Fresca' (2004) and 'El Hob Mawtan' (2005).,Complete_Archive_v2:الدراما والسينما
+PER-0037,أيمن عبيس,Ayman Obeis,Director,Directed 'Haret El Zaafarany' (2006).,Complete_Archive_v2:الدراما والسينما
+PER-0038,محمد فاضل,Mohamed Fadel,Director,Directed 'El Saeroun Neyaman' (2010).,Complete_Archive_v2:الدراما والسينما
+PER-0039,مصطفى رؤوف عبد العزيز,Mostafa Raouf Abdel Aziz,Director,Directed 'Teatro' (2023).,Complete_Archive_v2:الدراما والسينما
+PER-0040,مايا أشرف زكي,Maya Ashraf Zaki,Director,Directed 'Had Aqsa' (2026).,Complete_Archive_v2:الدراما والسينما
+PER-0041,إيهاب الرفاعي,Ihab El Refai,Director,Directed documentary 'Sayedat El Masrah'.,Complete_Archive_v2:الدراما والسينما
+PER-0042,إبراهيم السيد,Ibrahim El Sayed,Director,Directed documentary 'El Masrah El Qawmy El Masry'.,Complete_Archive_v2:الدراما والسينما
+PER-0043,محمد السيد عيد,Mohamed El Sayed Eid,Writer,Wrote 'El Shehab'.,Complete_Archive_v2:الدراما والسينما
+PER-0044,نبيل غلام,Nabil Ghallab,Writer,Wrote 'Emsek El Khashab'.,Complete_Archive_v2:الدراما والسينما
+PER-0045,مجدي صابر,Magdy Saber,Writer,Wrote 'Fresca'.,Complete_Archive_v2:الدراما والسينما
+PER-0046,محمد صفاء عامر,Mohamed Safaa Amer,Writer,Wrote 'El Hob Mawtan'.,Complete_Archive_v2:الدراما والسينما
+PER-0047,جمال الغيطاني,Gamal El Ghitany,Writer,Wrote 'Haret El Zaafarany' (literary source).,Complete_Archive_v2:الدراما والسينما
+PER-0048,مصطفى إبراهيم,Mostafa Ibrahim,Writer,Wrote 'El Saeroun Neyaman'.,Complete_Archive_v2:الدراما والسينما
+PER-0049,إسماعيل إبراهيم,Ismail Ibrahim,Writer,Co-wrote 'Teatro'.,Complete_Archive_v2:الدراما والسينما
+PER-0050,هشام هلال,Hesham Helal,Writer,Wrote 'Had Aqsa'.,Complete_Archive_v2:الدراما والسينما
+PER-0051,أشرف زكي,Ashraf Zaki,Director/Public Figure,"Directed 'Ya Ale3b Ya Aghlas', 'Nesaa Shakespeare', 'El Masrah Wahashna'; quoted in press about 'Had Aqsa'.",Complete_Archive_v2:الأعمال المسرحية / Press_Final
+PER-0052,أحمد رجب,Ahmed Ragab,Director,Directed 'El Ma3gana'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0053,محمد أبو صالح,Mohamed Abou Saleh,Director,Directed 'Qasr El Rabee3'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0054,محمد مرسي,Mohamed Morsi,Director,Directed 'Ala El Zeibaq'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0055,مؤمن عبده,Moemen Abdo,Playwright/Lyricist,Wrote text for 'Ala El Zeibaq' and 'Aakher El Matef'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0056,محمد علي,Mohamed Aly,Director,Directed 'Gebal El Hadeed'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0057,حمدي عباس,Hamdy Abbas,Director,Directed 'Aakher El Matef'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0058,دعاء طعيمة,Doaa Toaima,Director,Directed 'Yama Fel Garab'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0059,عمرو قابيل,Amr Qabil,Director,Directed 'Aakher El Forsan' and 'Men El Obour Ela El Amal'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0060,محمد منصور,Mohamed Mansour,Director,Directed 'Sous We Sousa Wel Harb El Basousa'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0061,أحمد شوقي,Ahmed Shawky,Director,Directed 'Helm Leilet Saif'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0062,سامح بسيوني,Sameh Bassiouny,Director,"Directed 'Tazkarat El Tahrir', 'El Badroum', 'El Mokhatat'.",Complete_Archive_v2:الأعمال المسرحية
+PER-0063,باسم قناوي,Bassem Kenawy,Director,"Directed 'El Habl', 'Noqtet Hodoud', 'Amr Taklif'.",Complete_Archive_v2:الأعمال المسرحية
+PER-0064,عامر منيب,Amer Mounib,Musician (video subject),"Subject of 'Geet Ala Baly' video, described as tribute/musical piece.",Press_Final:المقالات والأخبار
+PER-0065,روجينا,Rogina,Actor,Cast in 'Teatro' and 'Ya Ale3b Ya Aghlas'.,Complete_Archive_v2:الدراما والسينما / الأعمال المسرحية
+PER-0066,أحمد زاهر,Ahmed Zaher,Actor,Cast in 'Teatro'.,Complete_Archive_v2:الدراما والسينما
+PER-0067,أحمد بدير,Ahmed Badir,Actor,Cast in 'Teatro'.,Complete_Archive_v2:الدراما والسينما
+PER-0068,محمد القس,Mohamed El Qass,Actor,Cast in 'Had Aqsa'.,Complete_Archive_v2:الدراما والسينما
+PER-0069,خالد كمال,Khaled Kamal,Actor,Cast in 'Had Aqsa'.,Complete_Archive_v2:الدراما والسينما
+PER-0070,فدوى عابد,Fadwa Abed,Actor,Cast in 'Had Aqsa'.,Complete_Archive_v2:الدراما والسينما
+PER-0071,أحمد رزق,Ahmed Rizk,Actor,Cast in 'Ya Ale3b Ya Aghlas'.,Complete_Archive_v2:الأعمال المسرحية
+PER-0072,أمل حمدي رؤوف,Amal Hamdy Raouf,Actor / Executive Producer,"Appears as cast in 'El Sa'irun Niyaman' (2010 TV series) and as Executive Producer of 'Shukran Ya Emarat' (2026). **Confirmed by the data owner (2026-07-21): Amal Hamdy Raouf is Ahmed Hamdy Raouf's sister.**",Live-Works-Google-Sheet-2026-07-21 (Drama & Film tab / Singles tab) / owner-confirmed 2026-07-21

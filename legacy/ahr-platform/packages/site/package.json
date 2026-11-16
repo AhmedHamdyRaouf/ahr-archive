@@ -1,0 +1,21 @@
+{
+  "name": "@ahr/site",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Milestone 8 — Public Website foundation. Pure, testable logic (locale utilities, SEO metadata building, sitemap building, public-settings shape, theme token catalog) consumed by apps/web's public-facing pages. No UI, no Next.js dependency.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src tests --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@ahr/eslint-config": "*",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5",
+    "eslint": "^8.57.0",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

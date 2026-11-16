@@ -1,0 +1,26 @@
+{
+  "name": "@ahr/workflow",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Milestone 10 — Workflow Engine. Formalizes content lifecycle orchestration (reusing @ahr/cms-core's transition graph, now correctly audited — see the Milestone 4 bug fix noted in this package's README) and implements the Moderation Report review/resolution workflow (open to in_review to escalated to resolved), the first real 'approval and review flow' in this platform beyond content status. Strictly against the Frozen v1 Database Architecture - no schema changes.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src tests --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@ahr/auth": "*",
+    "@ahr/cms-core": "*",
+    "@ahr/relationships": "*"
+  },
+  "devDependencies": {
+    "@ahr/eslint-config": "*",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5",
+    "eslint": "^8.57.0",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

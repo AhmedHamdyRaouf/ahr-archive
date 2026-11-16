@@ -1,0 +1,31 @@
+﻿tag_id,keyword,language,tag_category,priority,notes,person_id,source_ref
+TAG-0001,أحمد حمدي رؤوف,عربي,اسم الفنان,High,الكلمة الرئيسية,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #1
+TAG-0002,احمد حمدي رؤوف,عربي,اسم الفنان (بدون تشكيل),High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #2
+TAG-0003,احمد حمدى رؤوف,عربي,اسم بديل شائع,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #3
+TAG-0004,Ahmed Hamdy Raouf,إنجليزي,اسم الفنان,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #4
+TAG-0005,AHR Vision,إنجليزي,البراند الرقمي,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #5
+TAG-0006,أحمد حمدي رؤوف ملحن,عربي,مهنة,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #6
+TAG-0007,أحمد حمدي رؤوف مؤلف موسيقي,عربي,مهنة,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #7
+TAG-0008,أحمد حمدي رؤوف مدرب أصوات,عربي,مهنة,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #8
+TAG-0009,Ahmed Hamdy Raouf composer,إنجليزي,مهنة,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #9
+TAG-0010,Ahmed Hamdy Raouf voice coach,إنجليزي,مهنة,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #10
+TAG-0011,أغاني أحمد حمدي رؤوف,عربي,أعمال,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #11
+TAG-0012,ألحان أحمد حمدي رؤوف,عربي,أعمال,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #12
+TAG-0013,أحمد حمدي رؤوف علي الحجار,عربي,تعاون,High,40+ أغنية,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #13
+TAG-0014,أحمد حمدي رؤوف محمد منير,عربي,تعاون,High,أنا منك اتعلمت + تِعب,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #14
+TAG-0015,أحمد حمدي رؤوف مدحت صالح,عربي,تعاون,Medium,قلب واحد,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #15
+TAG-0016,تِعب محمد منير أحمد حمدي رؤوف,عربي,أغنية,High,2026,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #16
+TAG-0017,أنا منك اتعلمت محمد منير,عربي,أغنية,High,2015,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #17
+TAG-0018,ست الكل علي الحجار ملحن,عربي,أغنية,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #18
+TAG-0019,داري جمالك علي الحجار,عربي,أغنية,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #19
+TAG-0020,الساعة 12 ودقيقة ملحن,عربي,أغنية,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #20
+TAG-0021,فجر بلادي أوسكار الأغنية المصورة,عربي,جائزة,High,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #21
+TAG-0022,أحمد حمدي رؤوف حد أقصى,عربي,مسلسل,High,2026,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #22
+TAG-0023,أحمد حمدي رؤوف تياترو,عربي,مسلسل,High,2023,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #23
+TAG-0024,أحمد حمدي رؤوف موسم الرياض,عربي,مسرح,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #24
+TAG-0025,نجل حمدي رؤوف,عربي,عائلة,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #25
+TAG-0026,son of Hamdy Raouf composer,إنجليزي,عائلة,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #26
+TAG-0027,Egyptian composer Alexandrian,إنجليزي,هوية,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #27
+TAG-0028,قلب واحد مدحت صالح ملحن,عربي,أغنية,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #28
+TAG-0029,أحمد حمدي رؤوف يوتيوب,عربي,منصة,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #29
+TAG-0030,ahmedhamdyraouf Instagram,إنجليزي,منصة,Medium,,PER-0001,Press_Archive.xlsx : sheet 'كلمات البحث' row #30

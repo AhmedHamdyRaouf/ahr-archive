@@ -1,0 +1,19 @@
+﻿award_id,name_arabic,award_category,year,granting_organization_raw,granting_organization_id,related_work_raw,role,notes,person_id,source_ref
+AWD-0001,أوسكار الأغنية المصورة,Award,,مهرجان الأغنية المصورة,,فجر بلادي,ملحن,جائزة دولية مرموقة,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #1
+AWD-0002,الإقامة الذهبية الإماراتية,Official Recognition,,الإمارات العربية المتحدة,,,فنان مبدع,فئة المبدعين والفنانين,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #2
+AWD-0003,تكريم وزارة الثقافة المصرية,Honor,,وزارة الثقافة,ORG-0011,,ملحن / فنان,تكريمات رسمية متعددة,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #3
+AWD-0004,درع المجلس الأهلي للتراث,Honor,,المجلس الأهلي للتراث,ORG-0012,,ملحن,تكريم ثقافي وفني,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #4
+AWD-0005,درع نادي سموحة الرياضي,Honor,,نادي سموحة — الإسكندرية,ORG-0013,,فنان,تكريم مجتمعي,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #5
+AWD-0006,درع محافظة الفيوم,Honor,,محافظة الفيوم,ORG-0014,,فنان / مدرب,تكريم رسمي,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #6
+AWD-0007,تكريم وزارة الشباب والرياضة,Honor,,وزارة الشباب والرياضة,ORG-0015,,مدرب كورال,مرتبط بتدريب الأطفال,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #7
+AWD-0008,جائزة حمدي رؤوف للموسيقى,Named Award,,مهرجان الحرية المسرحي,ORG-0016,,,أُطلق اسم الأسرة على الجائزة تكريماً,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #8
+AWD-0009,لجنة تحكيم — مهرجان الحرية,Jury Member,2018,مركز الحرية للإبداع — الإسكندرية,ORG-0016,,Jury Member,الدورة الرابعة,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #9
+AWD-0010,لجنة تحكيم — مهرجان الحرية,Jury Member,2024,مركز الحرية للإبداع — الإسكندرية,ORG-0016,,Jury Member,الدورة العاشرة,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #10
+AWD-0011,لجنة تحكيم — المهرجان القومي للمسرح,Jury Member,2021,المهرجان القومي للمسرح المصري,ORG-0017,,Jury Member,الدورة 14 — التجارب النوعية,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #11
+AWD-0012,لجنة تحكيم — نوادي المسرح,Jury Member,,الهيئة العامة لقصور الثقافة,ORG-0018,,Jury Member,الدورة 31,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #12
+AWD-0013,لجنة تحكيم — فرق الأقاليم,Jury Member,,الهيئة العامة لقصور الثقافة,ORG-0018,,Jury Member,الدورة 45,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #13
+AWD-0014,عضوية SACEM,Professional Membership,,جمعية المؤلفين والملحنين الفرنسية,ORG-0019,,عضو فعال,عضوية دولية — فرنسا,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #14
+AWD-0015,عضوية SASERO,Professional Membership,,جمعية المؤلفين والملحنين المصرية,ORG-0020,,عضو فعال,عضوية مهنية — مصر,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #15
+AWD-0016,نقابة المهن الموسيقية,Professional Membership,2025,نقابة المهن الموسيقية المصرية,ORG-0021,,عضو عامل,شعبة التلحين — رقم 10372,PER-0001,Complete_Archive_v2.xlsx : sheet 'الجوائز والعضويات' row #16
+AWD-0017,تكريم المركز القومي لثقافة الطفل,Honor,,المركز القومي لثقافة الطفل,ORG-0030,,فنان,"Honored for children's artistic activities. — new source, distinct row from any existing Ministry/Council honor.",PER-0001,Live-Works-Google-Sheet-2026-07-21 : Awards & Recognition tab
+AWD-0018,تكريم مركز الإبداع الفني بالإسكندرية,Honor,,مركز الإبداع الفني بالإسكندرية,ORG-0029,,فنان,Honored for concerts and musical projects (distinct from the Al-Horreya Festival jury/award items already on file as AWD-0009/AWD-0010).,PER-0001,Live-Works-Google-Sheet-2026-07-21 : Awards & Recognition tab

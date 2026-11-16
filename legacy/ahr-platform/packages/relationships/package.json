@@ -1,0 +1,26 @@
+{
+  "name": "@ahr/relationships",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Milestone 7 — Relationships & Metadata. Cross-entity relationship services (taxonomy joins, Contribution/Press Mention/Award queries, Work/Category hierarchy) and shared metadata services (ownership, visibility, verification status, state history) — strictly against the Frozen v1 Database Architecture. No schema changes.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src tests --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@ahr/auth": "*",
+    "@ahr/cms-core": "*",
+    "@ahr/content": "*"
+  },
+  "devDependencies": {
+    "@ahr/eslint-config": "*",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5",
+    "eslint": "^8.57.0",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

@@ -257,7 +257,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
 
   /* bottom tab bar */
   aside.nav{position:fixed;inset:auto 0 0 0;top:auto;height:auto;z-index:60;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-end;justify-content:space-around;gap:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(16px);-webkit-backdrop-filter:saturate(1.4) blur(16px);border:0;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(28,33,51,.06)}
-  .nav .brand,.nav .foot,.nav #export-all,.nav #pw-open,.nav [data-view=log]{display:none}
+  .nav .brand,.nav .foot,.nav #export-all,.nav #import-photos,.nav #pw-open,.nav [data-view=log]{display:none}
   .nav>button:not(.newbtn){flex:1;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:7px 2px 5px;font-size:11px;line-height:1.2;border-radius:12px;position:relative;background:transparent;color:var(--dim);text-align:center;white-space:nowrap;margin:0}
   .nav>button:not(.newbtn) svg{width:23px;height:23px;margin:0}
   .nav>button.on{background:transparent;color:var(--gold);font-weight:600}
@@ -365,6 +365,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
     <button data-view="review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>قائمة المراجعة<span class="badge" id="nb-review">—</span></button>
     <button data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
     <button id="export-all" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف<span class="badge" id="export-st"></span></button>
+    <button id="import-photos" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>استيراد الصور للمخزن<span class="badge" id="imp-st"></span></button>
     <button id="pw-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button>
     <button id="more-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>المزيد</button>
     <div class="foot"><span class="dot" id="conn-dot"></span><span id="conn-txt">جارٍ الاتصال…</span><br><span id="conn-time"></span>
@@ -429,6 +430,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
 <div id="more-sheet" role="dialog" aria-label="المزيد"><div class="grab"></div><div class="who" id="more-who"></div>
 <button type="button" data-more="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
 <button type="button" data-more="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف</button>
+<button type="button" data-more="photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>استيراد الصور للمخزن</button>
 <button type="button" data-more="pw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button></div>
 <div class="toast" id="toast"></div>
 <dialog id="pw-dlg" style="border:1px solid var(--line2);border-radius:16px;padding:22px;width:min(360px,92vw);background:var(--card);color:var(--ink);font-family:inherit">
@@ -497,7 +499,7 @@ const sqlStr=s=>"'"+String(s).replace(/'/g,"''")+"'";
 const lbl=(t,k)=>{const s=(SCHEMA[t]||[]).find(x=>x[0]===k);return s?s[1]:(FIELDLBL[k]||k);};
 const when=d=>{try{return new Date(d).toLocaleString('ar-EG',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return d}};
 
-let mcp=null, assets=null, DATA={ov:null,rows:[],reviews:[],byId:new Map()}, state={view:'overview',type:'',shown:120,sel:new Set(),showArch:false}, current=null;
+let mcp=null, assets=null, SESS=null, DATA={ov:null,rows:[],reviews:[],byId:new Map()}, state={view:'overview',type:'',shown:120,sel:new Set(),showArch:false}, current=null;
 let EDITOR='أحمد'; try{EDITOR=localStorage.getItem('ahr_editor')||'أحمد'}catch(e){}
 
 function toast(msg,bad){const t=$('#toast');t.textContent=msg;t.style.color=bad?'var(--bad)':'';t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),3200);}
@@ -1055,6 +1057,34 @@ $$('[data-refresh]').forEach(b=>b.onclick=()=>loadAll());
 go(location.hash.slice(1)||'overview');
 skeleton();
 
+
+/* one-time photo import: /photos/* (deployed static, login-protected) -> storage bucket archive-files */
+(function(){
+  const b=$('#import-photos'); if(!b)return;
+  const st=$('#imp-st'); let busy=false;
+  b.onclick=async()=>{
+    if(busy)return; if(!SESS||!SESS.token){toast('سجّل الدخول الأول');return;}
+    busy=true;
+    try{
+      const rows=await sql("select distinct url from archive.link where url like 'photos/%' order by 1");
+      const paths=rows.map(r=>r.url); let done=0,fail=[],i=0;
+      st.textContent='0/'+paths.length;
+      const worker=async()=>{while(i<paths.length){const p=paths[i++];
+        try{
+          const g=await fetch('/'+encodeURI(p)); if(!g.ok) throw new Error('src '+g.status);
+          const blob=await g.blob();
+          const r=await fetch(SESS.url+'/storage/v1/object/archive-files/'+encodeURI(p),{method:'POST',headers:{apikey:SESS.anon,Authorization:'Bearer '+SESS.token,'content-type':blob.type||'image/jpeg','x-upsert':'true'},body:blob});
+          if(!r.ok) throw new Error('up '+r.status);
+        }catch(e){fail.push(p)}
+        done++; st.textContent=done+'/'+paths.length;
+      }};
+      await Promise.all([worker(),worker(),worker()]);
+      st.textContent=fail.length?('فشل '+fail.length):'✓';
+      toast(fail.length?('تم، لكن '+fail.length+' صورة فشلت — اضغط تاني'):'كل الصور اترفعت ('+paths.length+')');
+    }catch(e){toast('خطأ: '+(e&&e.message||e))}
+    busy=false;
+  };
+})();
 /* mobile filter toggle */
 (function(){
   const t=$('#f-toggle'),tb=t&&t.closest('.toolbar'); if(!t)return;
@@ -1070,7 +1100,7 @@ skeleton();
   const close=()=>{sh.classList.remove('on');sc.classList.remove('on')};
   mb.onclick=()=>{const en=$('#editor-name');$('#more-who').textContent=en&&en.value?'مسجّل باسم: '+en.value:'';sh.classList.add('on');sc.classList.add('on')};
   sc.onclick=close;
-  $$('#more-sheet [data-more]').forEach(b=>b.onclick=()=>{const k=b.dataset.more;close();if(k==='log')go('log');else if(k==='export')$('#export-all').click();else if(k==='pw')$('#pw-open').click();});
+  $$('#more-sheet [data-more]').forEach(b=>b.onclick=()=>{const k=b.dataset.more;close();if(k==='log')go('log');else if(k==='export')$('#export-all').click();else if(k==='pw')$('#pw-open').click();else if(k==='photos')$('#import-photos').click();});
   const mark=()=>mb.classList.toggle('on',state.view==='log');
   window.addEventListener('hashchange',mark);
   new MutationObserver(mark).observe($('#v-log'),{attributes:true,attributeFilter:['hidden']});
@@ -1079,7 +1109,7 @@ skeleton();
 
 (async()=>{
   try{
-    const S=await (await fetch('/api/session')).json();
+    const S=await (await fetch('/api/session')).json(); SESS=S;
     if(S&&S.me){ EDITOR=S.me.name; const ed=$('#editor-name'); if(ed){ed.value=EDITOR;ed.disabled=true;ed.title='الاسم من حسابك';}
       assets={upload:async f=>{
         if(f.size>20*1024*1024) throw {message:'الملف أكبر من ٢٠ ميجا'};

@@ -1,0 +1,7 @@
+﻿id,item,period,detail,evidence_status,confidence,privacy,source,item_en,privacy_en
+PL-0001,الوطن,2023,,SOURCE-STATED,PENDING,عام,Press_Media_Database,Al-Watan,Public
+PL-0002,الشروق,2022,,SOURCE-STATED,PENDING,عام,Press_Media_Database,Shorouk,Public
+PL-0003,اليوم السابع,2022,,SOURCE-STATED,PENDING,عام,Press_Media_Database,Youm7,Public
+PL-0004,ElCinema,,elcinema.com person/2024870,SOURCE-STATED,PENDING,عام,Press_Media_Database,ElCinema,Public
+PL-0005,IMDb,,nm14146970,SOURCE-STATED,PENDING,عام,Press_Media_Database,IMDb,Public
+PL-0006,Anghami,,artist/1910527,SOURCE-STATED,PENDING,عام,Press_Media_Database,Anghami,Public

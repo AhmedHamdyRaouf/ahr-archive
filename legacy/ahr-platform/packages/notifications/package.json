@@ -1,0 +1,24 @@
+{
+  "name": "@ahr/notifications",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Milestone 11 - Notifications. Notification provider abstraction, email delivery via platform_settings.email_configuration, event-driven dispatch, templates, and the notification-preference domain model (a fixed V1 default, no per-user persistence). See docs/blocked-notifications.md for what is not implemented and why. Strictly against the Frozen v1 Database Architecture - no schema changes.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src tests --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@ahr/cms-core": "*"
+  },
+  "devDependencies": {
+    "@ahr/eslint-config": "*",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5",
+    "eslint": "^8.57.0",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

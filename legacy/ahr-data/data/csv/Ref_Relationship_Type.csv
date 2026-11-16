@@ -1,0 +1,7 @@
+﻿code,label_ar,label_en,direction_note,sort_order,active
+part_of,جزء من,Part of,source is part of target,1,true
+soundtrack_for,موسيقى/أغنية تتر لـ,Soundtrack for,source is the soundtrack of target,2,true
+theme_song_for,أغنية رئيسية لـ,Theme song for,source is the theme song of target,3,true
+featured_in,ضمن,Featured in,source appears within target,4,true
+version_of,نسخة من,Version of,source is a version of target,5,true
+updates,تحديث لـ,Updates,source updates/replaces target,6,true

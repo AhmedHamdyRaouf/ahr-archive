@@ -1,0 +1,6 @@
+{
+  "name": "@ahr/database",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder — Milestone 2 will populate this package with Supabase migrations and types."
+}

@@ -1,0 +1,125 @@
+﻿sheet,column,value,row_count,value_en
+Works,category,أغنية,49,Song
+Works,category,عمل مسرحي,26,Stage Production
+Works,category,مسلسل تلفزيوني,8,TV Series
+Works,category,فيلم وثائقي,4,Documentary Film
+Works,category,إعلان (أغنية أو موسيقى),2,Advertising Music
+Works,category,فيلم سينمائي,2,Feature Film
+Works,category,مشروع فيديو,1,Video Project
+Works,category,موسيقى برنامج,1,Program Music
+Works,privacy,عام,90,Public
+Works,privacy,أقصى خصوصية,1,Maximum privacy
+Works,privacy,داخلي (حتى الإعلان الرسمي),1,Internal (until the official announcement)
+Works,privacy,عام (تفاصيل الحقوق: داخلي),1,Public (rights details: internal)
+Works,confidence,HIGH,57,HIGH
+Works,confidence,PENDING,33,PENDING
+Works,confidence,MEDIUM,3,MEDIUM
+Works,evidence_status,USER-CONFIRMED,25,USER-CONFIRMED
+Works,evidence_status,USER-CONFIRMED + USER-CONFIRMED (تأكيد جماعي 2026-11-08),21,USER-CONFIRMED + USER-CONFIRMED (bulk confirmation 2026-11-08)
+Works,evidence_status,SOURCE-STATED + USER-CONFIRMED (تأكيد جماعي 2026-11-08),19,SOURCE-STATED + USER-CONFIRMED (bulk confirmation 2026-11-08)
+Works,evidence_status,SOURCE-STATED,12,SOURCE-STATED
+Works,evidence_status,USER-CONFIRMED (الدور),5,USER-CONFIRMED (the role)
+Works,evidence_status,USER-CONFIRMED + DOCUMENTED,3,USER-CONFIRMED + DOCUMENTED
+Works,evidence_status,DOCUMENTED,2,DOCUMENTED
+Works,evidence_status,USER-CONFIRMED (السنة),1,USER-CONFIRMED (the year)
+Works,evidence_status,USER-CONFIRMED (السنوات) + USER-CONFIRMED (تأكيد جماعي 2026-11-08),1,USER-CONFIRMED (the years) + USER-CONFIRMED (bulk confirmation 2026-11-08)
+Works,evidence_status,USER-CONFIRMED (الموضوع) + USER-CONFIRMED (تأكيد جماعي 2026-11-08),1,USER-CONFIRMED (the subject) + USER-CONFIRMED (bulk confirmation 2026-11-08)
+Works,evidence_status,USER-CONFIRMED (تأكيد أحمد 2026-11-09),1,USER-CONFIRMED (Ahmed confirmation 2026-11-09)
+Works,evidence_status,USER-CONFIRMED + DOCUMENTED (أفيش),1,USER-CONFIRMED + DOCUMENTED (poster)
+Works,evidence_status,SOURCE-STATED (إلسينما، ويكيبيديا) + USER-CONFIRMED (دور أحمد),1,"SOURCE-STATED (elCinema, Wikipedia) + USER-CONFIRMED (Ahmed's role)"
+Credits,confidence,PENDING,266,PENDING
+Credits,confidence,HIGH,150,HIGH
+Credits,confidence,MEDIUM,4,MEDIUM
+Credits,evidence_status,SOURCE-STATED,269,SOURCE-STATED
+Credits,evidence_status,USER-CONFIRMED,102,USER-CONFIRMED
+Credits,evidence_status,DOCUMENTED,38,DOCUMENTED
+Credits,evidence_status,USER-CONFIRMED + DOCUMENTED,7,USER-CONFIRMED + DOCUMENTED
+Credits,evidence_status,USER-STATED,4,USER-STATED
+Person,type,person,214,person
+Person,type,group,4,group
+Person,type,organization,4,organization
+Person,privacy,عام,221,Public
+Person,privacy,داخلي,1,Internal
+Events,event_type,عرض مسرحي,25,Theatre show
+Events,event_type,إصدار,8,Release
+Events,event_type,حفل,8,Concert
+Events,event_type,مهرجان,5,Festival
+Events,event_type,تحكيم,3,Jury service
+Events,event_type,مناسبة,3,Occasion
+Events,event_type,إذاعة,2,Radio broadcast
+Events,event_type,إصدار ألبوم,2,Album release
+Events,event_type,جولة عروض,2,Show tour
+Events,event_type,أداء أول,1,First performance
+Events,event_type,اتفاق,1,Agreement
+Events,event_type,افتتاح,1,Opening
+Events,event_type,تكليف/تأسيس,1,Assignment / founding
+Events,event_type,تلحين,1,Composition
+Events,event_type,طرح,1,Launch
+Events,event_type,عرض فيلم,1,Film screening
+Events,event_type,مهرجان / جائزة,1,Festival / Award
+Events,event_type,نشر فيديو,1,Video publication
+Events,event_type,وفاة,1,Passing
+Events,privacy,عام,66,Public
+Events,privacy,أقصى خصوصية,1,Maximum privacy
+Events,privacy,داخلي (حتى الإعلان),1,Internal (until the announcement)
+Awards,privacy,عام,19,Public
+Awards,privacy,عام (الرقم: أقصى خصوصية),3,Public (the number: maximum privacy)
+Awards,privacy,عام (رقم العضوية: أقصى خصوصية — غير مكتوب هنا),1,Public (membership number: maximum privacy — not written here)
+Press,type,منشور اجتماعي (طرف ثالث),71,Social post (third party)
+Press,type,خبر صحفي,26,Press news
+Press,type,خبر,24,News
+Press,type,فيديو (طرف ثالث),21,Video (third party)
+Press,type,حوار,4,Interview
+Press,type,تصريح,2,Statement
+Press,type,مقال,2,Article
+Press,type,بطاقة عرض/نقد,1,Show card / criticism
+Press,type,تصريحات,1,Statements
+Press,type,تقرير رسمي,1,Official report
+Press,type,جريدة,1,Newspaper
+Press,type,خبر الجائزة (الرابط مختصر),1,Award news (shortened link)
+Press,type,خبر جائزة,1,Award news
+Press,type,خبر خاص,1,Exclusive news
+Press,type,خبر رسمي,1,Official news
+Press,type,خبر عن الترجمة (لا يذكر العرض),1,News about the translation (does not mention the show)
+Press,type,قاعدة بيانات,2,Database
+Press,type,مراجعة نقدية,1,Critical review
+Press,type,مرجع,1,Reference
+Press,type,مرجع فني,1,Artistic reference
+Press,type,مرجع موسوعي,2,Encyclopedic reference
+Press,type,مقال (سياقي),4,Article (contextual)
+Press,type,منشور اجتماعي,1,Social post
+Press,type,منشور اجتماعي (صفحة أحمد),1,Social post (Ahmed's page)
+Press,type,نقد مسرحي (يذكر أحمد حمدي رؤوف وطارق علي),1,Theatre criticism (mentions Ahmed Hamdy Raouf and Tarek Ali)
+Press,privacy,عام,170,Public
+Press,privacy,أقصى خصوصية,3,Maximum privacy
+Sources,trust_level,متوسطة,113,Medium
+Sources,trust_level,عالية,28,High
+Sources,trust_level,متوسطة-عالية,13,Medium–high
+Sources,trust_level,3,7,3
+Sources,trust_level,منخفضة,3,Low
+Sources,trust_level,2,2,2
+Sources,trust_level,متوسطة (لم يُتحقق),2,Medium (unverified)
+Sources,trust_level,ممنوع,1,Forbidden
+Sources,trust_level,1 – أعلى,1,1 – highest
+Sources,trust_level,4 – أدنى,1,4 – lowest
+Sources,trust_level,متوسطة (تاريخ الوفاة) / مرفوضة (سبب الوفاة),1,Medium (date of death) / rejected (cause of death)
+Media_Assets,privacy,عام,203,Public
+Life_Story,privacy,عام,54,Public
+Life_Story,privacy,أقصى خصوصية,3,Maximum privacy
+Life_Story,privacy,عام (الخدمة العسكرية: داخلي),1,Public (military service: internal)
+Life_Story,status,مسجّلة,23,Recorded
+Life_Story,status,مبدئي,12,Preliminary
+Life_Story,status,مكتمل — يُراجع في المرحلة النهائية,9,Complete — to be reviewed in the final stage
+Life_Story,status,مسجّلة؛ قابلة للإضافة,7,Recorded; open to additions
+Life_Story,status,جارية,2,In progress
+Life_Story,status,مكتمل مبدئياً,2,Preliminarily complete
+Life_Story,status,جارية (جلسة الأسئلة),1,In progress (Q&A session)
+Life_Story,status,مؤكد,1,Confirmed
+Life_Story,status,مبدئي (مادة لكتاب الفنان),1,Preliminary (material for the artist book)
+Sources,reliability,متوسطة,123,Medium
+Sources,reliability,عالية,29,High
+Sources,reliability,متوسطة-عالية,15,Medium–high
+Sources,reliability,منخفضة,4,Low
+Sources,reliability,ممنوع,1,Forbidden
+Sources,needs_review,لا,169,No
+Sources,needs_review,نعم,3,Yes

@@ -1,0 +1,22 @@
+{
+  "name": "@ahr/ai",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Minimal AI Assistance (Packages Specification Package 06; 14-AI-Integration.md). Archive-scoped, human-reviewed-only AI suggestions for Category/Tag assignment and draft summary/description text on Work/Project entities. OpenAI only, behind a provider-agnostic aiClient abstraction. No autonomous write to any governed platform state; every output is ephemeral in v1 (no ai_recommendation_log table exists yet — see docs/blocked-persistence.md). Built during the Development Audit (Development track) — the package did not exist before; nothing here changes the frozen schema, the Permissions Matrix, or any prior architecture decision.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src tests --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ahr/eslint-config": "*",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5",
+    "eslint": "^8.57.0",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

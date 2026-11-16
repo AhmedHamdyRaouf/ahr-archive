@@ -1,0 +1,25 @@
+AHR Data v10.5 — 2026-11-11
+Built from data/csv (identical to Supabase; Value_Lists is repo-only reference). v10.5 = v10.4 + Phase 1 relationship architecture (migrations 001-003): sheets Ref_Relationship_Type (6 rows) and Work_Relationship added, Data_Dictionary +19 rows. 2026-11-11 (migration 004): Work_Relationship filled with 9 relations (WR-0001..WR-0009); parent_work_id cleared in Works (its 7 values moved, direction child->parent kept); W-0072 source tagged with Ahmed's confirmation of year 2017; migration 005: the two albums as Project_Items (6 rows), album date of Ma Takhdy Balek set to 11 Nov 2017 in W-0013, W-0015, E-0007, E-0010; migration 006: W-0015 year corrected to 2017; Sawy Culturewheel concert (E-0008, W-0013 notes) set to 11 Nov 2017; migration 007: W-0012 noted as planned for the album but released as a single; video clip added as E-0072 (Events 70 rows); migration 008: YouTube link added to W-0012; migration 009: E-0072 clip date set to 20 Mar 2017; final check 2026-11-11: all 20 synced tables match Supabase by row count and content hash; Review_Queue row 17 aligned with Supabase; all other sheets unchanged.
+
+Works                93 rows
+Person              222 rows
+Credits             420 rows
+Sources             172 rows
+Events               68 rows
+Awards               23 rows
+Life_Story           58 rows
+Press               173 rows
+Press_Links           6 rows
+Media_Assets        203 rows
+YouTube_Videos       83 rows
+Audience_Voices      25 rows
+Roles_Education      10 rows
+Training_Choir       14 rows
+Project_Items            6 rows
+Site_Texts           25 rows
+Contact_Channels      8 rows
+Review_Queue         66 rows
+Value_Lists         124 rows
+Data_Dictionary     365 rows
+Ref_Relationship_Type   6 rows
+Work_Relationship         9 rows

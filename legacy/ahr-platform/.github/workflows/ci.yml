@@ -1,0 +1,122 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [staging, main]
+  push:
+    branches: [staging, main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm run test --workspaces --if-present
+
+      # Added: Phase 3 CTO Audit (Testing & QA Final Review — Coverage
+      # Report). Generates a coverage report per package on every run;
+      # not currently enforced as a merge-blocking threshold (see the
+      # Testing & Quality Assurance Final Review Report for why an
+      # enforced number isn't set without a baseline history yet).
+      - name: Test coverage
+        run: npm run test:coverage --workspaces --if-present
+
+      - name: Build
+        run: npm run build
+
+  # Added: Phase 2 CTO Audit — Milestone 2 (Database Foundation) Verification.
+  # Neither smoke test (structural integrity, nor the RLS behavior test added
+  # in this same audit) was previously run anywhere in CI — both existed only
+  # as scripts a developer had to remember to run manually. This job applies
+  # every migration to a disposable Postgres 16 service container (matching
+  # Supabase's own engine version) and runs both suites on every push/PR.
+  database-verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ahr_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PGPASSWORD: postgres
+      PGHOST: localhost
+      PGUSER: postgres
+      PGDATABASE: ahr_ci
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply local Supabase-equivalent shim (auth.uid(), anon/authenticated/service_role)
+        # See packages/database/docs/local-rls-verification.md — a real
+        # Supabase project provisions the real versions of all of this
+        # itself; this shim exists only so CI can exercise our own RLS
+        # policies without a live Supabase project.
+        run: |
+          psql <<'SQL'
+          create schema if not exists auth;
+          create table if not exists auth.users (id uuid primary key default gen_random_uuid());
+          create or replace function auth.uid() returns uuid as $$
+            select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid;
+          $$ language sql stable;
+          do $$
+          begin
+            if not exists (select 1 from pg_roles where rolname = 'anon') then
+              create role anon nologin;
+            end if;
+            if not exists (select 1 from pg_roles where rolname = 'authenticated') then
+              create role authenticated nologin;
+            end if;
+            if not exists (select 1 from pg_roles where rolname = 'service_role') then
+              create role service_role nologin bypassrls;
+            end if;
+          end $$;
+          grant usage on schema public to anon, authenticated, service_role;
+          grant usage on schema auth to anon, authenticated, service_role;
+          SQL
+
+      - name: Apply migrations
+        run: |
+          for f in packages/database/migrations/*.sql; do
+            echo "Applying $f"
+            psql -v ON_ERROR_STOP=1 -f "$f"
+          done
+
+      - name: Grant anon/authenticated table access (Supabase provisions this itself in a real project)
+        run: |
+          psql <<'SQL'
+          grant select, insert, update, delete on all tables in schema public to anon, authenticated;
+          grant usage on all sequences in schema public to anon, authenticated;
+          grant execute on function is_administrator() to anon, authenticated;
+          SQL
+
+      - name: Run structural integrity smoke test
+        run: psql -v ON_ERROR_STOP=1 -f packages/database/tests/smoke-test.sql
+
+      - name: Run RLS behavior smoke test
+        run: psql -v ON_ERROR_STOP=1 -f packages/database/tests/rls-smoke-test.sql

@@ -1,0 +1,12 @@
+﻿variant_id,person_id,name_variant,language,variant_type,usage_context,source_ref
+NV-01,PER-0001,أحمد حمدي رؤوف,Arabic,Official,Approved official form - used across official media,Press_Final:أشكال الاسم
+NV-02,PER-0001,احمد حمدي رؤوف,Arabic,Without diacritics,Most common in search engines,Press_Final:أشكال الاسم
+NV-03,PER-0001,احمد حمدى رؤوف,Arabic,Alternate ya spelling,Very common on Facebook and platforms; used on official Facebook page,Press_Final:أشكال الاسم
+NV-04,PER-0001,أحمد حمدى رؤوف,Arabic,Mixed spelling,Appears in some article headlines,Press_Final:أشكال الاسم
+NV-05,PER-0001,الملحن أحمد رؤوف,Arabic,Descriptive/short,Common in breaking news headlines,Press_Final:أشكال الاسم
+NV-06,PER-0001,نجل حمدي رؤوف,Arabic,Descriptive/familial,Used in historical/artistic context (investigative features),Press_Final:أشكال الاسم
+NV-07,PER-0001,Ahmed Hamdy Raouf,English,Official,Approved name on all international platforms,Press_Final:أشكال الاسم
+NV-08,PER-0001,Ahmed Hamdi Raouf,English,Alternate,Appears in some international coverage,Press_Final:أشكال الاسم
+NV-09,PER-0001,Ahmed Hamdy Raouf,English,Common,Most used across digital platforms (duplicate spelling of NV-07 in source sheet),Press_Final:أشكال الاسم
+NV-10,PER-0024,Mohamed hamdy Rouf,English,Corrected — re-pointed 2026-07-21,"Appears on IMDb for the film 'Shadow and Mirror' (Dhel We Meraya, nm5770871). Originally filed under PER-0001 as a 'common error'; re-pointed to PER-0024 following external verification (ElCinema profiles confirm PER-0024 is a distinct individual) and the data owner's 2026-07-21 confirmation that PER-0024 is a brother, not a misspelling of PER-0001.",Press_Final:أشكال الاسم / owner-confirmed 2026-07-21
+NV-11,PER-0001,حمد حمدى رؤوف,Arabic,Press typo,Used in elbyan.com (UAE) interview headline,Press_Final:المقالات والأخبار #49

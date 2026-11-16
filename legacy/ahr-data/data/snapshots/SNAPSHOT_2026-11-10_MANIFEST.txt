@@ -1,0 +1,23 @@
+AHR Data — snapshot 2026-11-10
+Source: data/csv/*.csv @ git HEAD 688b775 (identical to Supabase except where noted)
+
+Works                93 rows  md5 98d3b1ddff2bb0fa67e60dfd9b02991b
+Person              222 rows  md5 bac0c475a1ae9bc1fc0cd7a088e2e362
+Credits             420 rows  md5 0824c83d31c496450fb5990848fe9800
+Sources             172 rows  md5 ffbaf179f2f5a76adff08b85b39c69a4
+Events               68 rows  md5 f1a16a31d60bea4a1b38313a47398f29
+Awards               23 rows  md5 019f00e25f3adcdea247798ef11411ac
+Life_Story           58 rows  md5 ab56023ea6da51f6f984b7e13034a6e1
+Press               173 rows  md5 f71fb207a31bfbf371cf21903e9bb9cb
+Press_Links           6 rows  md5 e143db85eca82a43e912dd09184df1ae
+Media_Assets        203 rows  md5 0e650c03db46158c30e94506a6d8f079
+YouTube_Videos       83 rows  md5 eb0ea5bd56975011c023555a90e12cad
+Audience_Voices      25 rows  md5 0c601191c9ecbd598162588a54ee96ac
+Roles_Education      10 rows  md5 586cfd3fb2e371a511bc8354490c1858
+Training_Choir       14 rows  md5 12c800ec2e054161c2fce0b9b96460b8
+Project_Items         0 rows  md5 00b510edcaea8574ac82556ab1cab5db
+Site_Texts           25 rows  md5 cf15cb8507a1f22f72c32a38704bcaeb
+Contact_Channels      8 rows  md5 099b8dfb68fccd23f5e6028f68340dc0
+Review_Queue         66 rows  md5 34d8c44d90317792ec995f945dcfbcb1
+Value_Lists         117 rows  md5 c20d3ce7041a277b50220ff9e8f2d0ea
+Data_Dictionary     328 rows  md5 7698f1d5434bca64be60ae05c733e54a
