@@ -400,6 +400,14 @@ td.ttl::after{content:"";display:block;clear:both}
   .addbox{padding:12px}
   .addbox .row>*{min-width:100%}
 }
+.pgbar{height:12px;border-radius:99px;background:var(--card2);border:1px solid var(--line);overflow:hidden;margin:14px 0 10px}
+.pgbar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),#6472C2);transition:width .25s ease}
+.pgbar.ok i{background:var(--ok)} .pgbar.bad i{background:var(--bad)}
+.pgrow{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13.5px;margin-bottom:6px}
+.pgrow b{color:var(--ink);font-variant-numeric:tabular-nums}
+@keyframes spin{to{transform:rotate(360deg)}}
+[data-refresh].spin svg{animation:spin .8s linear infinite}
+.rvitem.gone{opacity:0;transform:scale(.97);height:0;padding:0;margin:0;border:0;overflow:hidden;transition:.25s}
 </style>
 </head>
 <body>
@@ -484,6 +492,7 @@ td.ttl::after{content:"";display:block;clear:both}
 <button type="button" data-more="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف</button>
 <button type="button" data-more="photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>استيراد الصور للمخزن</button>
 <button type="button" data-more="pw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button></div>
+<div class="modal" id="progm"><div class="mbox" role="dialog" aria-live="polite"><h3 id="pg-t"></h3><div class="pgbar"><i id="pg-f"></i></div><div class="pgrow"><span id="pg-p"></span><b id="pg-n"></b></div><div class="act"><button class="btn" id="pg-x" type="button" hidden>إغلاق</button></div></div></div>
 <div class="toast" id="toast"></div>
 <dialog id="pw-dlg" style="border:1px solid var(--line2);border-radius:16px;padding:22px;width:min(360px,92vw);background:var(--card);color:var(--ink);font-family:inherit">
   <form method="dialog" id="pw-form" style="display:grid;gap:12px">
@@ -554,6 +563,9 @@ const when=d=>{try{return new Date(d).toLocaleString('ar-EG',{day:'numeric',mont
 let mcp=null, assets=null, SESS=null, DATA={ov:null,rows:[],reviews:[],byId:new Map()}, state={view:'overview',type:'',shown:120,sel:new Set(),showArch:false}, current=null;
 let EDITOR='أحمد'; try{EDITOR=localStorage.getItem('ahr_editor')||'أحمد'}catch(e){}
 
+const PG={open(t){const m=$('#progm');$('#pg-t').textContent=t;$('#pg-f').style.width='0%';$('#pg-f').parentNode.className='pgbar';$('#pg-p').textContent='جارٍ التحضير…';$('#pg-n').textContent='٠٪';$('#pg-x').hidden=true;m.classList.add('on');},
+ set(frac,txt){const v=Math.max(0,Math.min(1,frac));$('#pg-f').style.width=(v*100).toFixed(1)+'%';$('#pg-n').textContent=Math.floor(v*100).toLocaleString('ar-EG')+'٪';if(txt)$('#pg-p').textContent=txt;},
+ end(ok,txt){$('#pg-f').parentNode.className='pgbar '+(ok?'ok':'bad');if(ok)this.set(1);$('#pg-p').textContent=txt;const x=$('#pg-x');x.hidden=false;x.onclick=()=>$('#progm').classList.remove('on');}};
 function toast(msg,bad){const t=$('#toast');t.textContent=msg;t.style.color=bad?'var(--bad)':'';t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('on'),3200);}
 function ask(title,body,okText){return new Promise(res=>{$('#m-t').textContent=title;$('#m-p').textContent=body;$('#m-ok').textContent=okText||'تأكيد';const m=$('#modal');m.classList.add('on');const done=v=>{m.classList.remove('on');$('#m-ok').onclick=$('#m-no').onclick=null;res(v)};$('#m-ok').onclick=()=>done(true);$('#m-no').onclick=()=>done(false);});}
 function cleanErr(err){let m=(err&&err.message)||'';const a=m.match(/ERROR:\s*(?:[A-Z0-9]+:\s*)?([^\n"]+)/);if(a)m=a[1];return m.replace(/\\n.*/,'').slice(0,220)||'حصل خطأ';}
@@ -566,7 +578,7 @@ function parsePayload(res){
   return p;
 }
 async function sql(q){
-  const r=await fetch('/api/sql',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({q})});
+  const r=await fetch('/api/sql',{cache:'no-store',method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({q})});
   if(r.status===401){location.href='/login';throw {code:'auth',message:'سجّل الدخول'};}
   const j=await r.json().catch(()=>({error:'رد غير مفهوم'}));
   if(!r.ok) throw {code:'tool_error',message:j.error||'خطأ'};
@@ -685,7 +697,17 @@ async function loadAll(){
     $('#conn-time').textContent='آخر تحديث: '+new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
     renderOverview(); renderTabs(); renderRows(); renderReview();
     if(state.view==='log') loadLog();
-  }catch(err){console.error(err);errorBanner(err&&err.code?err:{code:err&&err.name||'unknown',message:err&&err.message});}
+    return true;
+  }catch(err){console.error(err);errorBanner(err&&err.code?err:{code:err&&err.name||'unknown',message:err&&err.message});return false;}
+}
+async function doRefresh(){
+  const bs=$$('[data-refresh]'); if(bs[0]&&bs[0].dataset.busy) return; bs.forEach(b=>{b.dataset.busy='1';b.classList.add('spin')});
+  try{
+    const ok=await loadAll();
+    if(ok&&state.view==='log') await loadLog();
+    if(ok&&current&&!dirtyCount()&&$('#drawer').classList.contains('on')) await openDetail(current.id,current.tab);
+    toast(ok?'اتحدّث ✓ — '+new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'تعذّر التحديث',!ok);
+  }finally{bs.forEach(b=>{delete b.dataset.busy;b.classList.remove('spin')});}
 }
 function skeleton(){$('#kpis').innerHTML=Array(6).fill('<div class="card kpi"><div class="skel" style="height:30px;width:60%"></div><div class="skel" style="margin-top:10px;width:80%"></div></div>').join('');}
 async function refreshAfterWrite(){
@@ -776,9 +798,11 @@ function openList(type,f={}){state.type=type||'';$('#q').value='';$('#f-ver').va
 /* ---------- review ---------- */
 function renderReview(){
   const showClosed=$('#rv-closed').checked;
+  const wasOpen=new Set($$('#rv details[open] summary>span:first-child').map(x=>x.textContent));
   const g={}; DATA.reviews.filter(r=>showClosed||r.open).forEach(r=>{(g[r.reason]=g[r.reason]||[]).push(r)});
   const keys=Object.keys(g).sort((a,b)=>g[b].length-g[a].length);
   $('#rv').innerHTML=keys.map(k=>`<details class="rvgroup"><summary><span>${esc(REASON[k]||k)}</span>${chip(fmt(g[k].length),'c-warn')}</summary>${g[k].slice(0,500).map(r=>`<div class="rvitem"><span class="code">${esc(r.code||'—')}</span><span class="d" title="${esc(r.detail)}">${esc(r.detail||'')}${r.status&&r.status!=='Open'?' '+chip(r.status==='Resolved'?'اتحل':r.status,CLOSED(r.status)?'c-ok':'c-mute'):''}</span><span style="display:flex;gap:6px">${r.eid?`<button class="btn sm" data-open="${r.eid}" data-tab="${k==='Date needs manual structuring'?'dates':'review'}">فتح</button>`:''}${r.open?`<button class="btn sm" data-resolve="${r.id}">اتحل</button>`:''}</span></div>`).join('')}</details>`).join('')||'<div class="empty">مفيش بنود مفتوحة.</div>';
+  $$('#rv details').forEach(d=>{if(wasOpen.has(d.querySelector('summary>span').textContent))d.open=true;});
   $$('#rv [data-open]').forEach(b=>b.onclick=e=>{e.stopPropagation();openDetail(b.dataset.open,b.dataset.tab)});
   $$('#rv [data-resolve]').forEach(b=>b.onclick=e=>{e.stopPropagation();resolveItem(b.dataset.resolve)});
 }
@@ -786,7 +810,7 @@ $('#rv-closed').onchange=renderReview;
 async function resolveItem(rid,note){
   if(!UUID.test(rid)) return;
   if(note===undefined){ if(!await ask('قفل بند المراجعة','هيتعلّم إن البند ده اتحل، والتغيير بيتسجّل باسمك.','اتحل')) return; }
-  try{await api('api_review',{id:rid,status:'Resolved',note:note||''});toast('اتحل ✓');}catch(err){toast(cleanErr(err),1)}
+  try{await api('api_review',{id:rid,status:'Resolved',note:note||''});toast('اتحل ✓');const el=document.querySelector('#rv [data-resolve="'+rid+'"]');const it=el&&el.closest('.rvitem');if(it&&!$('#rv-closed').checked){it.classList.add('gone');}}catch(err){toast(cleanErr(err),1)}
   await refreshAfterWrite(); if(current) openDetail(current.id,current.tab);
 }
 
@@ -1043,8 +1067,8 @@ function tabDates(body,d){
 /* review tab */
 function tabReview(body,d){
   const e=d.e, R=d.rev||[];
-  body.innerHTML=`<div class="sec"><h4>بنود المراجعة</h4><div class="list">${R.map(x=>{const done=CLOSED(x.s);return `<div class="li" style="align-items:flex-start"><span class="grow" style="white-space:normal"><b style="font-weight:500">${esc(REASON[x.r]||x.r)}</b><br><span style="color:var(--muted)">${esc(x.d||'')}</span>
-    ${done?'':`<div class="row" style="display:flex;gap:6px;margin-top:8px"><input class="inp" data-note="${x.id}" placeholder="قرارك أو ملاحظتك (اختياري)" style="flex:1"><button class="btn sm gold" data-res="${x.id}">اتحل</button></div>`}</span>${done?chip('اتحل','c-ok'):chip('مفتوح','c-warn')}</div>`}).join('')||'<div class="hint">مفيش بنود مراجعة للسجل ده.</div>'}</div>
+  body.innerHTML=`<div class="sec"><h4>بنود المراجعة</h4><div class="list">${R.filter(x=>!CLOSED(x.s)).map(x=>{const done=CLOSED(x.s);return `<div class="li" style="align-items:flex-start"><span class="grow" style="white-space:normal"><b style="font-weight:500">${esc(REASON[x.r]||x.r)}</b><br><span style="color:var(--muted)">${esc(x.d||'')}</span>
+    ${done?'':`<div class="row" style="display:flex;gap:6px;margin-top:8px"><input class="inp" data-note="${x.id}" placeholder="قرارك أو ملاحظتك (اختياري)" style="flex:1"><button class="btn sm gold" data-res="${x.id}">اتحل</button></div>`}</span>${done?chip('اتحل','c-ok'):chip('مفتوح','c-warn')}</div>`}).join('')||'<div class="hint">مفيش بنود مراجعة مفتوحة للسجل ده ✓</div>'}</div>
     <div class="addbox"><b style="font-size:14px">إضافة ملاحظة مراجعة</b><input class="inp" id="rv-new" placeholder="مثلاً: محتاج نتأكد من سنة العرض"><div class="row" style="flex:0"><button class="btn gold" id="rv-add">ضيف</button></div></div></div>`;
   $$('#d-body [data-res]').forEach(b=>b.onclick=()=>resolveItem(b.dataset.res,$(`[data-note="${b.dataset.res}"]`).value||''));
   $('#rv-add').onclick=async()=>{const v=$('#rv-new').value.trim();if(!v)return toast('اكتب الملاحظة',1);try{await api('api_review',{op:'add',entity_id:e.id,reason:'ملاحظة',detail:v});toast('اتضافت ✓');await refreshAfterWrite();openDetail(e.id,'review');}catch(err){toast(cleanErr(err),1)}};
@@ -1109,7 +1133,7 @@ const VIEWS=['overview','records','review','log'];
 function go(v){if(!VIEWS.includes(v))v='overview';state.view=v;VIEWS.forEach(x=>$('#v-'+x).hidden=x!==v);$$('.nav button[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view===v));if(location.hash!=='#'+v){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo(0,0);if(v==='log'&&mcp)loadLog();}
 $$('.nav button[data-view]').forEach(b=>b.onclick=()=>go(b.dataset.view));
 window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
-$$('[data-refresh]').forEach(b=>b.onclick=()=>loadAll());
+$$('[data-refresh]').forEach(b=>b.onclick=doRefresh);
 go(location.hash.slice(1)||'overview');
 skeleton();
 
@@ -1120,24 +1144,24 @@ skeleton();
   const st=$('#imp-st'); let busy=false;
   b.onclick=async()=>{
     if(busy)return; if(!SESS||!SESS.token){toast('سجّل الدخول الأول');return;}
-    busy=true;
+    busy=true; PG.open('استيراد الصور للمخزن');
     try{
       const rows=await sql("select distinct url from archive.link where url like 'photos/%' order by 1");
       const paths=rows.map(r=>r.url); let done=0,fail=[],i=0,why='';
-      st.textContent='0/'+paths.length;
+      PG.set(0,'0 من '+paths.length+' صورة');
       const worker=async()=>{while(i<paths.length){const p=paths[i++];
         try{
-          const g=await fetch('/'+encodeURI(p)); if(!g.ok) throw new Error('src '+g.status);
+          const g=await fetch('/'+encodeURI(p)); if(!g.ok) throw new Error('الملف مش موجود على الموقع ('+g.status+')');
           const blob=await g.blob();
           const r=await fetch(SESS.url+'/storage/v1/object/archive-files/'+encodeURI(p),{method:'POST',headers:{apikey:SESS.anon,Authorization:'Bearer '+SESS.token,'content-type':blob.type||'image/jpeg'},body:blob});
-          if(!r.ok){const t=await r.text().catch(()=>'');if(!(r.status===409||/Duplicate|already exists/i.test(t))) throw new Error('up '+r.status);}
+          if(!r.ok){const t=await r.text().catch(()=>'');if(!(r.status===409||/Duplicate|already exists/i.test(t))) throw new Error('رفع '+r.status+' '+t.slice(0,80));}
         }catch(e){fail.push(p);if(!why)why=String(e&&e.message||e)}
-        done++; st.textContent=done+'/'+paths.length;
+        done++; PG.set(done/paths.length,done+' من '+paths.length+' صورة'+(fail.length?' — فشل '+fail.length:''));
       }};
       await Promise.all([worker(),worker(),worker()]);
-      st.textContent=fail.length?('فشل '+fail.length):'✓';
-      toast(fail.length?('فشل '+fail.length+' ('+why+') — اضغط تاني'):'كل الصور اترفعت ('+paths.length+')');
-    }catch(e){toast('خطأ: '+(e&&e.message||e))}
+      if(fail.length) PG.end(false,'فشل '+fail.length+' من '+paths.length+' ('+why+'). اضغط الزر تاني — اللي اترفع بيتعدّى.');
+      else PG.end(true,'كل الصور اترفعت ('+paths.length+').');
+    }catch(e){PG.end(false,'خطأ: '+(e&&e.message||e))}
     busy=false;
   };
 })();
@@ -1182,28 +1206,30 @@ skeleton();
 
 // Full export: every archive table, read page by page through the read-only /api/sql, saved as one JSON file.
 async function exportAll(){
-  const b=$('#export-all'),st=$('#export-st');
+  const b=$('#export-all');
   if(b.dataset.busy) return; b.dataset.busy='1';
+  PG.open('تصدير كل الأرشيف');
   try{
-    const tl=await sql("select table_name n from information_schema.tables where table_schema='archive' and table_type='BASE TABLE' order by 1");
+    const tl=await sql("select table_name n,(xpath('/row/c/text()',query_to_xml(format('select count(*) c from archive.%I',table_name),false,true,'')))[1]::text::int c from information_schema.tables where table_schema='archive' and table_type='BASE TABLE' order by 1");
+    const total=Math.max(1,tl.reduce((a,x)=>a+x.c,0)); let got=0,i=0;
     const out={exported_at:new Date().toISOString(),schema:'archive',tables:{}};
-    let i=0;
     for(const {n} of tl){
-      i++; st.textContent=i+'/'+tl.length;
-      const rows=[];
+      i++; const rows=[];
       for(let off=0;;off+=500){
+        PG.set(got/total*0.97,'جدول '+i+' من '+tl.length+' — '+n);
         const r=await sql('select to_jsonb(t) j from archive."'+n.replace(/"/g,'')+'" t order by t.ctid limit 500 offset '+off);
-        r.forEach(x=>rows.push(x.j)); if(r.length<500) break;
+        r.forEach(x=>rows.push(x.j)); got+=r.length; if(r.length<500) break;
       }
       out.tables[n]=rows;
     }
+    PG.set(0.98,'تجهيز الملف…');
     const blob=new Blob([JSON.stringify(out)],{type:'application/json'});
     const a=document.createElement('a');a.href=URL.createObjectURL(blob);
     a.download='ahr-archive-export-'+out.exported_at.slice(0,10)+'.json';
     document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000);
-    toast('تم تنزيل ملف التصدير ('+tl.length+' جدول)');
-  }catch(e){toast('فشل التصدير: '+((e&&e.message)||''),true);}
-  finally{delete b.dataset.busy;st.textContent='';}
+    PG.end(true,'تم — '+tl.length+' جدول، '+got.toLocaleString('ar-EG')+' سجل. الملف اتنزّل.');
+  }catch(e){PG.end(false,'فشل التصدير: '+((e&&e.message)||''));}
+  finally{delete b.dataset.busy;}
 }
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#export-all')) exportAll();});
 
