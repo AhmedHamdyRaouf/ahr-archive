@@ -354,6 +354,52 @@ td.ttl::after{content:"";display:block;clear:both}
   .toast{bottom:calc(98px + env(safe-area-inset-bottom));max-width:90vw;text-align:center}
 }
 @media (max-width:760px){.th{width:52px;height:52px}tbody td.ttl{display:block;-webkit-line-clamp:unset;overflow:visible}tbody td.ttl small{white-space:normal}}
+
+#d-photo:empty{display:none}
+#d-photo{flex:none;background:var(--card2)}
+#d-photo .dph{display:block;width:100%;height:auto;max-height:280px;margin:0;border:0;border-radius:0;object-fit:cover;object-position:center 30%}
+#d-photo .note{padding:10px 20px;margin:0}
+.fcell .lg{display:none}
+@media (max-width:760px){
+  .scrim{z-index:74}
+  .drawer,.drawer.on{z-index:75;display:block;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--bg)}
+  #d-photo .dph{height:min(62vw,300px);max-height:none}
+  .dh{padding:16px 16px 12px;border-bottom:0;display:block}
+  .dh .code{font-size:12px;margin-bottom:4px}
+  .dh h2{font-size:20px;line-height:1.45}
+  .dh .x{position:fixed;top:calc(env(safe-area-inset-top) + 10px);left:12px;z-index:70;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.96);border:0;box-shadow:0 2px 12px rgba(28,33,51,.28);font-size:16px}
+  #d-chips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;margin:10px -16px 0!important;padding:0 16px}
+  #d-chips::-webkit-scrollbar{display:none}
+  #d-chips .chip{flex:none}
+  .dtabs{position:sticky;top:0;z-index:8;padding:0 8px;gap:0;border-top:1px solid var(--line);box-shadow:0 2px 8px rgba(28,33,51,.05)}
+  .dtab{padding:14px 13px 12px;font-size:14px}
+  .db{overflow:visible;flex:none;padding:16px 14px 24px}
+  .sec{margin-bottom:20px}
+  .sec h4{font-size:13.5px;margin-bottom:10px}
+  .miss li{padding:12px;font-size:14px;border-radius:12px}
+  .statusrow{grid-template-columns:1fr;gap:12px}
+  .statusrow label{font-size:13px}
+  .statusrow select,.sel,.inp,.ta{min-height:46px;font-size:16px;border-radius:12px;padding:10px 13px}
+  .ta{min-height:96px}
+  .li{padding:12px;border-radius:12px}
+  .kv{grid-template-columns:1fr;gap:2px}
+  .kv dt{margin-top:10px}
+  /* edit form: one card per field, Arabic then English, each labelled */
+  .form{gap:12px}
+  .frow,.frow.one{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .frow>label{padding:0;font-size:14px;font-weight:600;color:var(--ink)}
+  .fcell{gap:6px}
+  .fcell .lg{display:block;font-size:12px;color:var(--dim)}
+  .fsec{margin:10px 2px 0;font-size:13.5px}
+  .savebar{position:sticky;bottom:0;margin:20px -14px 0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));box-shadow:0 -6px 16px rgba(28,33,51,.07)}
+  .savebar .btn.gold{flex:1}
+  .savebar .msg{display:none}
+  .savebar.has .msg{display:block;order:-1;flex:1 0 100%;margin:0 0 2px;font-size:12.5px}
+  .savebar{flex-wrap:wrap}
+  .savebar .kbd{display:none}
+  .addbox{padding:12px}
+  .addbox .row>*{min-width:100%}
+}
 </style>
 </head>
 <body>
@@ -423,7 +469,8 @@ td.ttl::after{content:"";display:block;clear:both}
 <datalist id="roles-dl"></datalist>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="تفاصيل السجل">
-  <div class="dh"><div style="min-width:0"><div class="code" id="d-code"></div><h2 id="d-title"></h2><div id="d-chips" class="flags" style="margin-top:8px"></div><div id="d-photo"></div></div><button class="x" id="d-close" aria-label="إغلاق">✕</button></div>
+  <div id="d-photo"></div>
+  <div class="dh"><div style="min-width:0"><div class="code" id="d-code"></div><h2 id="d-title"></h2><div id="d-chips" class="flags" style="margin-top:8px"></div></div><button class="x" id="d-close" aria-label="إغلاق">✕</button></div>
   <nav class="dtabs" id="d-tabs" aria-label="أقسام السجل"></nav>
   <div class="db" id="d-body"></div>
 </aside>
@@ -789,7 +836,7 @@ function picker(el,{types,value,onPick,placeholder,allowNew}){
 }
 
 /* ---------- detail drawer ---------- */
-const TABS=[['summary','ملخص'],['data','البيانات'],['credits','الكريدت'],['links','الروابط والملفات'],['dates','التواريخ'],['review','المراجعة'],['history','سجل التغييرات'],['origin','الأصل']];
+const TABS=[['summary','ملخص'],['data','البيانات'],['credits','الكريدت'],['links','روابط وملفات'],['dates','التواريخ'],['review','المراجعة'],['history','السجل'],['origin','الأصل']];
 function dirtyCount(){return current&&current.dirty?Object.keys(current.dirty).length:0;}
 async function closeDrawer(){
   if(dirtyCount()&&!await ask('في تعديلات مش محفوظة','لو قفلت دلوقتي التعديلات اللي ما اتحفظتش هتضيع.','اقفل من غير حفظ')) return;
@@ -891,9 +938,9 @@ function tabData(body,d){
   const sch=SCHEMA[t]||[]; const known=new Set(sch.map(s=>s[0]));
   const extra=Object.keys(tm).filter(k=>!known.has(k)&&!HIDE.has(k)&&!(t==='work'&&k==='category'));
   const row=(k,label,ml,req)=>{const ar=tm[k]&&tm[k].ar,en=tm[k]&&tm[k].en;
-    const ph=l==='en'?'English':'عربي';const ctl=(l,v)=>ml?`<textarea class="ta ${l==='en'?'en':''}" data-k="${k}" data-l="${l}" rows="3" placeholder="${l==='en'?'English':'عربي'}" aria-label="${esc(label)} ${l==='en'?'English':'عربي'}">${esc(v)}</textarea>`:`<input class="inp ${l==='en'?'en':''}" data-k="${k}" data-l="${l}" value="${esc(v)}" placeholder="${l==='en'?'English':'عربي'}" aria-label="${esc(label)} ${l==='en'?'English':'عربي'}">`;
+    const ctl=(l,v)=>ml?`<textarea class="ta ${l==='en'?'en':''}" data-k="${k}" data-l="${l}" rows="3" placeholder="${l==='en'?'English':'عربي'}" aria-label="${esc(label)} ${l==='en'?'English':'عربي'}">${esc(v)}</textarea>`:`<input class="inp ${l==='en'?'en':''}" data-k="${k}" data-l="${l}" value="${esc(v)}" placeholder="${l==='en'?'English':'عربي'}" aria-label="${esc(label)} ${l==='en'?'English':'عربي'}">`;
     const st=en?`<div class="tstat">${en.s==='Approved'?chip('ترجمة معتمدة','c-ok'):(en.s==='Imported'?chip('منقولة من AHR Data','c-mute'):chip('ترجمة مسودة','c-warn'))+(en.s==='Approved'?'':`<button type="button" data-approve="${k}">اعتمد</button>`)}</div>`:'';
-    return `<div class="frow"><label>${esc(label)}${req?' <b>*</b>':''}</label><div class="fcell">${ctl('ar',ar?ar.b:'')}</div><div class="fcell">${ctl('en',en?en.b:'')}${st}</div></div>`;};
+    return `<div class="frow"><label>${esc(label)}${req?' <b>*</b>':''}</label><div class="fcell"><span class="lg">عربي</span>${ctl('ar',ar?ar.b:'')}</div><div class="fcell"><span class="lg">English</span>${ctl('en',en?en.b:'')}${st}</div></div>`;};
   let h=`<div class="form"><div class="fhead"><span></span><span>عربي (الأساس)</span><span>English — بالنطق للعناوين والأسماء</span></div>`;
   if(t==='work') h+=`<div class="frow one"><label>التصنيف</label><select class="sel" data-ext="category"><option value="">— اختار —</option>${Object.keys(CAT).map(c=>`<option value="${c}" ${ext.category===c?'selected':''}>${CAT[c]}</option>`).join('')}</select></div>`;
   if(t==='organization') h+=`<div class="frow one"><label>نوع الجهة</label><input class="inp" data-ext="organization_type" list="orgtypes" value="${esc(ext.organization_type||'')}"><datalist id="orgtypes">${ORGTYPES.map(x=>`<option value="${x}">`).join('')}</datalist></div>`;
