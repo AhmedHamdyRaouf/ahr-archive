@@ -36,3 +36,8 @@ Decision recorded: direct replacement after a restorable backup (Ahmed, chat 202
 - Work titles are phonetic (not translated by meaning). Heading lines embedded in the Arabic text (e.g. "2015") are carried over as-is pending step 4.
 - Verified: 63 rows, 0 left with "Needs update" status, md5 of DB text equals the committed file `english_translation_2026-11-16.json`.
 - The previous English remains in `archive.bk_life_story_20261116`.
+
+## Step 4 — Codes restored as links (2026-11-16)
+- Codes removed from the new texts (P-0086, P-0217, P-0091, W-0056, W-0057, W-0053) restored as `entity_relation` rows (kind `mentions`) from the story to the person/work; also W-0024 (LS-0027) and W-0063's W-0064. Codes are NOT put back inside the text.
+- English titles aligned with DB titles (El Badroom, El Mokhattat, Helm Fi Leilt Nos El Sayf, Sharjah – Khalli El Salam Wasel) in LS-0027/0042/0043.
+- Detail removals (LS-0006, 0039, 0042, 0059, 0062) intentionally not restored (owner decision).
