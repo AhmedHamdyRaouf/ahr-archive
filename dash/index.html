@@ -245,6 +245,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
     <button data-view="review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>قائمة المراجعة<span class="badge" id="nb-review">—</span></button>
     <button data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
     <button id="export-all" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف<span class="badge" id="export-st"></span></button>
+    <button id="pw-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button>
     <div class="foot"><span class="dot" id="conn-dot"></span><span id="conn-txt">جارٍ الاتصال…</span><br><span id="conn-time"></span>
       <label class="editor">التعديلات بتتسجّل باسم<input id="editor-name" maxlength="40" aria-label="اسم المحرر"></label></div>
   </aside>
@@ -304,6 +305,15 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
   <div class="act"><button class="btn gold" id="c-ok">إضافة</button><button class="btn" id="c-no">إلغاء</button></div></div></div>
 <div class="modal" id="modal"><div class="mbox"><h3 id="m-t"></h3><p id="m-p"></p><div class="act"><button class="btn gold" id="m-ok">تأكيد</button><button class="btn" id="m-no">إلغاء</button></div></div></div>
 <div class="toast" id="toast"></div>
+<dialog id="pw-dlg" style="border:1px solid var(--line2);border-radius:16px;padding:22px;width:min(360px,92vw);background:var(--card);color:var(--ink);font-family:inherit">
+  <form method="dialog" id="pw-form" style="display:grid;gap:12px">
+    <b style="font-size:17px">تغيير كلمة السر</b>
+    <label style="font-size:13px;color:var(--muted)">كلمة السر الجديدة (12 حرف على الأقل)<input id="pw-1" type="password" autocomplete="new-password" style="width:100%;box-sizing:border-box;margin-top:6px;padding:11px 12px;border:1px solid var(--line2);border-radius:10px;font:inherit"></label>
+    <label style="font-size:13px;color:var(--muted)">أعد كتابتها<input id="pw-2" type="password" autocomplete="new-password" style="width:100%;box-sizing:border-box;margin-top:6px;padding:11px 12px;border:1px solid var(--line2);border-radius:10px;font:inherit"></label>
+    <div id="pw-msg" style="font-size:13px;color:var(--bad);min-height:18px"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" type="button" id="pw-cancel">إلغاء</button><button class="btn gold" type="button" id="pw-save">حفظ</button></div>
+  </form>
+</dialog>
 <script>
 (function(){
 'use strict';
@@ -961,6 +971,26 @@ async function exportAll(){
   finally{delete b.dataset.busy;st.textContent='';}
 }
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#export-all')) exportAll();});
+
+// Change own password (server route /api/password -> Supabase Auth)
+(function(){
+  const dlg=$('#pw-dlg'),m=$('#pw-msg');
+  $('#pw-open').addEventListener('click',()=>{$('#pw-1').value='';$('#pw-2').value='';m.textContent='';dlg.showModal();});
+  $('#pw-cancel').addEventListener('click',()=>dlg.close());
+  $('#pw-save').addEventListener('click',async()=>{
+    const a=$('#pw-1').value,b=$('#pw-2').value;
+    if(a.length<12){m.textContent='لازم 12 حرف على الأقل';return;}
+    if(a!==b){m.textContent='الكلمتين مش متطابقتين';return;}
+    $('#pw-save').disabled=true;
+    try{
+      const r=await fetch('/api/password',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password:a})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok){m.textContent=j.error||'فشل التغيير';return;}
+      dlg.close();toast('تم تغيير كلمة السر');
+    }catch(e){m.textContent='حصل خطأ في الاتصال';}
+    finally{$('#pw-save').disabled=false;}
+  });
+})();
 })();
 </script>
 </body>
