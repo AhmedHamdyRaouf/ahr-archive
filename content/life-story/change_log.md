@@ -41,3 +41,9 @@ Decision recorded: direct replacement after a restorable backup (Ahmed, chat 202
 - Codes removed from the new texts (P-0086, P-0217, P-0091, W-0056, W-0057, W-0053) restored as `entity_relation` rows (kind `mentions`) from the story to the person/work; also W-0024 (LS-0027) and W-0063's W-0064. Codes are NOT put back inside the text.
 - English titles aligned with DB titles (El Badroom, El Mokhattat, Helm Fi Leilt Nos El Sayf, Sharjah – Khalli El Salam Wasel) in LS-0027/0042/0043.
 - Detail removals (LS-0006, 0039, 0042, 0059, 0062) intentionally not restored (owner decision).
+
+## Step 5 — Editorial heading lines removed from the texts (2026-11-16)
+- First line (heading/date) removed from ar `life_story.content`, ar and en `translation` for 21 stories: LS-0033, 0034, 0035, 0039, 0046–0054, 0055, 0056, 0057, 0058, 0059, 0060, 0062, 0063. The same information remains in each story's `period` / `topic`.
+- LS-0039 note "حكاية محورية تحتاج استكمالاً" recorded in open_questions.csv.
+- Code sentences removed from the body: W-0024 (LS-0027) and W-0064 (LS-0063), ar + en. No `P-/W-` code remains inside any story text; links to those entities are kept in `entity_relation`.
+- Verified: 63 stories, ar content = ar translation, no leading heading lines, no codes in text. Originals remain in `archive.bk_life_story_20261116`.
