@@ -16,6 +16,7 @@ create table archive.life_story (entity_id uuid not null, period text, topic tex
 create table archive.link (id uuid not null default gen_random_uuid(), entity_id uuid not null, kind text not null, url text not null);
 create table archive.digital_profile (entity_id uuid not null, section text not null default 'social', platform text, page_type text, profile_url text, external_id text, owner_entity_id uuid default archive.eid('P-0001'), last_reviewed date);
 create table archive.contact_info (entity_id uuid not null, kind text not null default 'phone', label text, value text, region text, owner_entity_id uuid default archive.eid('P-0001'));
+create table archive.quality_decision (id uuid not null default gen_random_uuid(), check_code text not null, entity_id uuid not null, entity_id_2 uuid, decision text not null, note text, decided_by text, decided_at timestamptz not null default now());
 create table archive.media_asset (entity_id uuid not null, platform_or_asset text, category text, rights_holder text, usage_rights text, credit_line text);
 create table archive.organization (entity_id uuid not null, name_ar text, name_en text, organization_type text);
 create table archive.person (entity_id uuid not null, name_ar text not null, name_en text, person_type text, profession text);
@@ -38,6 +39,12 @@ create table archive.work (entity_id uuid not null, category text, category_orig
 -- primary keys / unique / checks
 alter table archive.audit_log_archived add constraint audit_log_archived_pkey primary key (id);
 alter table archive.award add constraint award_pkey primary key (entity_id);
+alter table archive.quality_decision add constraint quality_decision_pkey primary key (id);
+alter table archive.quality_decision add constraint quality_decision_entity_id_fkey foreign key (entity_id) references archive.entity(id);
+alter table archive.quality_decision add constraint quality_decision_entity_id_2_fkey foreign key (entity_id_2) references archive.entity(id);
+alter table archive.quality_decision add constraint chk_quality_decision_decision check (decision in ('accept','reject','defer'));
+create unique index uq_quality_decision_case on archive.quality_decision(check_code, entity_id, coalesce(entity_id_2,'00000000-0000-0000-0000-000000000000'::uuid));
+create index idx_quality_decision_entity on archive.quality_decision(entity_id);
 alter table archive.digital_profile add constraint digital_profile_pkey primary key (entity_id);
 alter table archive.digital_profile add constraint digital_profile_entity_id_fkey foreign key (entity_id) references archive.entity(id);
 alter table archive.digital_profile add constraint digital_profile_owner_entity_id_fkey foreign key (owner_entity_id) references archive.entity(id);

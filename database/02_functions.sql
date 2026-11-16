@@ -367,3 +367,28 @@ CREATE OR REPLACE FUNCTION archive.touch()
  LANGUAGE plpgsql
  SET search_path TO ''
 AS $function$ begin new.updated_at=now(); return new; end $function$;
+
+-- Data quality decisions (accept / reject / defer) and media-to-record links; SECURITY DEFINER so unlink/reset can delete
+CREATE OR REPLACE FUNCTION archive.api_quality(p jsonb) RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path TO '' AS $f$
+declare e1 uuid := (p->>'entity_id')::uuid; e2 uuid := nullif(p->>'entity_id_2','')::uuid; dec text := p->>'decision'; code text := btrim(coalesce(p->>'check_code',''));
+begin
+ perform archive.set_editor(p->>'editor');
+ if code !~ '^[a-z0-9_]{1,40}$' then raise exception 'نوع فحص غير صالح'; end if;
+ if dec='reset' then delete from archive.quality_decision where check_code=code and entity_id=e1 and entity_id_2 is not distinct from e2; return jsonb_build_object('ok',true); end if;
+ if dec not in ('accept','reject','defer') then raise exception 'قرار غير معروف'; end if;
+ if not exists(select 1 from archive.entity where id=e1) then raise exception 'السجل غير موجود'; end if;
+ insert into archive.quality_decision(check_code,entity_id,entity_id_2,decision,note,decided_by) values(code,e1,e2,dec,nullif(btrim(p->>'note'),''),current_setting('app.editor',true))
+ on conflict (check_code, entity_id, coalesce(entity_id_2,'00000000-0000-0000-0000-000000000000'::uuid)) do update set decision=excluded.decision, note=excluded.note, decided_by=excluded.decided_by, decided_at=now();
+ return jsonb_build_object('ok',true);
+end $f$;
+CREATE OR REPLACE FUNCTION archive.api_media_link(p jsonb) RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path TO '' AS $f$
+declare m uuid := (p->>'media_id')::uuid; t uuid := (p->>'target_id')::uuid;
+begin
+ perform archive.set_editor(p->>'editor');
+ if not exists(select 1 from archive.entity where id=m and entity_type='media_asset') then raise exception 'ده مش سجل وسائط'; end if;
+ if not exists(select 1 from archive.entity where id=t and entity_type in ('work','person','event','award','organization','press_mention','video','project_item')) then raise exception 'النوع ده ما ينفعش يتربط بوسائط'; end if;
+ if p->>'op'='add' then insert into archive.entity_relation(from_entity,to_entity,kind) values(m,t,'media_of') on conflict do nothing;
+ elsif p->>'op'='remove' then delete from archive.entity_relation where from_entity=m and to_entity=t and kind='media_of';
+ else raise exception 'عملية غير معروفة'; end if;
+ return jsonb_build_object('ok',true);
+end $f$;

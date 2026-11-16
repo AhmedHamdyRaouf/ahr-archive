@@ -3,7 +3,7 @@ import { getStaff } from '@/lib/auth';
 export const runtime = 'nodejs';
 export const maxDuration = 30;
 
-const FNS = new Set(['api_save','api_status','api_create','api_credit','api_link','api_date','api_review','api_merge']);
+const FNS = new Set(['api_save','api_status','api_create','api_credit','api_link','api_date','api_review','api_merge','api_quality','api_media_link']);
 
 // Write: only the whitelisted archive.api_* functions. The editor name comes from the signed-in staff member.
 export async function POST(req) {

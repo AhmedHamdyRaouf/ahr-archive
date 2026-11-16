@@ -408,20 +408,68 @@ td.ttl::after{content:"";display:block;clear:both}
 @keyframes spin{to{transform:rotate(360deg)}}
 [data-refresh].spin svg{animation:spin .8s linear infinite}
 .rvitem.gone{opacity:0;transform:scale(.97);height:0;padding:0;margin:0;border:0;overflow:hidden;transition:.25s}
+/* ===== quality / media / timeline / palette ===== */
+.qsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.qsum .card{padding:12px 14px}.qsum b{font-size:22px;display:block}.qsum small{color:var(--muted)}
+.qgh{font-size:13px;color:var(--muted);margin:18px 2px 8px;font-weight:600}
+.qitem{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);align-items:center;font-size:13.5px}
+.qitem:last-child{border-bottom:0}.qitem.gone{opacity:0;height:0;padding:0;overflow:hidden;transition:.3s}
+.qrec{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.qrec .code{font-size:12px}
+.qrec a{cursor:pointer;color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line2)}
+.qvs{color:var(--dim);font-size:12px}.qwhy{color:var(--muted);font-size:12.5px;margin-top:4px}
+.qact{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.btn.ok{color:var(--ok);border-color:var(--ok)}.btn.no{color:var(--bad);border-color:var(--bad)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;position:relative;min-width:0}
+.mcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--card2)}
+.mcard .cap{padding:7px 9px;font-size:12px;line-height:1.35;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px}
+.mcard .lk{position:absolute;top:6px;right:6px}
+.lbbox{width:min(900px,96vw);max-height:94vh;overflow:auto;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+.lbbox .pv{background:var(--card2);border-radius:12px;display:grid;place-items:center;min-height:240px}.lbbox .pv img{max-width:100%;max-height:70vh;border-radius:8px}
+.lbbox .meta{display:grid;gap:10px;align-content:start;font-size:13.5px;min-width:0}.lbbox .meta h3{margin:0;font-size:17px}
+.lbbox dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px}.lbbox dt{color:var(--muted)}.lbbox dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.mthumbs{display:flex;gap:8px;flex-wrap:wrap}.mthumbs img{width:78px;height:78px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer}
+.pal{align-items:start;padding-top:9vh}.palbox{background:var(--card);border:1px solid var(--line2);border-radius:16px;width:min(620px,94vw);overflow:hidden;box-shadow:0 20px 50px rgba(28,33,51,.25)}
+.palbox input{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid var(--line);padding:16px 18px;font:inherit;font-size:16px;outline:0;background:transparent;color:var(--ink)}
+.pallist{max-height:60vh;overflow:auto;padding:6px}.palh{font-size:11.5px;color:var(--dim);padding:8px 12px 3px}
+.palit{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:14px}.palit.act,.palit:hover{background:var(--goldbg)}
+.palit .code{font-size:11.5px;min-width:64px}.palit .s{margin-inline-start:auto;color:var(--dim);font-size:12px;white-space:nowrap}
+.prof{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-bottom:16px}
+.prof .pn{font-size:22px;font-weight:600}.prof .pb{color:var(--muted);margin-top:6px;line-height:1.7;font-size:14px}
+.pstats{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.pstats span{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:13px}.pstats b{font-size:16px;margin-inline-end:4px}
+.yrbars{display:flex;gap:3px;align-items:flex-end;height:70px;margin:6px 0 14px;overflow-x:auto;padding-bottom:2px}
+.yrbars i{flex:1 0 9px;min-width:9px;background:var(--gold);opacity:.55;border-radius:3px 3px 0 0;cursor:pointer}.yrbars i:hover{opacity:1}
+.tyr{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.tyr>b{font-size:18px;color:var(--gold2)}.tyr .its{display:flex;flex-direction:column;gap:6px}
+.tit{display:flex;gap:8px;align-items:center;cursor:pointer;font-size:14px}.tit:hover .l{text-decoration:underline}.tit .code{font-size:11.5px}
+@media (max-width:760px){
+  .nav [data-view=quality],.nav [data-view=media],.nav [data-view=timeline],.nav #open-pal{display:none}
+  .lbbox{grid-template-columns:1fr}.qitem{grid-template-columns:1fr}.qact{justify-content:flex-start}
+  .prof{grid-template-columns:1fr}.tyr{grid-template-columns:52px 1fr}.mgrid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+  .pal{padding-top:4vh}
+}
+  .mtop .ref+.ref{margin-inline-start:0}
+[hidden]{display:none!important}
+@media (max-width:760px){#v-media .toolbar select{display:block}}
+.nav .brand .logoimg{height:34px;width:auto}
 </style>
 </head>
 <body>
-<header class="mtop"><img src="/logo.png" alt="AHR"><div class="t"><b>AHR Archive</b><small>أرشيف أحمد حمدي رؤوف</small></div><button class="ref" data-refresh type="button" aria-label="تحديث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button></header>
+<header class="mtop"><img src="/logo.png" alt="AHR"><div class="t"><b>AHR Archive</b><small>أرشيف أحمد حمدي رؤوف</small></div><button class="ref" data-pal type="button" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button class="ref" data-refresh type="button" aria-label="تحديث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button></header>
 <div class="app">
   <aside class="nav">
     <div class="brand">
-      <svg class="mono" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M16 3h16l13 13v16L32 45H16L3 32V16z" stroke="#34418A" stroke-width="1.6"/><path d="M11 19h26M11 23h26M11 27h26M11 31h26" stroke="#34418A" stroke-opacity=".25" stroke-width=".8"/><text x="24" y="29.5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-weight="700" font-size="14" fill="#34418A">AHR</text></svg>
+      <img class="logoimg" src="/logo.png" alt="AHR">
       <div><b>Master Archive</b><small>أرشيف أحمد حمدي رؤوف</small></div>
     </div>
     <button class="btn gold newbtn" data-new><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>سجل جديد</button>
     <button data-view="overview" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>نظرة عامة</button>
     <button data-view="records"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16M4 12h16M4 18h10"/></svg>السجلات<span class="badge" id="nb-records">—</span></button>
     <button data-view="review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>قائمة المراجعة<span class="badge" id="nb-review">—</span></button>
+    <button data-view="quality"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>جودة البيانات</button>
+    <button data-view="media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>مكتبة الوسائط</button>
+    <button data-view="timeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16"/><circle cx="7" cy="12" r="2"/><circle cx="14" cy="12" r="2"/><path d="M7 6v4M14 14v4M18 6v6"/></svg>الملف الفني</button>
+    <button id="open-pal" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>بحث سريع<span class="badge">Ctrl K</span></button>
     <button data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
     <button id="export-all" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف<span class="badge" id="export-st"></span></button>
     <button id="import-photos" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>استيراد الصور للمخزن<span class="badge" id="imp-st"></span></button>
@@ -472,6 +520,32 @@ td.ttl::after{content:"";display:block;clear:both}
         <div style="display:flex;gap:10px;align-items:center"><select id="log-who"><option value="">كل الأشخاص</option></select><button class="btn" data-refresh><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>تحديث</button></div></div>
       <div class="hist" id="log"></div>
     </section>
+    <section id="v-quality" hidden>
+      <div class="top"><div><h1>جودة <em>البيانات</em></h1><div class="sub">فحص تلقائي للمشاكل المحتملة. مفيش أي تعديل بيحصل لوحده — إنت اللي بتقرر في كل حالة (قبول / تأجيل / رفض) والقرار بيتسجّل باسمك.</div></div>
+        <button class="btn" data-refresh>تحديث</button></div>
+      <div class="qsum" id="q-sum"></div>
+      <div class="tabs" id="q-tabs"></div>
+      <div class="rv" id="q-list"></div>
+    </section>
+    <section id="v-media" hidden>
+      <div class="top"><div><h1>مكتبة <em>الوسائط</em></h1><div class="sub">كل الصور مع المعاينة والحقوق. اضغط على أي صورة تشوف تفاصيلها وتربطها بعمل أو شخص أو حدث.</div></div>
+        <button class="btn" data-refresh>تحديث</button></div>
+      <div class="toolbar"><div class="search"><input id="m-q" placeholder="ابحث بالوصف أو الكود…"></div>
+        <select id="m-dir"><option value="">كل المجلدات</option></select>
+        <select id="m-lk"><option value="">كل الصور</option><option value="y">مربوطة بسجل</option><option value="n">غير مربوطة</option></select>
+        <select id="m-pr"><option value="">كل الخصوصية</option><option value="Public">مسموح بالنشر</option><option value="Internal">داخلي</option><option value="Restricted">مقيّد</option></select></div>
+      <div class="sub" id="m-count" style="margin-bottom:10px"></div>
+      <div class="mgrid" id="m-grid"></div>
+      <div style="text-align:center;margin:16px"><button class="btn" id="m-more" hidden>عرض المزيد</button></div>
+    </section>
+    <section id="v-timeline" hidden>
+      <div class="top"><div><h1>الملف الفني <em>والتايم لاين</em></h1><div class="sub">ملخص المسيرة والمحطات حسب السنين. اضغط على أي محطة تفتح سجلها.</div></div>
+        <button class="btn" data-refresh>تحديث</button></div>
+      <div class="card prof" id="t-prof"></div>
+      <div class="card"><div class="toolbar" style="margin-bottom:6px"><div class="tabs" id="t-types" style="margin:0"></div><label class="toggle"><input type="checkbox" id="t-asc">الأقدم الأول</label></div>
+        <div class="yrbars" id="t-bars" title="عدد المحطات في كل سنة"></div><div id="t-list"></div></div>
+    </section>
+
   </main>
 </div>
 <datalist id="roles-dl"></datalist>
@@ -488,11 +562,17 @@ td.ttl::after{content:"";display:block;clear:both}
 <div class="modal" id="modal"><div class="mbox"><h3 id="m-t"></h3><p id="m-p"></p><div class="act"><button class="btn gold" id="m-ok">تأكيد</button><button class="btn" id="m-no">إلغاء</button></div></div></div>
 <div id="more-scrim"></div>
 <div id="more-sheet" role="dialog" aria-label="المزيد"><div class="grab"></div><div class="who" id="more-who"></div>
+<button type="button" data-more="quality"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>جودة البيانات</button>
+<button type="button" data-more="media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>مكتبة الوسائط</button>
+<button type="button" data-more="timeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16"/><circle cx="7" cy="12" r="2"/><circle cx="14" cy="12" r="2"/></svg>الملف الفني والتايم لاين</button>
 <button type="button" data-more="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
 <button type="button" data-more="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف</button>
 <button type="button" data-more="photos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>استيراد الصور للمخزن</button>
 <button type="button" data-more="pw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button></div>
 <div class="modal" id="progm"><div class="mbox" role="dialog" aria-live="polite"><h3 id="pg-t"></h3><div class="pgbar"><i id="pg-f"></i></div><div class="pgrow"><span id="pg-p"></span><b id="pg-n"></b></div><div class="act"><button class="btn" id="pg-x" type="button" hidden>إغلاق</button></div></div></div>
+<div class="modal" id="qmodal"><div class="mbox" role="dialog" aria-label="قرار"><h3 id="qm-t">قرار</h3><p id="qm-p"></p><textarea class="ta" id="qm-n" rows="3" placeholder="ملاحظة (اختياري)"></textarea><div class="act"><button class="btn gold" id="qm-ok">تأكيد</button><button class="btn" id="qm-no">إلغاء</button></div></div></div>
+<div class="modal" id="lb"><div class="mbox lbbox" role="dialog" aria-label="تفاصيل الصورة" id="lb-box"></div></div>
+<div class="modal pal" id="pal"><div class="palbox" role="dialog" aria-label="بحث سريع"><input id="pal-q" placeholder="ابحث عن أي سجل، اسم، كود، سنة… أو اكتب أمر" autocomplete="off"><div class="pallist" id="pal-list"></div></div></div>
 <div class="toast" id="toast"></div>
 <dialog id="pw-dlg" style="border:1px solid var(--line2);border-radius:16px;padding:22px;width:min(360px,92vw);background:var(--card);color:var(--ink);font-family:inherit">
   <form method="dialog" id="pw-form" style="display:grid;gap:12px">
@@ -590,7 +670,7 @@ async function sql(q){
   return j.rows;
 }
 const one=r=>Array.isArray(r)?(r[0]&&r[0].j!==undefined?r[0].j:r[0]):r;
-const APIS=new Set(['api_save','api_status','api_create','api_credit','api_link','api_date','api_review','api_merge']);
+const APIS=new Set(['api_save','api_status','api_create','api_credit','api_link','api_date','api_review','api_merge','api_quality','api_media_link']);
 async function api(fn,obj){
   if(!APIS.has(fn)) throw {message:'bad api'};
   const r=await fetch('/api/fn',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fn,obj})});
@@ -676,6 +756,7 @@ function qDetail(id){const X=sqlStr(id)+'::uuid';return `select json_build_objec
    union all select to_jsonb(t)-'entity_id' from archive.contribution t where entity_id=${X} union all select to_jsonb(t)-'entity_id' from archive.relationship t where entity_id=${X} union all select to_jsonb(t)-'entity_id' from archive.digital_profile t where entity_id=${X} union all select to_jsonb(t)-'entity_id' from archive.contact_info t where entity_id=${X}) q limit 1),
  'tr',(select json_agg(json_build_object('f',field,'l',lang,'b',body,'s',status,'by',updated_by)) from archive.translation where entity_id=${X}),
  'links',(select json_agg(json_build_object('id',id,'k',kind,'u',url) order by kind) from archive.link where entity_id=${X}),
+ 'media',(select json_agg(json_build_object('id',r.from_entity,'u',(select l.url from archive.link l where l.entity_id=r.from_entity and l.url like 'photos/%' order by l.url limit 1))) from archive.entity_relation r where r.to_entity=${X} and r.kind='media_of'),
  'dates',(select json_agg(to_jsonb(d)-'entity_id') from archive.date_value d where entity_id=${X}),
  'rev',(select json_agg(json_build_object('id',id,'r',reason,'d',detail,'s',status) order by created_at) from archive.review_item where entity_id=${X}),
  'credits',(select json_agg(json_build_object('cid',c.entity_id,'ccode',ce.public_code,'id',c.person_id,'role',c.role,'name',coalesce(pp.name_ar,c.person_as_stated),'code',pe.public_code,'v',ce.verification) order by c.role,pp.name_ar) from archive.contribution c join archive.entity ce on ce.id=c.entity_id left join archive.person pp on pp.entity_id=c.person_id left join archive.entity pe on pe.id=c.person_id where c.work_id=${X} and ce.lifecycle<>'Archived'),
@@ -703,6 +784,7 @@ async function loadAll(){
     $('#conn-time').textContent='آخر تحديث: '+new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
     renderOverview(); renderTabs(); renderRows(); renderReview();
     if(state.view==='log') loadLog();
+    if(state.view==='quality') loadQuality(); if(state.view==='media') loadMedia(); if(state.view==='timeline') loadTimeline();
     return true;
   }catch(err){console.error(err);errorBanner(err&&err.code?err:{code:err&&err.name||'unknown',message:err&&err.message});return false;}
 }
@@ -711,6 +793,7 @@ async function doRefresh(){
   try{
     const ok=await loadAll();
     if(ok&&state.view==='log') await loadLog();
+    if(ok&&state.view==='quality') await loadQuality(); if(ok&&state.view==='media') await loadMedia(); if(ok&&state.view==='timeline') await loadTimeline();
     if(ok&&current&&!dirtyCount()&&$('#drawer').classList.contains('on')) await openDetail(current.id,current.tab);
     toast(ok?'اتحدّث ✓ — '+new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'تعذّر التحديث',!ok);
   }finally{bs.forEach(b=>{delete b.dataset.busy;b.classList.remove('spin')});}
@@ -892,7 +975,7 @@ function renderDrawer(){
   $('#d-code').textContent=e.public_code+' · '+(T1[t]||t)+(t==='fact'?' · '+(FACTK[ext.fact_kind]||ext.fact_kind):'');
   $('#d-title').textContent=ext.title_ar||ext.name_ar||(tm.title&&tm.title.ar&&tm.title.ar.b)||ext.title||ext.name||ext.title_or_topic||ext.topic||ext.label||ext.source_name||ext.platform_or_asset||(DATA.byId.get(e.id)||{}).l||e.public_code;
   $('#d-chips').innerHTML=chip(VER[e.verification]||e.verification,VERCLS(e.verification))+chip(LIFE[e.lifecycle],LIFECLS(e.lifecycle))+chip(PRIV[e.privacy],PRIVCLS(e.privacy))+chip(PUB[e.publication],e.publication==='Published'?'c-ok':'c-mute');
-  const ph=((d.links||[]).find(x=>/^photos\//.test(x.u))||{}).u;
+  const ph=((d.links||[]).find(x=>/^photos\//.test(x.u))||{}).u||((d.media||[]).find(m=>m.u)||{}).u;
   $('#d-photo').innerHTML=ph?`<a href="${photoSrc(ph)}" target="_blank" rel="noopener"><img class="dph" alt="" src="${photoSrc(ph)}" onerror="this.parentNode.outerHTML='<div class=&quot;note&quot;>الصورة لسه ما اترفعتش للمخزن</div>'"></a>`:'';
   const openRev=(d.rev||[]).filter(x=>!CLOSED(x.s)).length;
   const counts={credits:t==='work'?(d.credits||[]).length:t==='person'?(d.works||[]).length:null,links:(d.links||[]).length,dates:(d.dates||[]).length,review:openRev,history:d.hist};
@@ -1033,11 +1116,13 @@ function tabCredits(body,d){
 function tabLinks(body,d){
   const e=d.e, L=d.links||[];
   const kinds=Object.keys(LINKK).map(k=>`<option value="${k}">${LINKK[k]}</option>`).join('');
-  body.innerHTML=`<div class="sec"><h4>الروابط والملفات (${fmt(L.length)})</h4><div class="list">${L.map(l=>`<div class="li"><span class="chip ${l.k==='file'?'c-gold':'c-info'}">${esc(LINKK[l.k]||l.k)}</span><a class="grow" href="${esc(l.u)}" target="_blank" rel="noopener" style="direction:ltr;text-align:left">${esc(l.u)}</a>
+  const MED=(d.media||[]).filter(m=>m.u);
+  body.innerHTML=(MED.length?`<div class="sec"><h4>وسائط مرتبطة (${fmt(MED.length)})</h4><div class="mthumbs">${MED.map(m=>`<img loading="lazy" data-mid="${m.id}" src="${photoSrc(m.u)}" alt="">`).join('')}</div></div>`:'')+`<div class="sec"><h4>الروابط والملفات (${fmt(L.length)})</h4><div class="list">${L.map(l=>`<div class="li"><span class="chip ${l.k==='file'?'c-gold':'c-info'}">${esc(LINKK[l.k]||l.k)}</span><a class="grow" href="${esc(l.u)}" target="_blank" rel="noopener" style="direction:ltr;text-align:left">${esc(l.u)}</a>
     <button class="iconbtn" data-editl="${l.id}" title="تعديل" aria-label="تعديل">${ICON.edit}</button><button class="iconbtn danger" data-rml="${l.id}" title="حذف الرابط" aria-label="حذف الرابط">${ICON.x}</button></div>`).join('')||'<div class="hint">مفيش روابط لسه.</div>'}</div>
     <div class="addbox"><b style="font-size:14px" id="lk-title">إضافة رابط</b><div class="row"><select class="sel" id="lk-kind" style="max-width:190px">${kinds}</select><input class="inp en" id="lk-url" placeholder="https://…"></div>
     <div class="row" style="flex:0"><button class="btn gold" id="lk-save">ضيف الرابط</button><button class="btn" id="lk-cancel" hidden>إلغاء</button></div></div>
     <div class="addbox"><b style="font-size:14px">رفع ملف كدليل (صورة، أفيش، PDF، مستند)</b>${assets?`<input type="file" id="up-file" accept="image/*,application/pdf,.txt,.csv,.md,.json,video/*"><div class="hint">الملف بيتحفظ مع اللوحة وبيتربط بالسجل ده. الحد الأقصى ٢٠ ميجا.</div><div class="row" style="flex:0"><button class="btn gold" id="up-go">ارفع واربط</button></div>`:'<div class="hint">رفع الملفات مش متاح في العرض ده. افتح اللوحة من حسابك على claude.ai.</div>'}</div></div>`;
+  $$('#d-body [data-mid]').forEach(i=>i.onclick=()=>{if(!MD.loaded){MD.rows=[];}const rr=MD.rows.find(x=>x.id===i.dataset.mid);if(rr)openMedia(i.dataset.mid);else loadMedia().then(()=>openMedia(i.dataset.mid));});
   let editing=null;
   $('#lk-save').onclick=async()=>{const u=$('#lk-url').value.trim();if(!/^https?:\/\//.test(u))return toast('الرابط لازم يبدأ بـ https://',1);
     try{await api('api_link',editing?{op:'update',id:editing,kind:$('#lk-kind').value,url:u}:{op:'add',entity_id:e.id,kind:$('#lk-kind').value,url:u});toast('اتحفظ ✓');await refreshAfterWrite();openDetail(e.id,'links');}catch(err){toast(cleanErr(err),1)}};
@@ -1131,6 +1216,215 @@ function openCreate(type){
 $('#c-no').onclick=()=>$('#cmodal').classList.remove('on');
 $$('[data-new]').forEach(b=>b.onclick=()=>openCreate(state.type&&CREATE_TYPES.includes(state.type)?state.type:'work'));
 
+/* ===================== data quality center ===================== */
+const QCHK={
+ dup_work:{g:'acc',t:'أعمال مكررة محتملة',why:'نفس العنوان (عربي أو إنجليزي)',yes:'فعلاً مكرر',no:'مش مكرر'},
+ dup_person:{g:'acc',t:'أشخاص مكررين محتملين',why:'نفس الاسم (عربي أو إنجليزي)',yes:'فعلاً مكرر',no:'مش مكرر'},
+ contrib_unlinked:{g:'acc',t:'كريدت مش مربوط بسجل شخص',why:'الاسم مكتوب نص بس من غير ربط بشخص',yes:'محتاج ربط',no:'مش مشكلة'},
+ item_no_work:{g:'acc',t:'أحداث وجوائز وصحافة وفيديوهات من غير عمل مرتبط',why:'مفيش عمل مرتبط بالسجل',yes:'محتاج ربط',no:'مش مشكلة'},
+ work_no_credit:{g:'cmp',t:'أعمال من غير كريدت',why:'مفيش أي مشارك مسجّل على العمل',yes:'ناقص فعلاً',no:'مش مشكلة'},
+ work_no_date:{g:'cmp',t:'أعمال من غير تاريخ',why:'مفيش تاريخ أو سنة مفهومة للعمل',yes:'ناقص فعلاً',no:'مش مشكلة'},
+ person_orphan:{g:'cmp',t:'أشخاص مش مربوطين بأي عمل',why:'مفيش كريدت ولا علاقة مسجّلة للشخص',yes:'ناقص فعلاً',no:'مش مشكلة'},
+ unverified:{g:'src',t:'سجلات لسه ما اتحققش منها',why:'حالة التوثيق: قيد المراجعة أو غير موثّق',yes:'محتاج توثيق',no:'مش مشكلة'}
+};
+const QGRP={cmp:'اكتمال البيانات',acc:'صحة المعلومة (تكرار وعلاقات)',src:'التحقق من المصدر'};
+const QDEC={accept:'مؤكدة',defer:'مؤجلة',reject:'مرفوضة'};
+const Q_QUAL=`with nz as (select 1),
+w as (select e.id,e.public_code c,w.title_ar l,translate(lower(btrim(regexp_replace(w.title_ar,'\\s+',' ','g'))),'أإآةى','اااهي') k,lower(btrim(coalesce(w.title_en,''))) ke from archive.work w join archive.entity e on e.id=w.entity_id where e.lifecycle<>'Archived'),
+p as (select e.id,e.public_code c,p.name_ar l,translate(lower(btrim(regexp_replace(p.name_ar,'\\s+',' ','g'))),'أإآةى','اااهي') k,lower(btrim(coalesce(p.name_en,''))) ke from archive.person p join archive.entity e on e.id=p.entity_id where e.lifecycle<>'Archived'),
+cs as (
+ select 'dup_work' ck,a.id e1,a.c c1,a.l l1,b.id e2,b.c c2,b.l l2 from w a join w b on a.id<b.id and (a.k=b.k or (a.ke<>'' and a.ke=b.ke))
+ union all select 'dup_person',a.id,a.c,a.l,b.id,b.c,b.l from p a join p b on a.id<b.id and (a.k=b.k or (a.ke<>'' and a.ke=b.ke))
+ union all select 'work_no_credit',w.id,w.c,w.l,null::uuid,null,null from w where not exists(select 1 from archive.contribution c join archive.entity ce on ce.id=c.entity_id where c.work_id=w.id and ce.lifecycle<>'Archived')
+ union all select 'work_no_date',w.id,w.c,w.l,null,null,null from w where not exists(select 1 from archive.date_value d where d.entity_id=w.id and d.precision not in ('unknown','text'))
+ union all select 'person_orphan',p.id,p.c,p.l,null,null,null from p where not exists(select 1 from archive.contribution c join archive.entity ce on ce.id=c.entity_id where c.person_id=p.id and ce.lifecycle<>'Archived') and not exists(select 1 from archive.entity_relation r where r.from_entity=p.id or r.to_entity=p.id)
+ union all select 'contrib_unlinked',ce.id,ce.public_code,coalesce(c.person_as_stated,'؟')||' — '||coalesce(c.role,''),null,null,null from archive.contribution c join archive.entity ce on ce.id=c.entity_id where c.person_id is null and ce.lifecycle<>'Archived'
+ union all select 'item_no_work',e.id,e.public_code,coalesce(ev.name,a.name,pm.title_or_topic,vd.title,e.public_code),null,null,null from archive.entity e left join archive.event ev on ev.entity_id=e.id left join archive.award a on a.entity_id=e.id left join archive.press_mention pm on pm.entity_id=e.id left join archive.video vd on vd.entity_id=e.id where e.lifecycle<>'Archived' and ((ev.entity_id is not null and ev.work_id is null) or (a.entity_id is not null and a.work_id is null) or (pm.entity_id is not null and pm.work_id is null) or (vd.entity_id is not null and vd.work_id is null))
+ union all select 'unverified',e.id,e.public_code,coalesce(w.title_ar,pp.name_ar,e.public_code),null,null,null from archive.entity e left join archive.work w on w.entity_id=e.id left join archive.person pp on pp.entity_id=e.id where e.entity_type in ('work','person') and e.lifecycle<>'Archived' and e.verification in ('Pending Review','Unverified'))
+select coalesce(json_agg(x),'[]') j from (select cs.ck,cs.e1,cs.c1,cs.l1,cs.e2,cs.c2,cs.l2,d.decision,d.note,d.decided_by,d.decided_at,count(*) over(partition by cs.ck) tot,row_number() over(partition by cs.ck order by cs.c1,cs.c2) rn from cs left join archive.quality_decision d on d.check_code=cs.ck and d.entity_id=cs.e1 and d.entity_id_2 is not distinct from cs.e2) x where rn<=400`;
+let QD={rows:[],status:'open',loaded:false};
+async function loadQuality(){
+  $('#q-list').innerHTML='<div class="skel" style="height:70px"></div>';
+  try{QD.rows=one(await sql(Q_QUAL))||[];QD.loaded=true;renderQuality();}
+  catch(err){$('#q-list').innerHTML=`<div class="banner bad">${esc(cleanErr(err))}</div>`;}
+}
+function qStat(r){return r.decision||'open';}
+function renderQuality(){
+  const cnt={open:0,accept:0,defer:0,reject:0};QD.rows.forEach(r=>cnt[qStat(r)]++);
+  const gOpen={};QD.rows.filter(r=>!r.decision).forEach(r=>{const g=(QCHK[r.ck]||{}).g;gOpen[g]=(gOpen[g]||0)+1});
+  $('#q-sum').innerHTML=Object.keys(QGRP).map(g=>`<div class="card"><b>${fmt(gOpen[g]||0)}</b><small>${QGRP[g]} — مفتوحة</small></div>`).join('');
+  const tabs=[['open','مفتوحة'],['accept','مؤكدة'],['defer','مؤجلة'],['reject','مرفوضة']];
+  $('#q-tabs').innerHTML=tabs.map(([k,l])=>`<button class="tab ${QD.status===k?'on':''}" data-qs="${k}">${l}<span>${fmt(cnt[k])}</span></button>`).join('');
+  $$('#q-tabs [data-qs]').forEach(b=>b.onclick=()=>{QD.status=b.dataset.qs;renderQuality();});
+  const was=new Set($$('#q-list details[open]').map(d=>d.dataset.ck));
+  const rows=QD.rows.filter(r=>qStat(r)===QD.status);
+  let h='';
+  Object.keys(QGRP).forEach(g=>{
+    const cks=Object.keys(QCHK).filter(k=>QCHK[k].g===g&&rows.some(r=>r.ck===k));
+    if(!cks.length)return; h+=`<div class="qgh">${QGRP[g]}</div>`;
+    cks.forEach(k=>{const m=QCHK[k],rs=rows.filter(r=>r.ck===k),tot=rs.length?rs[0].tot:0;
+      h+=`<details class="rvgroup" data-ck="${k}" style="margin-bottom:8px" ${was.has(k)?'open':''}><summary><span>${esc(m.t)}</span>${chip(fmt(rs.length)+(tot>rs.length&&QD.status==='open'?' من '+fmt(tot):''),'c-warn')}</summary>${rs.slice(0,200).map(r=>qItem(r,m)).join('')}</details>`;});
+  });
+  $('#q-list').innerHTML=h||`<div class="card" style="text-align:center;color:var(--muted)">${QD.loaded?'مفيش حالات هنا.':''}</div>`;
+  $$('#q-list [data-open]').forEach(b=>b.onclick=e=>{e.preventDefault();openDetail(b.dataset.open,'summary')});
+  $$('#q-list [data-qd]').forEach(b=>b.onclick=()=>qDecide(b.dataset.ck,b.dataset.e1,b.dataset.e2,b.dataset.qd));
+}
+function qItem(r,m){
+  const rec=(id,c,l)=>`<span class="code">${esc(c)}</span><a data-open="${id}">${esc(l||c)}</a>`;
+  const who=r.decision?`<div class="qwhy">${chip(QDEC[r.decision],r.decision==='accept'?'c-bad':r.decision==='defer'?'c-warn':'c-mute')} ${esc(r.decided_by||'')} ${r.note?'— '+esc(r.note):''}</div>`:'';
+  const a=`data-ck="${r.ck}" data-e1="${r.e1}" data-e2="${r.e2||''}"`;
+  const acts=r.decision?`<button class="btn sm" ${a} data-qd="reset">رجّعه مفتوح</button>`:`<button class="btn sm ok" ${a} data-qd="accept">${esc(m.yes)}</button><button class="btn sm" ${a} data-qd="defer">تأجيل</button><button class="btn sm no" ${a} data-qd="reject">${esc(m.no)}</button>`;
+  return `<div class="qitem"><div><div class="qrec">${rec(r.e1,r.c1,r.l1)}${r.e2?`<span class="qvs">⟷</span>${rec(r.e2,r.c2,r.l2)}`:''}</div><div class="qwhy">${esc(m.why)}</div>${who}</div><div class="qact">${acts}</div></div>`;
+}
+function qDecide(ck,e1,e2,dec){
+  const m=QCHK[ck]||{}; const doIt=async note=>{
+    try{await api('api_quality',{check_code:ck,entity_id:e1,entity_id_2:e2||null,decision:dec,note:note||''});
+      const r=QD.rows.find(x=>x.ck===ck&&x.e1===e1&&(x.e2||'')===(e2||''));
+      if(r){if(dec==='reset'){r.decision=null;r.note=null;r.decided_by=null;}else{r.decision=dec;r.note=note||null;r.decided_by=($('#editor-name')&&$('#editor-name').value)||'';}}
+      toast(dec==='reset'?'رجع مفتوح ✓':'القرار اتسجّل ✓');renderQuality();}
+    catch(err){toast(cleanErr(err),1)}};
+  if(dec==='reset'){doIt('');return;}
+  const lab=dec==='accept'?m.yes:dec==='reject'?m.no:'تأجيل';
+  $('#qm-t').textContent=lab;$('#qm-p').textContent=m.t+' — القرار بيتسجّل باسمك.';$('#qm-n').value='';
+  const md=$('#qmodal');md.classList.add('on');
+  $('#qm-no').onclick=()=>md.classList.remove('on');
+  $('#qm-ok').onclick=()=>{md.classList.remove('on');doIt($('#qm-n').value.trim());};
+  setTimeout(()=>$('#qm-n').focus(),40);
+}
+
+/* ===================== media library ===================== */
+const Q_MEDIA=`select coalesce(json_agg(x),'[]') j from (select e.id,e.public_code c,e.privacy pr,e.verification v,
+ (select l.url from archive.link l where l.entity_id=e.id and l.url like 'photos/%' order by l.url limit 1) u,
+ m.rights_holder rh,m.usage_rights ur,m.credit_line cl,
+ (select body from archive.translation t where t.entity_id=e.id and t.field='description' and t.lang='ar') d,
+ (select body from archive.translation t where t.entity_id=e.id and t.field='source' and t.lang='ar') src,
+ coalesce((select json_agg(r.to_entity) from archive.entity_relation r where r.from_entity=e.id and r.kind='media_of'),'[]'::json) lk
+ from archive.media_asset m join archive.entity e on e.id=m.entity_id where e.lifecycle<>'Archived'
+ and exists(select 1 from archive.link l where l.entity_id=e.id and l.url like 'photos/%')) x`;
+const MDIR={ahmed:'أحمد',events:'أحداث',people:'أشخاص',works:'أعمال',projects:'مشاريع',press:'صحافة',awards:'جوائز'};
+let MD={rows:[],shown:60,loaded:false,list:[]};
+async function loadMedia(){
+  if(!MD.loaded)$('#m-grid').innerHTML='<div class="skel" style="height:150px"></div>';
+  try{MD.rows=one(await sql(Q_MEDIA))||[];MD.rows.forEach(r=>{r.dir=(r.u||'').split('/')[1]||'';});MD.loaded=true;
+    const dirs=[...new Set(MD.rows.map(r=>r.dir))].sort();const cur=$('#m-dir').value;
+    $('#m-dir').innerHTML='<option value="">كل المجلدات</option>'+dirs.map(d=>`<option value="${esc(d)}">${esc(MDIR[d]||d)}</option>`).join('');$('#m-dir').value=cur;
+    renderMedia();}
+  catch(err){$('#m-grid').innerHTML=`<div class="banner bad">${esc(cleanErr(err))}</div>`;}
+}
+const mLabel=r=>{const x=DATA.byId.get(r.id);return x?x.l:r.c;};
+function mFilter(){
+  const q=$('#m-q').value.trim().toLowerCase(),d=$('#m-dir').value,lk=$('#m-lk').value,pr=$('#m-pr').value;
+  return MD.rows.filter(r=>(!d||r.dir===d)&&(!pr||r.pr===pr)&&(!lk||(lk==='y')===(r.lk.length>0))&&(!q||(mLabel(r)+' '+r.c+' '+(r.d||'')).toLowerCase().includes(q)));
+}
+function renderMedia(){
+  MD.list=mFilter();const shown=MD.list.slice(0,MD.shown);
+  $('#m-count').textContent=fmt(MD.list.length)+' صورة من '+fmt(MD.rows.length)+' — مربوطة بسجل: '+fmt(MD.rows.filter(r=>r.lk.length).length);
+  $('#m-grid').innerHTML=shown.map((r,i)=>`<div class="mcard" data-mi="${i}"><img loading="lazy" src="${photoSrc(r.u)}" alt="${esc(mLabel(r))}">${r.lk.length?'<span class="lk chip c-ok">مربوطة</span>':''}<div class="cap">${esc(mLabel(r))}</div></div>`).join('')||'<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted)">مفيش صور بالفلاتر دي.</div>';
+  $('#m-more').hidden=MD.list.length<=MD.shown;
+  $$('#m-grid [data-mi]').forEach(c=>c.onclick=()=>openMedia(MD.list[+c.dataset.mi].id));
+}
+['#m-q','#m-dir','#m-lk','#m-pr'].forEach(s=>{$(s).oninput=$(s).onchange=()=>{MD.shown=60;renderMedia();};});
+$('#m-more').onclick=()=>{MD.shown+=60;renderMedia();};
+function openMedia(id){
+  const r=MD.rows.find(x=>x.id===id); if(!r){const x=DATA.byId.get(id);if(x&&x.ph){MD.rows.push({id,c:x.c,pr:x.pr,v:x.v,u:x.ph,lk:[],dir:(x.ph.split('/')[1]||'')});return openMedia(id);}return;}
+  const idx=MD.list.findIndex(x=>x.id===id);const box=$('#lb-box');
+  const row=(k,v)=>v?`<dt>${k}</dt><dd>${esc(v)}</dd>`:'';
+  box.innerHTML=`<div class="pv"><img src="${photoSrc(r.u)}" alt=""></div><div class="meta"><h3>${esc(mLabel(r))}</h3>
+   <div class="flags"><span class="code">${esc(r.c)}</span>${chip(r.pr==='Public'?'مسموح بالنشر':r.pr==='Restricted'?'مقيّد':'استخدام داخلي',PRIVCLS(r.pr))}${chip(VER[r.v]||r.v,VERCLS(r.v))}</div>
+   <dl>${row('الوصف',r.d)}${row('المصدر',r.src)}${row('صاحب الحقوق',r.rh)}${row('حقوق الاستخدام',r.ur)}${row('سطر الحقوق',r.cl)}${row('المجلد',MDIR[r.dir]||r.dir)}</dl>
+   <div><b style="font-size:13px">مربوطة بـ</b><div class="list" id="lb-lk" style="margin-top:6px">${r.lk.map(t=>{const x=DATA.byId.get(t);return `<div class="li"><span class="code">${esc(x?x.c:'')}</span><a class="grow" data-go="${t}" style="cursor:pointer">${esc(x?x.l:t)}</a><button class="iconbtn danger" data-unlk="${t}" aria-label="فك الربط">${ICON.x}</button></div>`}).join('')||'<div class="hint">مش مربوطة بأي سجل.</div>'}</div>
+    <div style="margin-top:8px" id="lb-pick"></div></div>
+   <div class="act" style="justify-content:flex-start;flex-wrap:wrap"><button class="btn gold" id="lb-open">فتح سجل الصورة</button>${idx>0?'<button class="btn" id="lb-prev">السابقة</button>':''}${idx>=0&&idx<MD.list.length-1?'<button class="btn" id="lb-next">التالية</button>':''}<button class="btn" id="lb-x">إغلاق</button></div></div>`;
+  $('#lb').classList.add('on');
+  picker($('#lb-pick'),{types:['work','person','event','award','organization','press_mention','video'],placeholder:'اربطها بعمل أو شخص أو حدث…',onPick:async t=>{if(!t)return;
+    try{await api('api_media_link',{op:'add',media_id:id,target_id:t});if(!r.lk.includes(t))r.lk.push(t);toast('اتربطت ✓');renderMedia();openMedia(id);}catch(err){toast(cleanErr(err),1)}}});
+  $$('#lb-lk [data-unlk]').forEach(b=>b.onclick=async()=>{try{await api('api_media_link',{op:'remove',media_id:id,target_id:b.dataset.unlk});r.lk=r.lk.filter(x=>x!==b.dataset.unlk);toast('اتفك الربط ✓');renderMedia();openMedia(id);}catch(err){toast(cleanErr(err),1)}});
+  $$('#lb-lk [data-go]').forEach(a=>a.onclick=()=>{$('#lb').classList.remove('on');openDetail(a.dataset.go,'summary')});
+  $('#lb-open').onclick=()=>{$('#lb').classList.remove('on');openDetail(id,'summary')};
+  $('#lb-x').onclick=()=>$('#lb').classList.remove('on');
+  if($('#lb-prev'))$('#lb-prev').onclick=()=>openMedia(MD.list[idx-1].id);
+  if($('#lb-next'))$('#lb-next').onclick=()=>openMedia(MD.list[idx+1].id);
+}
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lb')$('#lb').classList.remove('on');});
+
+/* ===================== artist profile & timeline ===================== */
+const Q_TL=`select coalesce(json_agg(json_build_object('id',entity_id,'y',y)),'[]') j from (select entity_id,min(start_year) y from archive.date_value where start_year is not null group by 1) x`;
+const Q_PROF=`select json_build_object('id',e.id,'prof',(select profession from archive.person where entity_id=e.id),'bio',(select body from archive.translation where entity_id=e.id and field='bio_short' and lang='ar'),'start',archive.career_start_year()) j from archive.entity e where e.public_code='P-0001'`;
+const TLT={work:'أعمال',event:'أحداث',award:'جوائز وتكريمات',life_story:'محطات من الحياة',press_mention:'صحافة',video:'فيديوهات'};
+let TL={items:[],prof:null,type:'',loaded:false};
+async function loadTimeline(){
+  try{const [t,p]=await Promise.all([sql(Q_TL),sql(Q_PROF)]);TL.items=one(t)||[];TL.prof=one(p);TL.loaded=true;renderTimeline();}
+  catch(err){$('#t-list').innerHTML=`<div class="banner bad">${esc(cleanErr(err))}</div>`;}
+}
+function renderTimeline(){
+  const rows=DATA.rows.filter(r=>r.lc!=='Archived'),cnt=t=>rows.filter(r=>r.t===t).length,P=TL.prof||{};
+  const me=DATA.byId.get(P.id)||{};
+  const ed=rows.filter(r=>r.t==='fact'&&r.s==='role_education').slice(0,6);
+  const wy=TL.items.filter(x=>{const r=DATA.byId.get(x.id);return r&&r.t==='work'&&r.lc!=='Archived'&&x.y>=1900}).map(x=>x.y);const start=P.start||(wy.length?Math.min(...wy):null);
+  $('#t-prof').innerHTML=`<div><div class="pn">${esc(me.l||'أحمد حمدي رؤوف')}</div><div class="flags" style="margin-top:6px">${P.prof?chip(P.prof,'c-info'):''}${me.c?`<span class="code">${esc(me.c)}</span>`:''}</div></div>
+   <div>${P.bio?`<div class="pb" style="margin-top:0">${esc(P.bio)}</div>`:''}
+   <div class="pstats">${start?`<span><b>${fmt(new Date().getFullYear()-start)}</b>سنة مسيرة (من ${start})</span>`:''}<span><b>${fmt(cnt('work'))}</b>عمل</span><span><b>${fmt(cnt('event'))}</b>حدث</span><span><b>${fmt(cnt('award'))}</b>جائزة وتكريم</span><span><b>${fmt(cnt('press_mention'))}</b>خبر صحفي</span></div>
+   ${ed.length?`<div style="margin-top:12px;font-size:13px"><b>التعليم والأدوار:</b> ${ed.map(r=>`<a data-open="${r.id}" style="cursor:pointer;margin-inline-end:10px;border-bottom:1px dashed var(--line2)">${esc(r.l)}</a>`).join('')}</div>`:''}
+   ${me.id?`<div style="margin-top:12px"><button class="btn sm" data-open="${me.id}">فتح سجل الملف</button></div>`:''}</div>`;
+  $$('#t-prof [data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open,'summary'));
+  const items=TL.items.map(x=>({...x,r:DATA.byId.get(x.id)})).filter(x=>x.r&&x.r.lc!=='Archived'&&TLT[x.r.t]&&x.y>=1900&&x.y<=2100);
+  const tc={};items.forEach(x=>tc[x.r.t]=(tc[x.r.t]||0)+1);
+  $('#t-types').innerHTML=`<button class="tab ${TL.type===''?'on':''}" data-tt="">الكل<span>${fmt(items.length)}</span></button>`+Object.keys(TLT).filter(t=>tc[t]).map(t=>`<button class="tab ${TL.type===t?'on':''}" data-tt="${t}">${TLT[t]}<span>${fmt(tc[t])}</span></button>`).join('');
+  $$('#t-types [data-tt]').forEach(b=>b.onclick=()=>{TL.type=b.dataset.tt;renderTimeline();});
+  const f=items.filter(x=>!TL.type||x.r.t===TL.type),by={};f.forEach(x=>(by[x.y]=by[x.y]||[]).push(x));
+  const ys=Object.keys(by).map(Number).sort((a,b)=>$('#t-asc').checked?a-b:b-a),mx=Math.max(1,...ys.map(y=>by[y].length));
+  $('#t-bars').innerHTML=[...ys].sort((a,b)=>a-b).map(y=>`<i data-y="${y}" style="height:${Math.max(6,by[y].length/mx*100)}%" title="${y}: ${by[y].length}"></i>`).join('');
+  $$('#t-bars [data-y]').forEach(b=>b.onclick=()=>{const el=document.getElementById('ty-'+b.dataset.y);if(el)el.scrollIntoView({behavior:'smooth',block:'center'})});
+  $('#t-list').innerHTML=ys.map(y=>`<div class="tyr" id="ty-${y}"><b>${y}</b><div class="its">${by[y].sort((a,b)=>(a.r.t>b.r.t?1:-1)).map(x=>`<div class="tit" data-open="${x.id}"><span class="chip c-mute">${esc(TLT[x.r.t])}</span><span class="code">${esc(x.r.c)}</span><span class="l">${esc(x.r.l)}</span></div>`).join('')}</div></div>`).join('')||'<div class="hint" style="padding:14px">مفيش محطات بتواريخ مفهومة لسه.</div>';
+  $$('#t-list [data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open,'summary'));
+}
+$('#t-asc').onchange=()=>renderTimeline();
+
+/* ===================== command palette / global search ===================== */
+const PAL_CMDS=[['overview','نظرة عامة'],['records','السجلات'],['review','قائمة المراجعة'],['quality','جودة البيانات'],['media','مكتبة الوسائط'],['timeline','الملف الفني والتايم لاين'],['log','سجل التغييرات']];
+const palActs=()=>PAL_CMDS.map(([v,l])=>({k:'go',v,l:'اذهب إلى: '+l})).concat([{k:'new',l:'سجل جديد'},{k:'refresh',l:'تحديث البيانات'},{k:'export',l:'تصدير كل الأرشيف'}]);
+let PAL={items:[],act:0,t:null,seq:0};
+function palOpen(){$('#pal').classList.add('on');$('#pal-q').value='';palRun('');setTimeout(()=>$('#pal-q').focus(),30);}
+function palClose(){$('#pal').classList.remove('on');}
+const normAr=s=>String(s||'').toLowerCase().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي');
+function palRun(q){
+  const n=normAr(q.trim()),my=++PAL.seq; PAL.srv=[];
+  const acts=palActs().filter(a=>!n||normAr(a.l).includes(n)).slice(0,n?4:9);
+  const recs=n?DATA.rows.filter(r=>r.lc!=='Archived'&&(normAr(r.l).includes(n)||r.c.toLowerCase().includes(n)||normAr(r.s).includes(n))).slice(0,12):DATA.rows.filter(r=>r.lc!=='Archived').slice(0,0);
+  PAL.local={acts,recs};palDraw();
+  clearTimeout(PAL.t); if(n.length<2)return;
+  PAL.t=setTimeout(async()=>{
+    const qs=sqlStr('%'+q.trim().replace(/[%_\\]/g,'\\$&')+'%'),yr=/^\d{4}$/.test(q.trim())?+q.trim():0;
+    const parts=[`select e.id,'مشارك: '||coalesce(p.name_ar,p.name_en) s from archive.contribution co join archive.entity ce on ce.id=co.entity_id join archive.entity e on e.id=co.work_id join archive.person p on p.entity_id=co.person_id where ce.lifecycle<>'Archived' and e.lifecycle<>'Archived' and (p.name_ar ilike ${qs} or p.name_en ilike ${qs})`,
+      `select e.id,'نص: '||t.field s from archive.translation t join archive.entity e on e.id=t.entity_id where e.lifecycle<>'Archived' and t.body ilike ${qs} and t.field not in ('platform_or_asset','label')`];
+    if(yr)parts.unshift(`select e.id,'سنة '||d.start_year s from archive.date_value d join archive.entity e on e.id=d.entity_id where e.lifecycle<>'Archived' and d.start_year=${yr}`);
+    try{const res=await Promise.all(parts.map(p=>sql(`select id,min(s) s from (${p}) z group by id limit 12`)));
+      if(my!==PAL.seq)return; const seen=new Set((PAL.local.recs||[]).map(r=>r.id)); PAL.srv=[];
+      res.forEach(rs=>(Array.isArray(rs)?rs:[]).forEach(x=>{const r=DATA.byId.get(x.id);if(r&&!seen.has(x.id)){seen.add(x.id);PAL.srv.push({r,s:x.s});}}));
+      palDraw();}catch(e){}
+  },280);
+}
+function palDraw(){
+  const L=PAL.local||{acts:[],recs:[]};PAL.items=[];let h='';
+  const add=(it,html)=>{PAL.items.push(it);h+=html(PAL.items.length-1);};
+  if(L.recs.length){h+='<div class="palh">سجلات</div>';L.recs.forEach(r=>add({k:'rec',id:r.id},i=>`<div class="palit" data-pi="${i}"><span class="code">${esc(r.c)}</span><span>${esc(r.l)}</span><span class="s">${esc(T1[r.t]||r.t)}</span></div>`));}
+  if((PAL.srv||[]).length){h+='<div class="palh">نتائج أعمق (مشاركين، سنين، نصوص)</div>';PAL.srv.slice(0,12).forEach(x=>add({k:'rec',id:x.r.id},i=>`<div class="palit" data-pi="${i}"><span class="code">${esc(x.r.c)}</span><span>${esc(x.r.l)}</span><span class="s">${esc(x.s)}</span></div>`));}
+  if(L.acts.length){h+='<div class="palh">أوامر</div>';L.acts.forEach(a=>add(a,i=>`<div class="palit" data-pi="${i}"><span>${esc(a.l)}</span></div>`));}
+  $('#pal-list').innerHTML=h||'<div class="palh" style="padding:16px">مفيش نتايج.</div>';
+  PAL.act=Math.min(PAL.act,Math.max(0,PAL.items.length-1));palMark();
+  $$('#pal-list [data-pi]').forEach(el=>{el.onclick=()=>palPick(+el.dataset.pi);el.onmousemove=()=>{PAL.act=+el.dataset.pi;palMark();};});
+}
+function palMark(){$$('#pal-list .palit').forEach(el=>{const on=+el.dataset.pi===PAL.act;el.classList.toggle('act',on);if(on)el.scrollIntoView({block:'nearest'});});}
+function palPick(i){const it=PAL.items[i];if(!it)return;palClose();
+  if(it.k==='rec')openDetail(it.id,'summary');else if(it.k==='go')go(it.v);else if(it.k==='new')$$('[data-new]')[0].click();else if(it.k==='refresh')doRefresh();else if(it.k==='export')$('#export-all').click();}
+$('#pal-q').oninput=e=>{PAL.act=0;palRun(e.target.value);};
+$('#pal-q').onkeydown=e=>{if(e.key==='ArrowDown'){PAL.act=Math.min(PAL.act+1,PAL.items.length-1);palMark();e.preventDefault();}else if(e.key==='ArrowUp'){PAL.act=Math.max(PAL.act-1,0);palMark();e.preventDefault();}else if(e.key==='Enter'){e.preventDefault();palPick(PAL.act);}else if(e.key==='Escape')palClose();};
+$('#pal').addEventListener('click',e=>{if(e.target.id==='pal')palClose();});
+document.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if((e.ctrlKey||e.metaKey)&&k==='k'){e.preventDefault();palOpen();}
+  else if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||'')&&!$('#pal').classList.contains('on')){e.preventDefault();palOpen();}
+  else if(e.key==='Escape'){if($('#lb').classList.contains('on'))$('#lb').classList.remove('on');if($('#qmodal').classList.contains('on'))$('#qmodal').classList.remove('on');}});
+$$('[data-pal]').forEach(b=>b.onclick=palOpen);
+
 /* ---------- routing / boot ---------- */
 fillSelect('#f-ver',VER); fillSelect('#f-life',LIFE); fillSelect('#f-priv',PRIV);
 $('#bulk-act').innerHTML='<option value="">اختار الإجراء…</option>'+
@@ -1139,8 +1433,8 @@ $('#bulk-act').innerHTML='<option value="">اختار الإجراء…</option>
   '<optgroup label="الخصوصية">'+Object.keys(PRIV).map(k=>`<option value="privacy|${k}">${PRIV[k]}</option>`).join('')+'</optgroup>';
 $('#roles-dl').innerHTML=ROLES.map(r=>`<option value="${r}">`).join('');
 const ed=$('#editor-name'); ed.value=EDITOR; ed.onchange=()=>{EDITOR=ed.value.trim()||'أحمد';ed.value=EDITOR;try{localStorage.setItem('ahr_editor',EDITOR)}catch(e){};toast('التعديلات هتتسجّل باسم: '+EDITOR);};
-const VIEWS=['overview','records','review','log'];
-function go(v){if(!VIEWS.includes(v))v='overview';state.view=v;VIEWS.forEach(x=>$('#v-'+x).hidden=x!==v);$$('.nav button[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view===v));if(location.hash!=='#'+v){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo(0,0);if(v==='log'&&mcp)loadLog();}
+const VIEWS=['overview','records','review','quality','media','timeline','log'];
+function go(v){if(!VIEWS.includes(v))v='overview';state.view=v;VIEWS.forEach(x=>$('#v-'+x).hidden=x!==v);$$('.nav button[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view===v));if(location.hash!=='#'+v){try{history.replaceState(null,'','#'+v)}catch(e){location.hash=v}}window.scrollTo(0,0);if(v==='log'&&mcp)loadLog();if(v==='quality'&&mcp)loadQuality();if(v==='media'&&mcp)loadMedia();if(v==='timeline'&&mcp)loadTimeline();}
 $$('.nav button[data-view]').forEach(b=>b.onclick=()=>go(b.dataset.view));
 window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
 $$('[data-refresh]').forEach(b=>b.onclick=doRefresh);
@@ -1190,8 +1484,8 @@ skeleton();
   const close=()=>{sh.classList.remove('on');sc.classList.remove('on')};
   mb.onclick=()=>{const en=$('#editor-name');$('#more-who').textContent=en&&en.value?'مسجّل باسم: '+en.value:'';sh.classList.add('on');sc.classList.add('on')};
   sc.onclick=close;
-  $$('#more-sheet [data-more]').forEach(b=>b.onclick=()=>{const k=b.dataset.more;close();if(k==='log')go('log');else if(k==='export')$('#export-all').click();else if(k==='pw')$('#pw-open').click();else if(k==='photos')$('#import-photos').click();});
-  const mark=()=>mb.classList.toggle('on',state.view==='log');
+  $$('#more-sheet [data-more]').forEach(b=>b.onclick=()=>{const k=b.dataset.more;close();if(['log','quality','media','timeline'].includes(k))go(k);else if(k==='export')$('#export-all').click();else if(k==='pw')$('#pw-open').click();else if(k==='photos')$('#import-photos').click();});
+  const mark=()=>mb.classList.toggle('on',['log','quality','media','timeline'].includes(state.view));
   window.addEventListener('hashchange',mark);
   new MutationObserver(mark).observe($('#v-log'),{attributes:true,attributeFilter:['hidden']});
   mark();

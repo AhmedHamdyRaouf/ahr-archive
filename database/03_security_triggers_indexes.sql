@@ -28,7 +28,7 @@ CREATE TRIGGER trg_entity_touch BEFORE UPDATE ON archive.entity FOR EACH ROW EXE
 
 -- change log on every content table (trg_log_<name>; review_item -> trg_log_review)
 do $$ declare t text; begin
-  foreach t in array array['award','contact_info','contribution','date_value','digital_profile','entity','entity_relation','event','fact','life_story','link','media_asset','organization','person','press_mention','project_item','relationship','review_item','site_text','source','translation','video','work'] loop
+  foreach t in array array['award','contact_info','contribution','date_value','digital_profile','entity','entity_relation','event','fact','life_story','link','media_asset','organization','person','press_mention','project_item','quality_decision','relationship','review_item','site_text','source','translation','video','work'] loop
     execute format('create trigger %I after insert or delete or update on archive.%I for each row execute function archive.log_change()',
       'trg_log_'||case t when 'review_item' then 'review' else t end, t);
   end loop;
