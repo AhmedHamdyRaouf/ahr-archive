@@ -292,29 +292,37 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
   .tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px 12px;padding:2px 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:none;padding:8px 15px;font-size:13.5px;background:var(--card)}
-  .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
   .toolbar .search{grid-column:1/-1;min-width:0}
-  .toolbar .toggle{grid-column:1/-1}
-  .search input,select,input,textarea{font-size:16px}
-  .search input{padding:13px 42px 13px 14px;border-radius:14px}
+  .toolbar select,.toolbar .toggle{display:none}
+  .toolbar.fopen select{display:block}
+  .toolbar.fopen .toggle{display:flex;grid-column:1/-1}
+  #f-toggle{position:absolute;left:5px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:10px;background:transparent;color:var(--muted);display:grid;place-items:center;padding:0;cursor:pointer}
+  #f-toggle svg{position:static;transform:none;width:20px;height:20px}
+  .toolbar.fopen #f-toggle{background:var(--goldbg);color:var(--gold)}
+  #f-toggle i{display:none;position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:var(--bad);border:2px solid #fff}
+  #f-toggle.act i{display:block}
+  .search input{padding:12px 42px 12px 48px;border-radius:14px}
+  .search svg:not(#f-toggle svg){right:14px}
   select{min-height:44px;border-radius:12px;width:100%;min-width:0;text-overflow:ellipsis}
-  .bulkbar{border-radius:14px}
-  .bulkbar select{width:100%!important;min-width:0!important}
-  .tablewrap{max-height:none;overflow:visible;background:transparent;border:0;border-radius:0}
+  .bulkbar{display:none!important}
+  #v-records .sub{display:none}
+  .tablewrap{max-height:none;overflow:visible;background:var(--card);border:1px solid var(--line);border-radius:14px}
   table,tbody{display:block}
   thead{display:none}
-  tbody tr{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(28,33,51,.04)}
+  tbody tr{display:flex;flex-wrap:wrap;align-items:center;column-gap:8px;row-gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:transparent;box-shadow:none}
+  tbody tr:last-child{border-bottom:0}
   tbody tr:active{background:var(--goldbg)}
   tbody td{display:block;padding:0;border:0;width:auto}
-  tbody td.cb{order:0;width:auto;padding:2px 0}
-  tbody td.cb input{width:20px;height:20px}
-  tbody td:nth-child(2){order:1;margin-inline-end:auto}
-  tbody td.ttl{order:2;flex:1 0 100%;font-size:15.5px;line-height:1.55}
-  tbody td.ttl small{font-size:12.5px;margin-top:1px}
-  tbody td:nth-child(4),tbody td:nth-child(5),tbody td:nth-child(6){order:3}
-  tbody td:nth-child(7){order:4;flex:1 0 100%}
-  tbody td:empty{display:none}
-  .chip{padding:3px 10px;font-size:12px}
+  tbody td.cb,tbody td:nth-child(5),tbody td:nth-child(6){display:none}
+  tbody td.ttl{order:1;flex:1 0 100%;min-width:0;font-size:15px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  tbody td.ttl small{display:block;font-size:12px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  tbody td:nth-child(4){order:2;flex:none}
+  tbody td:nth-child(2){order:4;flex:none;margin-inline-start:auto}
+  tbody td:nth-child(7){order:3;flex:0 1 auto;min-width:0;overflow:hidden}
+  tbody td:nth-child(7) .flags{gap:4px;flex-wrap:nowrap}
+  tbody td:nth-child(7) .chip{font-size:11px;padding:1px 8px}
+  .chip{padding:2px 9px;font-size:11.5px}
 
   /* review & log */
   .rvitem{grid-template-columns:1fr;gap:6px;padding:12px 14px}
@@ -384,7 +392,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
         <div style="display:flex;gap:8px"><button class="btn gold" data-new><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>سجل جديد</button><button class="btn" data-refresh><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>تحديث</button></div></div>
       <div class="tabs" id="type-tabs"></div>
       <div class="toolbar">
-        <div class="search"><input id="q" placeholder="ابحث بالاسم أو الكود (مثلاً W-0034)…"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
+        <div class="search"><input id="q" placeholder="ابحث بالاسم أو الكود (مثلاً W-0034)…"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><button type="button" id="f-toggle" aria-label="فلاتر"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg><i></i></button></div>
         <select id="f-ver"><option value="">كل حالات التوثيق</option></select>
         <select id="f-life"><option value="">كل المراحل</option></select>
         <select id="f-priv"><option value="">كل مستويات الخصوصية</option></select>
@@ -1046,6 +1054,15 @@ window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
 $$('[data-refresh]').forEach(b=>b.onclick=()=>loadAll());
 go(location.hash.slice(1)||'overview');
 skeleton();
+
+/* mobile filter toggle */
+(function(){
+  const t=$('#f-toggle'),tb=t&&t.closest('.toolbar'); if(!t)return;
+  const sync=()=>t.classList.toggle('act',['#f-ver','#f-life','#f-priv','#f-miss'].some(x=>$(x).value)||$('#show-arch').checked);
+  t.onclick=()=>tb.classList.toggle('fopen');
+  ['#f-ver','#f-life','#f-priv','#f-miss','#show-arch'].forEach(x=>$(x).addEventListener('change',sync));
+  setInterval(sync,800);
+})();
 /* mobile "more" sheet */
 (function(){
   const sh=$('#more-sheet'),sc=$('#more-scrim'),mb=$('#more-btn');
