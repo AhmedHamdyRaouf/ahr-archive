@@ -42,3 +42,11 @@ This is the reference state of the whole system after the full review. Any later
 - 4 foreign keys without covering index (`entity.lifecycle/privacy/verification`, `quality_decision.entity_id_2`) — tiny tables, no impact now.
 - Backup schemas have no primary keys / policies by design (snapshots).
 - Names inside story paragraphs are not clickable yet; links appear in each page's "related" section.
+
+
+## ملحق: مميزات الداشبورد المضافة (2026-11-16)
+- تنقّل سابق/تالي داخل السجل (أسهم الكيبورد ← →)؛ القصص مرتبة زمنياً عبر `entity.sort_order` (1..63 من chronology.csv).
+- حفظ تلقائي لمسودات التعديل في المتصفح (localStorage `ahr_draft_<id>`)، وضع قراءة (`ahr_read`)، أسماء قابلة للضغط داخل النص.
+- بطاقة تقدّم لكل نوع في النظرة العامة + «اعتمد المحدّد» و«حدّد كل نتائج الفلتر» في الشريط الجماعي.
+- فلاتر محفوظة (`ahr_filters`) وفلتر جديد «ترجمة إنجليزي مسودة».
+- تصدير Excel (شيت لكل نوع) من المتصفح؛ نصوص السجلات المقيّدة لا تُصدَّر.
