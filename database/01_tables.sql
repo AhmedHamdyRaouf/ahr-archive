@@ -1,0 +1,101 @@
+-- AHR Master Archive — current schema (tables + constraints), exported 2026-11-16 from Supabase project qgxagmbkgelxvzsphlrg
+create schema if not exists archive;
+
+create table archive.audit_log_archived (id bigint not null, at timestamptz, by_user text, tbl text, pk text, action text, before jsonb, after jsonb);
+create table archive.award (entity_id uuid not null, name text, award_type text, organization text, work_id uuid);
+create table archive.blocked_title (title_ar text not null, reason text);
+create sequence if not exists archive.change_log_id_seq;
+create table archive.change_log (id bigint not null default nextval('archive.change_log_id_seq'::regclass), at timestamptz not null default now(), by_user text not null default COALESCE(current_setting('request.jwt.claim.email'::text, true), (CURRENT_USER)::text), tbl text not null, row_id uuid, action text not null, before jsonb, after jsonb);
+create table archive.contribution (entity_id uuid not null, work_id uuid not null, person_id uuid, person_as_stated text, role text);
+create table archive.date_value (entity_id uuid not null, field text not null, original_text text not null, "precision" text not null, start_year integer, start_date date, qualifier text, end_year integer);
+create table archive.entity (id uuid not null default gen_random_uuid(), public_code text not null, entity_type text not null, lifecycle text not null default 'Draft', publication text not null default 'Unpublished', verification text not null, confirmation_scope text, privacy text not null, sort_order integer, featured boolean not null default false, created_at timestamptz not null default now(), updated_at timestamptz not null default now());
+create table archive.entity_relation (id uuid not null default gen_random_uuid(), from_entity uuid not null, to_entity uuid not null, kind text not null, note text);
+create table archive.event (entity_id uuid not null, name text, event_type text, place text, work_id uuid);
+create table archive.fact (entity_id uuid not null, fact_kind text not null, label text, detail text, period text);
+create table archive.life_story (entity_id uuid not null, period text, topic text, content text);
+create table archive.link (id uuid not null default gen_random_uuid(), entity_id uuid not null, kind text not null, url text not null);
+create table archive.media_asset (entity_id uuid not null, platform_or_asset text, category text, rights_holder text, usage_rights text, credit_line text);
+create table archive.organization (entity_id uuid not null, name_ar text, name_en text, organization_type text);
+create table archive.person (entity_id uuid not null, name_ar text not null, name_en text, person_type text, profession text);
+create table archive.press_mention (entity_id uuid not null, outlet text, title_or_topic text, work_id uuid, work_id_2 uuid);
+create table archive.project_item (entity_id uuid not null, project text, title text, platform text, work_id uuid);
+create table archive.ref_lifecycle (code text not null, sort integer);
+create table archive.ref_privacy (code text not null, sort integer);
+create table archive.ref_verification (code text not null, name_ar text not null, sort integer);
+create table archive.ref_work_category (code text not null, name_ar text, sort integer);
+create table archive.relationship (entity_id uuid not null, source_work uuid not null, target_work uuid not null, relationship_type text not null);
+create table archive.review_item (id uuid not null default gen_random_uuid(), entity_id uuid, reason text not null, detail text, status text not null default 'Open', created_at timestamptz not null default now());
+create table archive.site_text (entity_id uuid not null, kind text, title text, content text);
+create table archive.source (entity_id uuid not null, source_name text, source_type text, trust_level text, reliability text);
+create table archive.source_snapshot (entity_id uuid, src_table text not null, src_pk text not null, row_data jsonb not null);
+create table archive.staff (email text not null, display_name text not null, role text not null default 'editor', active boolean not null default true, created_at timestamptz not null default now());
+create table archive.translation (entity_id uuid not null, field text not null, lang text not null, body text not null, status text not null default 'Imported', author text not null default 'AHR Data import', updated_at timestamptz not null default now(), updated_by text);
+create table archive.video (entity_id uuid not null, title text, channel text, video_kind text, work_id uuid, work_id_2 uuid, work_link_basis text);
+create table archive.work (entity_id uuid not null, category text, category_original text, title_ar text not null, title_en text, ahmed_role text, parent_entity_id uuid);
+
+-- primary keys / unique / checks
+alter table archive.audit_log_archived add constraint audit_log_archived_pkey primary key (id);
+alter table archive.award add constraint award_pkey primary key (entity_id);
+alter table archive.blocked_title add constraint blocked_title_pkey primary key (title_ar);
+alter table archive.change_log add constraint change_log_pkey primary key (id);
+alter table archive.contribution add constraint contribution_pkey primary key (entity_id);
+alter table archive.date_value add constraint date_value_pkey primary key (entity_id, field);
+alter table archive.date_value add constraint chk_date_value_precision check ("precision" = any (array['year','month','day','range','decade','unknown','text']));
+alter table archive.entity add constraint entity_pkey primary key (id);
+alter table archive.entity add constraint entity_public_code_key unique (public_code);
+alter table archive.entity add constraint entity_publication_check check (publication = any (array['Unpublished','Published']));
+alter table archive.entity_relation add constraint entity_relation_pkey primary key (id);
+alter table archive.entity_relation add constraint entity_relation_from_entity_to_entity_kind_key unique (from_entity, to_entity, kind);
+alter table archive.event add constraint event_pkey primary key (entity_id);
+alter table archive.fact add constraint fact_pkey primary key (entity_id);
+alter table archive.life_story add constraint life_story_pkey primary key (entity_id);
+alter table archive.link add constraint link_pkey primary key (id);
+alter table archive.link add constraint link_entity_id_kind_url_key unique (entity_id, kind, url);
+alter table archive.media_asset add constraint media_asset_pkey primary key (entity_id);
+alter table archive.organization add constraint organization_pkey primary key (entity_id);
+alter table archive.person add constraint person_pkey primary key (entity_id);
+alter table archive.press_mention add constraint press_mention_pkey primary key (entity_id);
+alter table archive.project_item add constraint project_item_pkey primary key (entity_id);
+alter table archive.ref_lifecycle add constraint ref_lifecycle_pkey primary key (code);
+alter table archive.ref_privacy add constraint ref_privacy_pkey primary key (code);
+alter table archive.ref_verification add constraint ref_verification_pkey primary key (code);
+alter table archive.ref_work_category add constraint ref_work_category_pkey primary key (code);
+alter table archive.relationship add constraint relationship_pkey primary key (entity_id);
+alter table archive.review_item add constraint review_item_pkey primary key (id);
+alter table archive.site_text add constraint site_text_pkey primary key (entity_id);
+alter table archive.source add constraint source_pkey primary key (entity_id);
+alter table archive.source_snapshot add constraint source_snapshot_pkey primary key (src_table, src_pk);
+alter table archive.staff add constraint staff_pkey primary key (email);
+alter table archive.staff add constraint staff_email_check check (email = lower(email));
+alter table archive.staff add constraint staff_role_check check (role = any (array['owner','editor','viewer']));
+alter table archive.translation add constraint translation_pkey primary key (entity_id, field, lang);
+alter table archive.translation add constraint translation_lang_check check (lang = any (array['ar','en']));
+alter table archive.video add constraint video_pkey primary key (entity_id);
+alter table archive.work add constraint work_pkey primary key (entity_id);
+
+-- foreign keys
+alter table archive.entity add constraint entity_lifecycle_fkey foreign key (lifecycle) references archive.ref_lifecycle(code);
+alter table archive.entity add constraint entity_privacy_fkey foreign key (privacy) references archive.ref_privacy(code);
+alter table archive.entity add constraint entity_verification_fkey foreign key (verification) references archive.ref_verification(code);
+alter table archive.work add constraint work_category_fkey foreign key (category) references archive.ref_work_category(code);
+alter table archive.work add constraint work_parent_entity_id_fkey foreign key (parent_entity_id) references archive.entity(id) on delete restrict;
+alter table archive.award add constraint award_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.contribution add constraint contribution_person_id_fkey foreign key (person_id) references archive.entity(id) on delete restrict;
+alter table archive.contribution add constraint contribution_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.entity_relation add constraint entity_relation_from_entity_fkey foreign key (from_entity) references archive.entity(id) on delete restrict;
+alter table archive.entity_relation add constraint entity_relation_to_entity_fkey foreign key (to_entity) references archive.entity(id) on delete restrict;
+alter table archive.event add constraint event_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.press_mention add constraint press_mention_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.press_mention add constraint press_mention_work_id_2_fkey foreign key (work_id_2) references archive.entity(id) on delete restrict;
+alter table archive.project_item add constraint project_item_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.relationship add constraint relationship_source_work_fkey foreign key (source_work) references archive.entity(id) on delete restrict;
+alter table archive.relationship add constraint relationship_target_work_fkey foreign key (target_work) references archive.entity(id) on delete restrict;
+alter table archive.video add constraint video_work_id_fkey foreign key (work_id) references archive.entity(id) on delete restrict;
+alter table archive.video add constraint video_work_id_2_fkey foreign key (work_id_2) references archive.entity(id) on delete restrict;
+alter table archive.source_snapshot add constraint source_snapshot_entity_id_fkey foreign key (entity_id) references archive.entity(id) on delete restrict;
+alter table archive.review_item add constraint review_item_entity_id_fkey foreign key (entity_id) references archive.entity(id) on delete restrict;
+-- every table whose PK entity_id is the entity id:
+do $$ declare t text; begin
+  foreach t in array array['award','contribution','date_value','event','fact','life_story','link','media_asset','organization','person','press_mention','project_item','relationship','site_text','source','translation','video','work'] loop
+    execute format('alter table archive.%I add constraint %I foreign key (entity_id) references archive.entity(id) on delete restrict', t, t||'_entity_id_fkey');
+  end loop; end $$;

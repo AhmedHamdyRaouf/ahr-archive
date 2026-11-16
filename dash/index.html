@@ -1073,8 +1073,8 @@ skeleton();
         try{
           const g=await fetch('/'+encodeURI(p)); if(!g.ok) throw new Error('src '+g.status);
           const blob=await g.blob();
-          const r=await fetch(SESS.url+'/storage/v1/object/archive-files/'+encodeURI(p),{method:'POST',headers:{apikey:SESS.anon,Authorization:'Bearer '+SESS.token,'content-type':blob.type||'image/jpeg','x-upsert':'true'},body:blob});
-          if(!r.ok) throw new Error('up '+r.status);
+          const r=await fetch(SESS.url+'/storage/v1/object/archive-files/'+encodeURI(p),{method:'POST',headers:{apikey:SESS.anon,Authorization:'Bearer '+SESS.token,'content-type':blob.type||'image/jpeg'},body:blob});
+          if(!r.ok){const t=await r.text().catch(()=>'');if(!(r.status===409||/Duplicate|already exists/i.test(t))) throw new Error('up '+r.status);}
         }catch(e){fail.push(p)}
         done++; st.textContent=done+'/'+paths.length;
       }};

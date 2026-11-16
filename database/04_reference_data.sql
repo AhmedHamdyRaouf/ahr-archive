@@ -1,0 +1,4 @@
+insert into archive.ref_lifecycle(code,sort) values ('Draft',1),('In Progress',2),('Needs Information',3),('Ready for Review',4),('Approved',5),('Archived',6);
+insert into archive.ref_privacy(code,sort) values ('Public',1),('Internal',2),('Private',3),('Restricted',4);
+insert into archive.ref_verification(code,name_ar,sort) values ('Verified – External Evidence','موثّق بدليل خارجي',1),('Confirmed by Ahmed + Evidence','مؤكَّد من أحمد + دليل',2),('Confirmed by Ahmed','مؤكَّد من أحمد',3),('Pending Review','قيد المراجعة',4),('Conflicting','متعارض',5),('Unverified','غير موثّق',6),('Rejected / Incorrect','مرفوض أو غير صحيح',7);
+insert into archive.ref_work_category(code,name_ar,sort) values ('Songs','أغنية',1),('TV Drama Music','مسلسل تلفزيوني',2),('Film & Documentary Music','فيلم',3),('Theatre Music','عمل مسرحي',4),('Advertising Music','إعلان',5),('Live & Recorded Works','أعمال حيّة ومسجّلة',6),('Program Music','موسيقى برنامج',7);
