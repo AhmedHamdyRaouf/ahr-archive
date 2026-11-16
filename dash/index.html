@@ -2,7 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>AHR Master Archive — لوحة التحكم</title>
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -10,8 +11,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="AHR Archive">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0F192F">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F5F6FA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -230,9 +231,120 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
 .toggle{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
 .stack{display:flex;flex-direction:column;gap:10px}
 @media (max-width:720px){.frow,.frow.one,.fhead{grid-template-columns:1fr}.frow>label{padding-top:0}.fhead{display:none}.mbox .formgrid{grid-template-columns:1fr}}
+
+/* ===== mobile app experience ===== */
+.mtop,#more-sheet,#more-scrim,.nav #more-btn{display:none}
+@media (max-width:760px){
+  html{-webkit-text-size-adjust:100%;color-scheme:light}
+  body{-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+  button,.tab,tbody tr,.kpi,.rvitem,.hitem{touch-action:manipulation}
+  .app{display:block}
+  .mtop{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:30;background:rgba(245,246,250,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 10px) 16px 10px}
+  .mtop img{width:34px;height:34px;border-radius:9px;box-shadow:0 1px 3px rgba(28,33,51,.18)}
+  .mtop .t{display:flex;flex-direction:column;line-height:1.25}
+  .mtop .t b{font-size:15px;font-weight:600}
+  .mtop .t small{font-size:11.5px;color:var(--dim)}
+  .mtop .ref{margin-inline-start:auto;width:40px;height:40px;border-radius:12px;border:1px solid var(--line2);background:var(--card);display:grid;place-items:center;color:var(--muted);cursor:pointer;padding:0}
+  .mtop .ref svg{width:18px;height:18px}
+  .mtop .ref:active{background:var(--card2)}
+  main{padding:16px 14px calc(104px + env(safe-area-inset-bottom))}
+  .top{margin-bottom:14px;gap:8px}
+  h1{font-size:23px}
+  .sub{font-size:13px;line-height:1.6}
+  .top [data-refresh],.top [data-new]{display:none!important}
+  .top>div[style]{width:100%}
+  #log-who{width:100%}
+
+  /* bottom tab bar */
+  aside.nav{position:fixed;inset:auto 0 0 0;top:auto;height:auto;z-index:60;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-end;justify-content:space-around;gap:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(16px);-webkit-backdrop-filter:saturate(1.4) blur(16px);border:0;border-top:1px solid var(--line);box-shadow:0 -4px 18px rgba(28,33,51,.06)}
+  .nav .brand,.nav .foot,.nav #export-all,.nav #pw-open,.nav [data-view=log]{display:none}
+  .nav>button:not(.newbtn){flex:1;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:7px 2px 5px;font-size:11px;line-height:1.2;border-radius:12px;position:relative;background:transparent;color:var(--dim);text-align:center;white-space:nowrap;margin:0}
+  .nav>button:not(.newbtn) svg{width:23px;height:23px;margin:0}
+  .nav>button.on{background:transparent;color:var(--gold);font-weight:600}
+  .nav>button.on::before{content:"";position:absolute;top:-7px;left:30%;right:30%;height:3px;border-radius:0 0 4px 4px;background:var(--gold)}
+  .nav #more-btn{display:flex}
+  .nav [data-view=overview]{order:1}.nav [data-view=records]{order:2}.nav .newbtn{order:3}.nav [data-view=review]{order:4}.nav #more-btn{order:5}
+  .nav [data-view=records] .badge{display:none}
+  .nav [data-view=review] .badge{position:absolute;top:1px;left:50%;margin:0 0 0 6px;min-width:18px;height:18px;line-height:16px;padding:0 5px;font-size:10.5px;text-align:center;background:var(--bad);border-color:var(--bad);color:#fff;font-weight:600}
+  .nav .newbtn{flex:none;width:56px;height:56px;border-radius:50%;margin:-22px 6px 4px;padding:0;font-size:0;gap:0;box-shadow:0 6px 16px rgba(52,65,138,.38),0 0 0 5px var(--bg);justify-content:center;align-items:center}
+  .nav .newbtn svg{width:26px;height:26px;margin:0}
+
+  /* more sheet */
+  #more-scrim{display:block;position:fixed;inset:0;background:rgba(28,33,51,.38);z-index:90;opacity:0;pointer-events:none;transition:.2s}
+  #more-scrim.on{opacity:1;pointer-events:auto}
+  #more-sheet{display:block;position:fixed;left:0;right:0;bottom:0;z-index:95;background:var(--card);border-radius:22px 22px 0 0;padding:10px 14px calc(18px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .25s ease;box-shadow:0 -10px 40px rgba(28,33,51,.18)}
+  #more-sheet.on{transform:none}
+  #more-sheet .grab{width:42px;height:4px;border-radius:4px;background:var(--line2);margin:2px auto 12px}
+  #more-sheet button{display:flex;align-items:center;gap:14px;width:100%;padding:14px 12px;border:0;background:transparent;border-radius:14px;font:inherit;font-size:15px;color:var(--ink);text-align:right;cursor:pointer}
+  #more-sheet button:active{background:var(--card2)}
+  #more-sheet button svg{width:22px;height:22px;color:var(--gold);flex:none}
+  #more-sheet .who{padding:6px 12px 10px;color:var(--dim);font-size:12.5px;display:flex;align-items:center;gap:6px}
+
+  /* kpis */
+  .kpis{grid-template-columns:1fr 1fr;gap:10px}
+  .card{padding:14px 15px;border-radius:14px}
+  .kpi .n{font-size:26px}
+  .kpi .l{font-size:12px;line-height:1.5}
+  .two,.three{gap:12px}
+  .bar{grid-template-columns:96px 1fr 40px}
+
+  /* records */
+  .tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px 12px;padding:2px 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;padding:8px 15px;font-size:13.5px;background:var(--card)}
+  .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .toolbar .search{grid-column:1/-1;min-width:0}
+  .toolbar .toggle{grid-column:1/-1}
+  .search input,select,input,textarea{font-size:16px}
+  .search input{padding:13px 42px 13px 14px;border-radius:14px}
+  select{min-height:44px;border-radius:12px;width:100%;min-width:0;text-overflow:ellipsis}
+  .bulkbar{border-radius:14px}
+  .bulkbar select{width:100%!important;min-width:0!important}
+  .tablewrap{max-height:none;overflow:visible;background:transparent;border:0;border-radius:0}
+  table,tbody{display:block}
+  thead{display:none}
+  tbody tr{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(28,33,51,.04)}
+  tbody tr:active{background:var(--goldbg)}
+  tbody td{display:block;padding:0;border:0;width:auto}
+  tbody td.cb{order:0;width:auto;padding:2px 0}
+  tbody td.cb input{width:20px;height:20px}
+  tbody td:nth-child(2){order:1;margin-inline-end:auto}
+  tbody td.ttl{order:2;flex:1 0 100%;font-size:15.5px;line-height:1.55}
+  tbody td.ttl small{font-size:12.5px;margin-top:1px}
+  tbody td:nth-child(4),tbody td:nth-child(5),tbody td:nth-child(6){order:3}
+  tbody td:nth-child(7){order:4;flex:1 0 100%}
+  tbody td:empty{display:none}
+  .chip{padding:3px 10px;font-size:12px}
+
+  /* review & log */
+  .rvitem{grid-template-columns:1fr;gap:6px;padding:12px 14px}
+  .hitem{padding:12px 14px}
+
+  /* detail drawer = full screen */
+  .drawer,.drawer.on{width:100vw;height:100dvh}
+  .dh{padding:calc(env(safe-area-inset-top) + 14px) 16px 12px}
+  .dh h2{font-size:18px}
+  .dh .x{width:42px;height:42px;border-radius:12px}
+  .db{padding:14px 16px calc(40px + env(safe-area-inset-bottom))}
+  .dtabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .dtabs::-webkit-scrollbar{display:none}
+  .dtabs>*{flex:none}
+  .savebar{margin:18px -16px calc(-40px - env(safe-area-inset-bottom));padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+  .btn{min-height:44px;justify-content:center}
+  .btn.sm{min-height:38px}
+
+  /* modals as bottom sheets */
+  .modal{place-items:end center}
+  .mbox,.mbox.wide{width:100vw;max-width:100vw;border-radius:22px 22px 0 0;max-height:92dvh;padding:20px 18px calc(20px + env(safe-area-inset-bottom));border-bottom:0}
+  .mbox .act{flex-direction:row-reverse}
+  .mbox .act .btn{flex:1}
+  #pw-dlg{margin:auto auto 0!important;width:100vw!important;max-width:100vw!important;border-radius:22px 22px 0 0!important;padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}
+  .toast{bottom:calc(98px + env(safe-area-inset-bottom));max-width:90vw;text-align:center}
+}
 </style>
 </head>
 <body>
+<header class="mtop"><img src="/apple-touch-icon.png" alt=""><div class="t"><b>AHR Archive</b><small>أرشيف أحمد حمدي رؤوف</small></div><button class="ref" data-refresh type="button" aria-label="تحديث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button></header>
 <div class="app">
   <aside class="nav">
     <div class="brand">
@@ -246,6 +358,7 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
     <button data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
     <button id="export-all" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف<span class="badge" id="export-st"></span></button>
     <button id="pw-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button>
+    <button id="more-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>المزيد</button>
     <div class="foot"><span class="dot" id="conn-dot"></span><span id="conn-txt">جارٍ الاتصال…</span><br><span id="conn-time"></span>
       <label class="editor">التعديلات بتتسجّل باسم<input id="editor-name" maxlength="40" aria-label="اسم المحرر"></label></div>
   </aside>
@@ -304,6 +417,11 @@ input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:poin
   <div class="typegrid" id="c-types"></div><div class="formgrid" id="c-form"></div><div class="err" id="c-err"></div>
   <div class="act"><button class="btn gold" id="c-ok">إضافة</button><button class="btn" id="c-no">إلغاء</button></div></div></div>
 <div class="modal" id="modal"><div class="mbox"><h3 id="m-t"></h3><p id="m-p"></p><div class="act"><button class="btn gold" id="m-ok">تأكيد</button><button class="btn" id="m-no">إلغاء</button></div></div></div>
+<div id="more-scrim"></div>
+<div id="more-sheet" role="dialog" aria-label="المزيد"><div class="grab"></div><div class="who" id="more-who"></div>
+<button type="button" data-more="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>سجل التغييرات</button>
+<button type="button" data-more="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>تصدير كل الأرشيف</button>
+<button type="button" data-more="pw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>تغيير كلمة السر</button></div>
 <div class="toast" id="toast"></div>
 <dialog id="pw-dlg" style="border:1px solid var(--line2);border-radius:16px;padding:22px;width:min(360px,92vw);background:var(--card);color:var(--ink);font-family:inherit">
   <form method="dialog" id="pw-form" style="display:grid;gap:12px">
@@ -928,6 +1046,20 @@ window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
 $$('[data-refresh]').forEach(b=>b.onclick=()=>loadAll());
 go(location.hash.slice(1)||'overview');
 skeleton();
+/* mobile "more" sheet */
+(function(){
+  const sh=$('#more-sheet'),sc=$('#more-scrim'),mb=$('#more-btn');
+  if(!sh||!mb)return;
+  const close=()=>{sh.classList.remove('on');sc.classList.remove('on')};
+  mb.onclick=()=>{const en=$('#editor-name');$('#more-who').textContent=en&&en.value?'مسجّل باسم: '+en.value:'';sh.classList.add('on');sc.classList.add('on')};
+  sc.onclick=close;
+  $$('#more-sheet [data-more]').forEach(b=>b.onclick=()=>{const k=b.dataset.more;close();if(k==='log')go('log');else if(k==='export')$('#export-all').click();else if(k==='pw')$('#pw-open').click();});
+  const mark=()=>mb.classList.toggle('on',state.view==='log');
+  window.addEventListener('hashchange',mark);
+  new MutationObserver(mark).observe($('#v-log'),{attributes:true,attributeFilter:['hidden']});
+  mark();
+})();
+
 (async()=>{
   try{
     const S=await (await fetch('/api/session')).json();
