@@ -76,3 +76,9 @@ This is the reference state of the whole system after the full review. Any later
 - `ensemble_membership` جدول جاهز (فاضي) لربط الأشخاص بالفرق. مفيش بيانات اتدخلت لأنها مش في المصادر.
 - Backup: `archive.bk_cls_20261117_*` (entity, organization, event, entity_relation, translation). Rollback: `database/migrations/2026-11-17_rollback_classification.sql`.
 - الملفات: `database/migrations/2026-11-17_a_classification_structure.sql` و `..._b_classification_data.sql`.
+
+### Re-code of moved records (2026-11-17, migration C)
+The 14 records moved out of `organization` were re-coded one by one, each verified (relations, translations, links, dates, review items, snapshots unchanged; both codes resolve):
+FES-0006..0010 (festivals), ENS-0001..0005 (ensembles), PRG-0001..0002 (programs), PRJ-0001 (project), SEA-0001 (season).
+Old ORG-xxxx codes are kept in `archive.entity_code_alias` and `archive.eid()` falls back to it, so old references still resolve. Text in `translation.source` and one note on ORG-0029 still mention the old codes on purpose (provenance).
+Rollback of the codes only: `update archive.entity e set public_code=a.old_code from archive.entity_code_alias a where a.entity_id=e.id;` then delete the alias rows (needs owner-level access; `archive_app` cannot delete).
