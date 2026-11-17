@@ -80,5 +80,5 @@ This is the reference state of the whole system after the full review. Any later
 ### Re-code of moved records (2026-11-17, migration C)
 The 14 records moved out of `organization` were re-coded one by one, each verified (relations, translations, links, dates, review items, snapshots unchanged; both codes resolve):
 FES-0006..0010 (festivals), ENS-0001..0005 (ensembles), PRG-0001..0002 (programs), PRJ-0001 (project), SEA-0001 (season).
-Old ORG-xxxx codes are kept in `archive.entity_code_alias` and `archive.eid()` falls back to it, so old references still resolve. Text in `translation.source` and one note on ORG-0029 still mention the old codes on purpose (provenance).
+Old ORG-xxxx codes are kept in `archive.entity_code_alias` and `archive.eid()` falls back to it, so old references still resolve. The 13 texts that mentioned old codes (12 `source` fields + the ORG-0029 note) were rewritten to the new codes. Only `source_snapshot` rows (frozen original copies, `src_pk` = old code) still carry the old codes, deliberately.
 Rollback of the codes only: `update archive.entity e set public_code=a.old_code from archive.entity_code_alias a where a.entity_id=e.id;` then delete the alias rows (needs owner-level access; `archive_app` cannot delete).
