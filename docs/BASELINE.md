@@ -67,3 +67,12 @@ This is the reference state of the whole system after the full review. Any later
 - اللوجو الجديد (علامة AHR، لون indigo) في `public/logo.png` ويظهر في الشريط الجانبي والشريط العلوي للموبايل وصفحة الدخول.
 - الأيقونة (navy-gold): `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` وكلها في `manifest.webmanifest`.
 - المصدر: AHR_Logo_Pack (SVG/PDF/PNG الأصلية عند المالك).
+
+## إعادة تصنيف الكيانات (2026-11-17)
+- الجهات والمؤسسات (organization) بقت مؤسسات فقط (20 سجل). اتفصل منها: مهرجانات (festival، 10)، فرق وكورالات (ensemble، 5)، برامج وخدمات (program، 2)، مشروعات (project، 1)، مواسم (season، 1).
+- نفس الـIDs ونفس الأكواد (ORG-xxxx للسجلات المنقولة). السجلات الجديدة بتاخد FES- / ENS- / PRG- / PRJ- / SEA- / EM-.
+- 5 مهرجانات اتعملت من أسماء الأحداث (FES-0001..0005)، كلها Draft وعليها بند مراجعة.
+- 10 أحداث اتربطت بمهرجاناتها بعلاقة `part_of`، وحدث تأسيس الفرقة القومية اتربط بالفرقة بعلاقة `concerns`. نوع الأحداث "مهرجان" و"مهرجان / جائزة" اتوحّد لـ"دورة مهرجان". التحكيم والحفل فضلوا زي ما هم.
+- `ensemble_membership` جدول جاهز (فاضي) لربط الأشخاص بالفرق. مفيش بيانات اتدخلت لأنها مش في المصادر.
+- Backup: `archive.bk_cls_20261117_*` (entity, organization, event, entity_relation, translation). Rollback: `database/migrations/2026-11-17_rollback_classification.sql`.
+- الملفات: `database/migrations/2026-11-17_a_classification_structure.sql` و `..._b_classification_data.sql`.
