@@ -14,6 +14,15 @@ export default function Login() {
     if (error) { setMsg('الإيميل أو كلمة السر غلط'); setBusy(false); return; }
     window.location.href = '/dash';
   }
+  async function forgot() {
+    const em = email.trim().toLowerCase();
+    if (!em) { setMsg('اكتب الإيميل الأول وبعدين دوس "نسيت كلمة السر"'); return; }
+    setBusy(true); setMsg('');
+    const sb = createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+    const { error } = await sb.auth.resetPasswordForEmail(em, { redirectTo: window.location.origin + '/reset' });
+    setBusy(false);
+    setMsg(error ? 'مقدرتش أبعت اللينك دلوقتي، جرّب بعد شوية' : 'لو الإيميل مسجّل عندنا، هيوصلك لينك تغيير كلمة السر. شوف الإيميل (وكمان Spam).');
+  }
   const f = { width: '100%', padding: '12px 14px', border: '1px solid #D9DCEB', borderRadius: 10, fontSize: 15, fontFamily: 'inherit', boxSizing: 'border-box', marginTop: 6 };
   return (
     <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#F6F7FB', fontFamily: 'Readex Pro, system-ui, sans-serif' }}>
@@ -24,8 +33,9 @@ export default function Login() {
         <p style={{ margin: '0 0 22px', color: '#6B6F8A', fontSize: 14 }}>تسجيل الدخول للوحة التحكم</p>
         <label style={{ fontSize: 13, color: '#44486A' }}>الإيميل<input style={f} type="email" required value={email} onChange={e => setEmail(e.target.value)} autoComplete="username" /></label>
         <label style={{ fontSize: 13, color: '#44486A', display: 'block', marginTop: 14 }}>كلمة السر<input style={f} type="password" required value={pw} onChange={e => setPw(e.target.value)} autoComplete="current-password" /></label>
-        {msg && <div style={{ color: '#C0392B', fontSize: 13, marginTop: 12 }}>{msg}</div>}
+        {msg && <div style={{ color: msg.startsWith('لو الإيميل') ? '#1E8E5A' : '#C0392B', fontSize: 13, marginTop: 12 }}>{msg}</div>}
         <button disabled={busy} style={{ marginTop: 20, width: '100%', padding: 13, border: 0, borderRadius: 10, background: '#4B49C8', color: '#fff', fontSize: 15, fontFamily: 'inherit', cursor: 'pointer' }}>{busy ? '...' : 'دخول'}</button>
+      <button type="button" onClick={forgot} disabled={busy} style={{ marginTop: 14, width: '100%', padding: 8, border: 0, background: 'transparent', color: '#4B49C8', fontSize: 13, fontFamily: 'inherit', cursor: 'pointer' }}>نسيت كلمة السر؟</button>
       </form>
     </main>
   );

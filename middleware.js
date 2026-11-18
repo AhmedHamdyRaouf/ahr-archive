@@ -17,6 +17,9 @@ export async function middleware(req) {
   });
   const { data } = await supabase.auth.getUser();
   const path = req.nextUrl.pathname;
+  // A reset link that lands on the site root (redirect not on the Auth allow-list) is forwarded to /reset with its code.
+  if (path === '/' && req.nextUrl.searchParams.get('code')) return NextResponse.redirect(new URL('/reset?code=' + encodeURIComponent(req.nextUrl.searchParams.get('code')), req.url));
+  if (path.startsWith('/reset')) return res;
   if (!data.user && !path.startsWith('/login')) {
     if (path.startsWith('/api/')) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
     return NextResponse.redirect(new URL('/login', req.url));
