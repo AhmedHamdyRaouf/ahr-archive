@@ -40,7 +40,7 @@ export default function Reset() {
     <main dir="rtl" style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#F6F9FA', fontFamily: 'IBM Plex Sans Arabic, system-ui, sans-serif' }}>
       <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet" />
       <div style={card}>
-        <img src="/logo.png?v=4" alt="AHR" style={{ display: 'block', height: 44, width: 'auto', margin: '0 0 14px' }} />
+        <img src="/logo.png?v=5" alt="AHR" style={{ display: 'block', height: 44, width: 'auto', margin: '0 0 14px' }} />
         <h1 style={{ margin: '0 0 4px', fontSize: 22, color: '#092D3B' }}>كلمة سر جديدة</h1>
         {state === 'checking' && <p style={{ color: '#4B6672', fontSize: 14 }}>...</p>}
         {state === 'bad' && (<>

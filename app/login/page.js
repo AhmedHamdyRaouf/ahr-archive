@@ -28,7 +28,7 @@ export default function Login() {
     <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#F6F9FA', fontFamily: 'IBM Plex Sans Arabic, system-ui, sans-serif' }}>
       <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet" />
       <form onSubmit={go} style={{ background: '#fff', padding: 32, borderRadius: 16, width: 340, boxShadow: '0 8px 30px rgba(60,64,140,.10)' }}>
-        <img src="/logo.png?v=4" alt="AHR" style={{ display: 'block', height: 44, width: 'auto', margin: '0 0 14px' }} />
+        <img src="/logo.png?v=5" alt="AHR" style={{ display: 'block', height: 44, width: 'auto', margin: '0 0 14px' }} />
         <h1 style={{ margin: '0 0 4px', fontSize: 22, color: '#092D3B' }}>AHR Master Archive</h1>
         <p style={{ margin: '0 0 22px', color: '#4B6672', fontSize: 14 }}>تسجيل الدخول للوحة التحكم</p>
         <label style={{ fontSize: 13, color: '#092D3B' }}>الإيميل<input style={f} type="email" required value={email} onChange={e => setEmail(e.target.value)} autoComplete="username" /></label>
