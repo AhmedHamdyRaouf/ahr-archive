@@ -82,3 +82,6 @@ The 14 records moved out of `organization` were re-coded one by one, each verifi
 FES-0006..0010 (festivals), ENS-0001..0005 (ensembles), PRG-0001..0002 (programs), PRJ-0001 (project), SEA-0001 (season).
 Old ORG-xxxx codes are kept in `archive.entity_code_alias` and `archive.eid()` falls back to it, so old references still resolve. The 13 texts that mentioned old codes (12 `source` fields + the ORG-0029 note) were rewritten to the new codes. Only `source_snapshot` rows (frozen original copies, `src_pk` = old code) still carry the old codes, deliberately.
 Rollback of the codes only: `update archive.entity e set public_code=a.old_code from archive.entity_code_alias a where a.entity_id=e.id;` then delete the alias rows (needs owner-level access; `archive_app` cannot delete).
+
+### Visual identity trial (2026-11-20)
+Dashboard, login and reset pages moved to the white / cyan #079BC1 / orange #F36B12 / deep teal #092D3B palette (tokens in `:root` of `dash/index.html`; `--gold` is now cyan, `--orange` for primary buttons and active-nav indicator). Fonts: IBM Plex Sans Arabic + Inter. Status colours (green/amber/red) kept for meaning. To revert: `git revert` the commit titled "Dashboard: try new AHR palette".
