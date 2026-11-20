@@ -85,3 +85,6 @@ Rollback of the codes only: `update archive.entity e set public_code=a.old_code 
 
 ### Visual identity trial (2026-11-20)
 Dashboard, login and reset pages moved to the white / cyan #079BC1 / orange #F36B12 / deep teal #092D3B palette (tokens in `:root` of `dash/index.html`; `--gold` is now cyan, `--orange` for primary buttons and active-nav indicator). Fonts: IBM Plex Sans Arabic + Inter. Status colours (green/amber/red) kept for meaning. To revert: `git revert` the commit titled "Dashboard: try new AHR palette".
+
+### Logo pack v3 (2026-11-20)
+Replaced the logo and icons with AHR Logo Pack v3 (approved colourway: cyan letters, orange arc, teal wave): `public/logo.png` = fullcolor mark; favicon.ico / favicon-32 / icon-192 / icon-512 / apple-touch-icon from the pack's white-fullcolor app icons; `icon-maskable-512.png` = teal-on-dark square. SVG masters and the pack README are in `docs/brand/`. Asset URLs use `?v=3`; manifest theme/background colour is white.
